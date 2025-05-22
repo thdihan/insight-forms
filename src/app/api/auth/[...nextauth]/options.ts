@@ -1,4 +1,5 @@
 // import { getUserByEmail } from "@/data/users";
+import { login } from "@/app/actions.ts/login";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -23,19 +24,24 @@ export const authOptions: NextAuthOptions = {
                 try {
                     console.log("Auth Function called");
 
-                    const user = {
-                        id: "1", // Add a unique identifier for the user
+                    let user = {
+                        id: "",
                         email: "",
                         password: "",
                     };
+                    await login(credentials.email).then((data) => {
+                        if (data) {
+                            user = { ...data, id: String(data.id) };
+                        }
+                    });
 
-                    console.log(credentials, user);
+                    console.log("Auth options: ", credentials, user);
 
                     if (user) {
                         const isMatch = user?.password === credentials.password;
 
                         if (isMatch) {
-                            return user;
+                            return { ...user, id: String(user.id) };
                         } else {
                             throw new Error("Email or Password is not correct");
                         }
