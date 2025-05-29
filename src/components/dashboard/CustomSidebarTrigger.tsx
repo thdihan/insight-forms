@@ -6,7 +6,7 @@ export function CustomTrigger() {
     const { toggleSidebar } = useSidebar();
 
     return (
-        <button onClick={toggleSidebar} className="p-2">
+        <button onClick={toggleSidebar} className="">
             <Sidebar />
         </button>
     );

@@ -15,24 +15,19 @@ import {
 // Menu items.
 const items = [
     {
-        title: "Home",
+        title: "Dashboard",
         url: "#",
         icon: Home,
     },
     {
-        title: "Inbox",
-        url: "#",
+        title: "Forms",
+        url: "create-form",
         icon: Inbox,
     },
     {
-        title: "Calendar",
+        title: "Users",
         url: "#",
         icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
     },
     {
         title: "Settings",
@@ -55,7 +50,7 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton
-                                        className="hover:bg-amber-500"
+                                        className="hover:bg-black hover:text-white"
                                         asChild
                                     >
                                         <a href={item.url}>
