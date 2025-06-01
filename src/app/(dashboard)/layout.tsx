@@ -10,8 +10,8 @@ function layout({ children }: Props) {
     return (
         <SidebarProvider>
             <AppSidebar />
-            <main className="w-full">
-                <div className="flex  items-center p-2 gap-x-2 bg-[#FAFAFA] border-b">
+            <main className="w-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+                <div className="flex  items-center p-2 gap-x-2 bg-white border-b">
                     <CustomTrigger />
                     <h3 className="text-2xl font-bold">InsightForm</h3>
                 </div>

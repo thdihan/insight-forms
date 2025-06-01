@@ -12,7 +12,7 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(react-hook-form@7.56.4(react@19.1.0))
       '@prisma/client':
-        specifier: ^6.8.2
+        specifier: 6.8.2
         version: 6.8.2(prisma@6.8.2(typescript@5.8.3))(typescript@5.8.3)
       '@radix-ui/react-accordion':
         specifier: ^1.2.10
@@ -175,7 +175,7 @@ importers:
         specifier: 15.3.2
         version: 15.3.2(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3)
       prisma:
-        specifier: ^6.8.2
+        specifier: 6.8.2
         version: 6.8.2(typescript@5.8.3)
       tailwindcss:
         specifier: ^4

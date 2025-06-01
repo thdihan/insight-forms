@@ -10,116 +10,47 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-    Check,
-    CheckCheckIcon,
-    CheckSquare,
-    CircleDot,
-    Dot,
-    FormInput,
-    Radio,
-} from "lucide-react";
-import React from "react";
+import { GripVertical } from "lucide-react";
+import React, { FormEventHandler } from "react";
 import { useForm } from "react-hook-form";
+import { Switch } from "@/components/ui/switch";
+import { TypeFormField } from "@/types/form";
+import { Label } from "@/components/ui/label";
+import TextInput from "@/components/dashboard/inputs/TextInput";
+import SwitchInput from "@/components/dashboard/inputs/SwitchInput";
+import NewFieldButtons from "@/components/dashboard/forms/NewFieldButtons";
+import TextField from "@/components/dashboard/forms/TextField";
+import CheckboxField from "@/components/dashboard/forms/CheckboxField";
+import RadiobuttonsField from "@/components/dashboard/forms/RadiobuttonsField";
+import TableField from "@/components/dashboard/forms/TableField";
 
 type Props = {};
 
 const page = (props: Props) => {
-    const form = useForm();
-
-    function onSubmit() {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        // console.log(values);
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
     }
 
     return (
         <div className="p-2 flex justify-center w-full">
-            <div className="w-full md:max-w-[95%] py-4 px-4 my-8 border-2 rounded-md shadow-xl">
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8"
-                    >
-                        <FormField
-                            control={form.control}
-                            name="form-name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-xl font-semibold">
-                                        Form Name
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder="Form Name"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+            <div className="w-full md:max-w-[95%] py-8 px-8 my-8 border-2 rounded-md shadow-xl bg-white">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                    <TextInput
+                        name="form-name"
+                        placeholder="Enter Form name"
+                        label="Form Name"
+                        labelStyle="text-xl font-semibold"
+                        inputStyle=""
+                    />
 
-                        <div className="px-4 py-4 border-s-4 border-s-black rounded-md border ">
-                            <FormField
-                                control={form.control}
-                                name="form-name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="">
-                                            Form Name
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Form Name"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="flex gap-2">
-                            <Button
-                                variant="outline"
-                                // size="icon"
-                                className="flex flex-col items-center justify-center size-[100px]"
-                            >
-                                <FormInput
-                                    // className="w-40 h-40"
-                                    style={{ height: "25px", width: "25px" }}
-                                />
-                                <span>+ Text Box</span>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                // size="icon"
-                                className="flex flex-col items-center justify-center size-[100px]"
-                            >
-                                <CheckSquare
-                                    // className="w-40 h-40"
-                                    style={{ height: "25px", width: "25px" }}
-                                />
-                                <span>+ Check Box</span>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                // size="icon"
-                                className="flex flex-col items-center justify-center size-[100px]"
-                            >
-                                <CircleDot
-                                    // className="w-40 h-40"
-                                    style={{ height: "25px", width: "25px" }}
-                                />
-                                <span className="text-wrap">
-                                    + Radio Buttons
-                                </span>
-                            </Button>
-                        </div>
-                        <Button type="submit">Submit</Button>
-                    </form>
-                </Form>
+                    <TextField />
+                    <CheckboxField name="Checkbox" />
+                    <RadiobuttonsField name="radioBUttons" />
+                    <TableField placeholder="Table View" />
+                    <NewFieldButtons />
+
+                    <Button type="submit">Submit</Button>
+                </form>
             </div>
         </div>
     );

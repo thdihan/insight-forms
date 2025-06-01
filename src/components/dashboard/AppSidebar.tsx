@@ -38,8 +38,8 @@ const items = [
 
 export function AppSidebar() {
     return (
-        <Sidebar>
-            <SidebarContent>
+        <Sidebar className="bg-white">
+            <SidebarContent className="bg-white">
                 <SidebarGroup>
                     <SidebarGroupLabel>
                         <span>InsightForms</span>

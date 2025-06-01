@@ -123,7 +123,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/dihan/Developer/projects/Full-stack-form-builder/form-builder/src/generated/prisma",
+      "value": "/home/thdihan/Developer/insight-forms/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -132,16 +132,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/dihan/Developer/projects/Full-stack-form-builder/form-builder/prisma/schema.prisma",
+    "sourceFilePath": "/home/thdihan/Developer/insight-forms/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
