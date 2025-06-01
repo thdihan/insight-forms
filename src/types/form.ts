@@ -1,39 +1,38 @@
 export interface BaseField {
+    order: number;
     id: string;
     type: "text" | "checkbox" | "radio" | "table";
-    label: string;
     required?: boolean;
     placeholder?: string;
+    label: string;
 }
 
-export interface TextField extends BaseField {
+export interface TTextField extends BaseField {
     type: "text";
     multiline?: boolean;
 }
 
+export interface ICheckboxOption {
+    id: string;
+    label: string;
+}
 export interface CheckboxField extends BaseField {
     type: "checkbox";
-    options: string[];
+    options: ICheckboxOption[];
 }
 
 export interface RadioField extends BaseField {
     type: "radio";
-    options: string[];
-}
-
-export interface TableColumn {
-    id: string;
-    label: string;
-    type: "text" | "number" | "select";
-    options?: string[];
-    required?: boolean;
+    options: ICheckboxOption[];
 }
 
 export interface TableField extends BaseField {
     type: "table";
-    columns: TableColumn[];
-    minRows?: number;
-    maxRows?: number;
+    columns: ICheckboxOption[];
 }
 
-export type TypeFormField = TextField | CheckboxField | RadioField | TableField;
+export type TypeFormField =
+    | TTextField
+    | CheckboxField
+    | RadioField
+    | TableField;

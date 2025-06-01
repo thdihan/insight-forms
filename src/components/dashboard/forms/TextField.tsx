@@ -1,26 +1,62 @@
 import { GripVertical } from "lucide-react";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import TextInput from "../inputs/TextInput";
 import SwitchInput from "../inputs/SwitchInput";
+import { ICheckboxOption, TTextField } from "@/types/form";
+import { useSortable } from "@dnd-kit/sortable";
+import SortableFieldWrapper from "./SortableFieldWrapper";
 
-type Props = {};
+type Props = {
+    field: TTextField;
+    onChange: (
+        id: string,
+        valueName: string,
+        value: string | boolean | ICheckboxOption[]
+    ) => void;
+};
 
-const TextField = (props: Props) => {
+const TextField = ({ field, onChange }: Props) => {
     return (
-        <div className="px-3 py-4 border-s-4 border-s-black rounded-md border flex gap-x-4 items-center">
-            <GripVertical className="w-5 h-5" />
-            <div className="space-y-4 flex-1">
+        <SortableFieldWrapper id={field.id} type={field.type}>
+            <div
+                className="space-y-4 flex-1 transition-all"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <TextInput
-                    name="text-form"
                     placeholder="Enter Name"
-                    label="Text Form"
+                    label="Field Name"
+                    textValue={field.label}
+                    inputChange={(e) =>
+                        onChange(field.id, "label", e.target.value)
+                    }
+                />
+                <div onClick={(e) => e.stopPropagation()}></div>
+                <TextInput
+                    placeholder="Enter Placeholder"
+                    label="Placeholder"
+                    textValue={field.placeholder}
+                    inputChange={(e) =>
+                        onChange(field.id, "placeholder", e.target.value)
+                    }
                 />
                 <div className="flex gap-x-4">
-                    <SwitchInput label="Required" />
-                    <SwitchInput label="Multi line input" />
+                    <SwitchInput
+                        label="Required"
+                        checked={field.required}
+                        changeChecked={(checked: boolean) =>
+                            onChange(field.id, "required", checked)
+                        }
+                    />
+                    <SwitchInput
+                        label="Multi line input"
+                        checked={field.multiline}
+                        changeChecked={(checked: boolean) =>
+                            onChange(field.id, "multiline", checked)
+                        }
+                    />
                 </div>
             </div>
-        </div>
+        </SortableFieldWrapper>
     );
 };
 

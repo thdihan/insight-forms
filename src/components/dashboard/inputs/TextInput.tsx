@@ -3,18 +3,16 @@ import { Label } from "@/components/ui/label";
 import React from "react";
 
 type Props = {
-    name?: string;
     placeholder?: string;
     label: string;
     labelStyle?: string;
     inputStyle?: string;
     type?: string;
     textValue?: string;
-    inputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    inputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const TextInput = ({
-    name,
     placeholder,
     label,
     labelStyle,
@@ -28,9 +26,9 @@ const TextInput = ({
                 {label}
             </Label>
             <Input
+                onClick={(e) => e.stopPropagation()}
                 type={type || "text"}
                 id="form-name"
-                name={name}
                 placeholder={placeholder || "Enter text here..."}
                 className={`w-full p-2 border rounded-sm  ${placeholder}`}
                 value={textValue || ""}

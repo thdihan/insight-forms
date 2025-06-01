@@ -2,9 +2,9 @@ import React from "react";
 import { Type, CheckSquare, RadioIcon, Table, CircleDot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Props = {};
+type Props = { addField: (type: string) => void };
 
-const NewFieldButtons = (props: Props) => {
+const NewFieldButtons = ({ addField }: Props) => {
     const fieldTypes = [
         {
             type: "text" as const,
@@ -38,6 +38,7 @@ const NewFieldButtons = (props: Props) => {
                 return (
                     <Button
                         key={fieldType.type}
+                        onClick={() => addField(fieldType.type)}
                         variant="outline"
                         className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer"
                         // onClick={() => onAddField(fieldType.type)}

@@ -4,7 +4,7 @@ import React from "react";
 
 type Props = {
     checked?: boolean;
-    changeChecked?: (checked: boolean) => void;
+    changeChecked: (checked: boolean) => void;
     label: string;
     labelStyle?: string;
     inputStyle?: string;
@@ -21,7 +21,7 @@ const SwitchInput = ({
         <div className="flex gap-x-2 text-sm items-center">
             <Switch
                 checked={checked}
-                // onCheckedChange={(checked) => changeChecked(checked)}
+                onCheckedChange={changeChecked}
                 className={`${inputStyle}`}
             />
             <Label className={`${labelStyle}`}>{label}</Label>
