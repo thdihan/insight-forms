@@ -15,10 +15,14 @@ import {
 } from "@dnd-kit/sortable";
 import SelectField from "@/components/dashboard/forms/SelectField";
 import { createForm } from "@/app/actions.ts/createForm";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const page = (props: Props) => {
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState<INewForm>({
         formName: "",
         description: "",
@@ -28,17 +32,21 @@ const page = (props: Props) => {
     const handleSubmit = async (e: any): Promise<void> => {
         e.preventDefault();
         console.log("FORM VALUES: ", formValues);
+        setLoading(true);
         try {
             const result = await createForm(formValues);
 
             console.log("RESULT: ", result);
+            setLoading(false);
+            router.push("/forms");
         } catch (error) {
             console.log("Error: ", error);
+            setLoading(false);
         }
     };
 
     const handleFieldChange = (
-        id: string,
+        id: number,
         valueName: string,
         value: string | boolean | ICheckboxOption[]
     ) => {
@@ -65,7 +73,7 @@ const page = (props: Props) => {
         switch (type) {
             case "text":
                 tempFormValues.fields.push({
-                    id: (tempFormValues.fields.length + 1).toString(),
+                    id: tempFormValues.fields.length + 1,
                     order: tempFormValues.fields.length + 1,
                     type: "text",
                     placeholder: "",
@@ -76,7 +84,7 @@ const page = (props: Props) => {
                 break;
             case "checkbox":
                 tempFormValues.fields.push({
-                    id: (tempFormValues.fields.length + 1).toString(),
+                    id: tempFormValues.fields.length + 1,
                     order: tempFormValues.fields.length + 1,
                     type: "checkbox",
                     options: [], // Initialize with an empty array for checkbox options
@@ -86,7 +94,7 @@ const page = (props: Props) => {
                 break;
             case "radio":
                 tempFormValues.fields.push({
-                    id: (tempFormValues.fields.length + 1).toString(),
+                    id: tempFormValues.fields.length + 1,
                     order: tempFormValues.fields.length + 1,
                     type: "radio",
                     options: [], // Initialize with an empty array for checkbox options
@@ -96,7 +104,7 @@ const page = (props: Props) => {
                 break;
             case "table":
                 tempFormValues.fields.push({
-                    id: (tempFormValues.fields.length + 1).toString(),
+                    id: tempFormValues.fields.length + 1,
                     order: tempFormValues.fields.length + 1,
                     type: "table",
                     options: [], // Initialize with an empty array for checkbox options
@@ -106,7 +114,7 @@ const page = (props: Props) => {
                 break;
             case "select":
                 tempFormValues.fields.push({
-                    id: (tempFormValues.fields.length + 1).toString(),
+                    id: tempFormValues.fields.length + 1,
                     order: tempFormValues.fields.length + 1,
                     type: "select",
                     options: [], // Initialize with an empty array for checkbox options
@@ -116,6 +124,26 @@ const page = (props: Props) => {
                 break;
         }
 
+        setFormValues(tempFormValues);
+    };
+
+    const updateIdAndOrder = (tempFormValues: INewForm) => {
+        tempFormValues.fields
+            .sort((a, b) => a.order - b.order)
+            .forEach((field, index) => {
+                field.id = index + 1;
+                field.order = index + 1;
+            });
+        return tempFormValues;
+    };
+    const deleteField = (e: any, id: number) => {
+        e.preventDefault();
+        let tempFormValues = { ...formValues };
+
+        tempFormValues.fields = tempFormValues.fields.filter(
+            (field) => id != field.id
+        );
+        tempFormValues = updateIdAndOrder(tempFormValues);
         setFormValues(tempFormValues);
     };
 
@@ -151,7 +179,7 @@ const page = (props: Props) => {
                     {/* Form Name  */}
                     <TextInput
                         placeholder="Enter form name..."
-                        label="Form NameEnter form name"
+                        label="Form Name"
                         labelStyle="text-xl font-semibold"
                         inputStyle=""
                         textValue={formValues.formName}
@@ -199,6 +227,9 @@ const page = (props: Props) => {
                                                         onChange={
                                                             handleFieldChange
                                                         }
+                                                        deleteAction={
+                                                            deleteField
+                                                        }
                                                     />
                                                 )}
                                                 {field.type === "checkbox" && (
@@ -206,6 +237,9 @@ const page = (props: Props) => {
                                                         field={field}
                                                         onChange={
                                                             handleFieldChange
+                                                        }
+                                                        deleteAction={
+                                                            deleteField
                                                         }
                                                     />
                                                 )}
@@ -215,6 +249,9 @@ const page = (props: Props) => {
                                                         onChange={
                                                             handleFieldChange
                                                         }
+                                                        deleteAction={
+                                                            deleteField
+                                                        }
                                                     />
                                                 )}
                                                 {field.type === "table" && (
@@ -223,6 +260,9 @@ const page = (props: Props) => {
                                                         onChange={
                                                             handleFieldChange
                                                         }
+                                                        deleteAction={
+                                                            deleteField
+                                                        }
                                                     />
                                                 )}
                                                 {field.type === "select" && (
@@ -230,6 +270,9 @@ const page = (props: Props) => {
                                                         field={field}
                                                         onChange={
                                                             handleFieldChange
+                                                        }
+                                                        deleteAction={
+                                                            deleteField
                                                         }
                                                     />
                                                 )}
@@ -244,8 +287,13 @@ const page = (props: Props) => {
                         <Button
                             onClick={handleSubmit}
                             className="cursor-pointer"
+                            disabled={loading}
                         >
-                            Submit
+                            {loading ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                                "Submit"
+                            )}
                         </Button>
                         <Button variant="outline" className="cursor-pointer">
                             Preview

@@ -9,13 +9,14 @@ import SortableFieldWrapper from "./SortableFieldWrapper";
 type Props = {
     field: TypeFormField;
     onChange: (
-        id: string,
+        id: number,
         valueName: string,
         value: string | boolean | ICheckboxOption[]
     ) => void;
+    deleteAction: (e: any, id: number) => void;
 };
 
-const CheckboxField = ({ field, onChange }: Props) => {
+const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
     const addCheckboxOption = (e: any) => {
@@ -44,7 +45,11 @@ const CheckboxField = ({ field, onChange }: Props) => {
         }
     };
     return (
-        <SortableFieldWrapper id={field.id} type={field.type}>
+        <SortableFieldWrapper
+            id={field.id}
+            type={field.type}
+            deleteAction={deleteAction}
+        >
             <TextInput
                 placeholder={"Enter checkbox group name..."}
                 label="Checkbox group name."

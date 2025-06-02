@@ -9,15 +9,20 @@ import SortableFieldWrapper from "./SortableFieldWrapper";
 type Props = {
     field: TTextField;
     onChange: (
-        id: string,
+        id: number,
         valueName: string,
         value: string | boolean | ICheckboxOption[]
     ) => void;
+    deleteAction: (e: any, id: number) => void;
 };
 
-const TextField = ({ field, onChange }: Props) => {
+const TextField = ({ field, onChange, deleteAction }: Props) => {
     return (
-        <SortableFieldWrapper id={field.id} type={field.type}>
+        <SortableFieldWrapper
+            id={field.id}
+            type={field.type}
+            deleteAction={deleteAction}
+        >
             <div
                 className="space-y-4 flex-1 transition-all"
                 onClick={(e) => e.stopPropagation()}

@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, GripVertical } from "lucide-react";
+import {
+    ChevronDown,
+    ChevronUp,
+    GripVertical,
+    Trash,
+    Trash2,
+} from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import _ from "lodash";
 
 type Props = {
-    id: string;
+    id: number;
     children: React.ReactNode;
     type: string;
+    deleteAction: (e: any, id: number) => void;
 };
 
-const SortableFieldWrapper = ({ id, children, type }: Props) => {
+const SortableFieldWrapper = ({ id, children, type, deleteAction }: Props) => {
     const [expanded, setExpanded] = useState(false);
     const {
         attributes,
@@ -42,9 +49,15 @@ const SortableFieldWrapper = ({ id, children, type }: Props) => {
                 <GripVertical className="w-5 h-5" />
             </div>
             <div className="flex-1 space-y-4 transition-all">
-                <p className="text-muted-foreground text-sm">
-                    Type : {_.capitalize(type)}
-                </p>
+                <div className="flex justify-between items-center">
+                    <p className="text-muted-foreground text-sm">
+                        Type : {_.capitalize(type)}
+                    </p>
+                    <Trash2
+                        onClick={(e) => deleteAction(e, id)}
+                        className="w-5 h-5 text-red-500"
+                    />
+                </div>
                 {expanded && children}
             </div>
 

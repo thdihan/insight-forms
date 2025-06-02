@@ -21,7 +21,7 @@ const items = [
     },
     {
         title: "Forms",
-        url: "create-form",
+        url: "forms",
         icon: Inbox,
     },
     {

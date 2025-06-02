@@ -1,6 +1,14 @@
+export interface IForms {
+    id: number;
+    formName: string;
+    description: string;
+    createdAt: Date;
+    updatedAt: Date;
+    fields?: TypeFormField[];
+}
 export interface BaseField {
     order: number;
-    id: string;
+    id: number;
     type: "text" | "checkbox" | "radio" | "table" | "select";
     required?: boolean;
     placeholder?: string;
