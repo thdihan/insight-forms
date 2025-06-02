@@ -1,5 +1,12 @@
 import React from "react";
-import { Type, CheckSquare, RadioIcon, Table, CircleDot } from "lucide-react";
+import {
+    Type,
+    CheckSquare,
+    RadioIcon,
+    Table,
+    CircleDot,
+    TextCursorInput,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Props = { addField: (type: string) => void };
@@ -30,7 +37,14 @@ const NewFieldButtons = ({ addField }: Props) => {
             icon: Table,
             description: "Dynamic table with custom columns",
         },
+        {
+            type: "select" as const,
+            label: "Select",
+            icon: TextCursorInput,
+            description: "Select options",
+        },
     ];
+
     return (
         <div className="flex gap-2">
             {fieldTypes.map((fieldType) => {

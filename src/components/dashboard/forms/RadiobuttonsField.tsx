@@ -63,7 +63,7 @@ const RadiobuttonsField = ({ field, onChange }: Props) => {
                                 key={index}
                                 className="flex items-center gap-x-4"
                             >
-                                <Label id="terms-2">Option {index + 1}</Label>
+                                <Label>Option {index + 1}</Label>
                                 <TextInput
                                     placeholder={"Enter Option..."}
                                     label=""

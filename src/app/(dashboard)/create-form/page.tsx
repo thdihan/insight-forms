@@ -13,15 +13,18 @@ import {
     SortableContext,
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import SelectField from "@/components/dashboard/forms/SelectField";
 
 type Props = {};
 
 const page = (props: Props) => {
     const [formValues, setFormValues] = useState<{
         formName: string;
+        description: string;
         fields: TypeFormField[];
     }>({
         formName: "",
+        description: "",
         fields: [],
     });
 
@@ -96,6 +99,16 @@ const page = (props: Props) => {
                     required: false,
                 });
                 break;
+            case "select":
+                tempFormValues.fields.push({
+                    id: (tempFormValues.fields.length + 1).toString(),
+                    order: tempFormValues.fields.length + 1,
+                    type: "select",
+                    options: [], // Initialize with an empty array for checkbox options
+                    label: "",
+                    required: false,
+                });
+                break;
         }
 
         setFormValues(tempFormValues);
@@ -112,10 +125,16 @@ const page = (props: Props) => {
                 (f) => f.id === over?.id
             );
 
-            const tempIndex = tempFormValues.fields[oldIndex].order;
-            tempFormValues.fields[oldIndex].order =
-                tempFormValues.fields[newIndex].order;
-            tempFormValues.fields[newIndex].order = tempIndex;
+            // Remove the dragged item from its old position
+            const [movedItem] = tempFormValues.fields.splice(oldIndex, 1);
+
+            // Insert the dragged item at the new position
+            tempFormValues.fields.splice(newIndex, 0, movedItem);
+
+            // Recalculate the order for all items
+            tempFormValues.fields.forEach((field, index) => {
+                field.order = index + 1;
+            });
 
             setFormValues(tempFormValues);
         }
@@ -127,10 +146,23 @@ const page = (props: Props) => {
                     {/* Form Name  */}
                     <TextInput
                         placeholder="Enter form name..."
-                        label="Form Name"
+                        label="Form NameEnter form name"
                         labelStyle="text-xl font-semibold"
                         inputStyle=""
                         textValue={formValues.formName}
+                        inputChange={(e) => {
+                            const tempFormValues = { ...formValues };
+                            tempFormValues.formName = e.target.value;
+                            setFormValues(tempFormValues);
+                        }}
+                    />
+                    <TextInput
+                        placeholder="Enter description..."
+                        label="Description"
+                        labelStyle="text-lg font-semibold"
+                        inputStyle=""
+                        textValue={formValues.description}
+                        multiline={true}
                         inputChange={(e) => {
                             const tempFormValues = { ...formValues };
                             tempFormValues.formName = e.target.value;
@@ -188,6 +220,14 @@ const page = (props: Props) => {
                                                         }
                                                     />
                                                 )}
+                                                {field.type === "select" && (
+                                                    <SelectField
+                                                        field={field}
+                                                        onChange={
+                                                            handleFieldChange
+                                                        }
+                                                    />
+                                                )}
                                             </div>
                                         );
                                     })}
@@ -195,7 +235,14 @@ const page = (props: Props) => {
                     </DndContext>
 
                     <NewFieldButtons addField={addField} />
-                    <Button type="submit">Submit</Button>
+                    <div className="flex gap-x-2">
+                        <Button type="submit" className="cursor-pointer">
+                            Submit
+                        </Button>
+                        <Button variant="outline" className="cursor-pointer">
+                            Preview
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>

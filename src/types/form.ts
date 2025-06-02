@@ -1,7 +1,7 @@
 export interface BaseField {
     order: number;
     id: string;
-    type: "text" | "checkbox" | "radio" | "table";
+    type: "text" | "checkbox" | "radio" | "table" | "select";
     required?: boolean;
     placeholder?: string;
     label: string;
@@ -31,8 +31,14 @@ export interface TableField extends BaseField {
     columns: ICheckboxOption[];
 }
 
+export interface SelectField extends BaseField {
+    type: "select";
+    options: ICheckboxOption[];
+}
+
 export type TypeFormField =
     | TTextField
     | CheckboxField
     | RadioField
-    | TableField;
+    | TableField
+    | SelectField;
