@@ -1,13 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { ChangeEvent, Context, use, useEffect, useState } from "react";
 import TextInput from "@/components/dashboard/inputs/TextInput";
 import NewFieldButtons from "@/components/dashboard/forms/NewFieldButtons";
 import TextField from "@/components/dashboard/forms/TextField";
 import CheckboxField from "@/components/dashboard/forms/CheckboxField";
 import RadiobuttonsField from "@/components/dashboard/forms/RadiobuttonsField";
 import TableField from "@/components/dashboard/forms/TableField";
-import { ICheckboxOption, INewForm, TypeFormField } from "@/types/form";
+import { ICheckboxOption, IForms, INewForm, TypeFormField } from "@/types/form";
 import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
     SortableContext,
@@ -17,20 +17,52 @@ import SelectField from "@/components/dashboard/forms/SelectField";
 import { createForm } from "@/app/actions.ts/createForm";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.snow.css";
-import { Label } from "@/components/ui/label";
+import { getFormById } from "@/app/actions.ts/forms";
 
-type Props = {};
+type Props = {
+    params: Context<{ id: string }>;
+};
 
-const page = (props: Props) => {
+const page = ({ params }: Props) => {
+    const { id } = use<{ id: string }>(params);
+
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [formValues, setFormValues] = useState<INewForm>({
+    const [formValues, setFormValues] = useState<IForms>({
+        id: 1,
         formName: "",
         description: "",
         fields: [],
     });
+
+    useEffect(() => {
+        console.log(id);
+        const loadData = () => {
+            getFormById(id).then((data) => {
+                console.log(data);
+                if (data) {
+                    const transformedData: IForms = {
+                        id: data.id,
+                        formName: data.formName,
+                        description: data.description,
+                        fields: data.fields.map((field) => {
+                            const transformedField: TypeFormField = {
+                                ...field,
+                                type: field.type, // Ensure type matches the expected TypeFormField type
+                                options: field.options || [],
+                            } as TypeFormField;
+                            return transformedField;
+                        }),
+                    };
+                    setFormValues(transformedData);
+                } else {
+                    console.error("No data found for the given ID");
+                }
+            });
+        };
+
+        loadData();
+    }, []);
 
     const handleSubmit = async (e: any): Promise<void> => {
         e.preventDefault();
@@ -55,9 +87,11 @@ const page = (props: Props) => {
     ) => {
         const tempFormValues = { ...formValues };
 
-        const fields = tempFormValues.fields.filter((field) => field.id !== id);
+        const fields = tempFormValues?.fields.filter(
+            (field) => field.id !== id
+        );
         const updatedField: TypeFormField = {
-            ...tempFormValues.fields.find((field) => field.id === id),
+            ...tempFormValues?.fields.find((field) => field.id === id),
             [valueName]: value,
         } as TypeFormField;
 
@@ -130,7 +164,7 @@ const page = (props: Props) => {
         setFormValues(tempFormValues);
     };
 
-    const updateIdAndOrder = (tempFormValues: INewForm) => {
+    const updateIdAndOrder = (tempFormValues: IForms) => {
         tempFormValues.fields
             .sort((a, b) => a.order - b.order)
             .forEach((field, index) => {
@@ -192,25 +226,7 @@ const page = (props: Props) => {
                             setFormValues(tempFormValues);
                         }}
                     />
-                    <div className="space-y-2">
-                        <Label
-                            htmlFor="form-name"
-                            className={`text-lg font-semibold`}
-                        >
-                            Description
-                        </Label>
-                        <ReactQuill
-                            theme="snow"
-                            value={formValues.description}
-                            onChange={(val: string) => {
-                                const tempFormValues = { ...formValues };
-                                tempFormValues.description = val;
-                                setFormValues(tempFormValues);
-                            }}
-                            className="rounde-lg"
-                        />
-                    </div>
-                    {/* <TextInput
+                    <TextInput
                         placeholder="Enter description..."
                         label="Description"
                         labelStyle="text-lg font-semibold"
@@ -222,7 +238,7 @@ const page = (props: Props) => {
                             tempFormValues.description = e.target.value;
                             setFormValues(tempFormValues);
                         }}
-                    /> */}
+                    />
 
                     <div className="border-t border-2 border-dashed"></div>
                     {/* Form Fields */}
@@ -313,7 +329,7 @@ const page = (props: Props) => {
                             {loading ? (
                                 <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                                "Submit"
+                                "Update"
                             )}
                         </Button>
                         <Button variant="outline" className="cursor-pointer">

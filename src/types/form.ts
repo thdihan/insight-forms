@@ -2,9 +2,9 @@ export interface IForms {
     id: number;
     formName: string;
     description: string;
-    createdAt: Date;
-    updatedAt: Date;
-    fields?: TypeFormField[];
+    createdAt?: Date;
+    updatedAt?: Date;
+    fields: TypeFormField[];
 }
 export interface BaseField {
     order: number;
@@ -13,6 +13,8 @@ export interface BaseField {
     required?: boolean;
     placeholder?: string;
     label: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export interface TTextField extends BaseField {
@@ -21,8 +23,10 @@ export interface TTextField extends BaseField {
 }
 
 export interface ICheckboxOption {
-    id: string;
+    id: number;
     label: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 export interface CheckboxField extends BaseField {
     type: "checkbox";

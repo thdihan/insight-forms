@@ -33,6 +33,16 @@ export type FormField = $Result.DefaultSelection<Prisma.$FormFieldPayload>
  * 
  */
 export type FieldOption = $Result.DefaultSelection<Prisma.$FieldOptionPayload>
+/**
+ * Model FormSubmission
+ * 
+ */
+export type FormSubmission = $Result.DefaultSelection<Prisma.$FormSubmissionPayload>
+/**
+ * Model FieldResponse
+ * 
+ */
+export type FieldResponse = $Result.DefaultSelection<Prisma.$FieldResponsePayload>
 
 /**
  * Enums
@@ -218,6 +228,26 @@ export class PrismaClient<
     * ```
     */
   get fieldOption(): Prisma.FieldOptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formSubmission`: Exposes CRUD operations for the **FormSubmission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormSubmissions
+    * const formSubmissions = await prisma.formSubmission.findMany()
+    * ```
+    */
+  get formSubmission(): Prisma.FormSubmissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.fieldResponse`: Exposes CRUD operations for the **FieldResponse** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FieldResponses
+    * const fieldResponses = await prisma.fieldResponse.findMany()
+    * ```
+    */
+  get fieldResponse(): Prisma.FieldResponseDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -661,7 +691,9 @@ export namespace Prisma {
     User: 'User',
     Form: 'Form',
     FormField: 'FormField',
-    FieldOption: 'FieldOption'
+    FieldOption: 'FieldOption',
+    FormSubmission: 'FormSubmission',
+    FieldResponse: 'FieldResponse'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -680,7 +712,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "form" | "formField" | "fieldOption"
+      modelProps: "user" | "form" | "formField" | "fieldOption" | "formSubmission" | "fieldResponse"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -980,6 +1012,154 @@ export namespace Prisma {
           }
         }
       }
+      FormSubmission: {
+        payload: Prisma.$FormSubmissionPayload<ExtArgs>
+        fields: Prisma.FormSubmissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormSubmissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormSubmissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          findFirst: {
+            args: Prisma.FormSubmissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormSubmissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          findMany: {
+            args: Prisma.FormSubmissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>[]
+          }
+          create: {
+            args: Prisma.FormSubmissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          createMany: {
+            args: Prisma.FormSubmissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormSubmissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>[]
+          }
+          delete: {
+            args: Prisma.FormSubmissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          update: {
+            args: Prisma.FormSubmissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormSubmissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormSubmissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormSubmissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormSubmissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+          }
+          aggregate: {
+            args: Prisma.FormSubmissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormSubmission>
+          }
+          groupBy: {
+            args: Prisma.FormSubmissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormSubmissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormSubmissionCountArgs<ExtArgs>
+            result: $Utils.Optional<FormSubmissionCountAggregateOutputType> | number
+          }
+        }
+      }
+      FieldResponse: {
+        payload: Prisma.$FieldResponsePayload<ExtArgs>
+        fields: Prisma.FieldResponseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FieldResponseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FieldResponseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          findFirst: {
+            args: Prisma.FieldResponseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FieldResponseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          findMany: {
+            args: Prisma.FieldResponseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>[]
+          }
+          create: {
+            args: Prisma.FieldResponseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          createMany: {
+            args: Prisma.FieldResponseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FieldResponseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>[]
+          }
+          delete: {
+            args: Prisma.FieldResponseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          update: {
+            args: Prisma.FieldResponseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          deleteMany: {
+            args: Prisma.FieldResponseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FieldResponseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FieldResponseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>[]
+          }
+          upsert: {
+            args: Prisma.FieldResponseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FieldResponsePayload>
+          }
+          aggregate: {
+            args: Prisma.FieldResponseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFieldResponse>
+          }
+          groupBy: {
+            args: Prisma.FieldResponseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FieldResponseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FieldResponseCountArgs<ExtArgs>
+            result: $Utils.Optional<FieldResponseCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1068,6 +1248,8 @@ export namespace Prisma {
     form?: FormOmit
     formField?: FormFieldOmit
     fieldOption?: FieldOptionOmit
+    formSubmission?: FormSubmissionOmit
+    fieldResponse?: FieldResponseOmit
   }
 
   /* Types for Logging */
@@ -1163,10 +1345,12 @@ export namespace Prisma {
 
   export type FormCountOutputType = {
     fields: number
+    submissions: number
   }
 
   export type FormCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     fields?: boolean | FormCountOutputTypeCountFieldsArgs
+    submissions?: boolean | FormCountOutputTypeCountSubmissionsArgs
   }
 
   // Custom InputTypes
@@ -1187,16 +1371,25 @@ export namespace Prisma {
     where?: FormFieldWhereInput
   }
 
+  /**
+   * FormCountOutputType without action
+   */
+  export type FormCountOutputTypeCountSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormSubmissionWhereInput
+  }
+
 
   /**
    * Count Type FormFieldCountOutputType
    */
 
   export type FormFieldCountOutputType = {
+    responses: number
     options: number
   }
 
   export type FormFieldCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responses?: boolean | FormFieldCountOutputTypeCountResponsesArgs
     options?: boolean | FormFieldCountOutputTypeCountOptionsArgs
   }
 
@@ -1214,8 +1407,46 @@ export namespace Prisma {
   /**
    * FormFieldCountOutputType without action
    */
+  export type FormFieldCountOutputTypeCountResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FieldResponseWhereInput
+  }
+
+  /**
+   * FormFieldCountOutputType without action
+   */
   export type FormFieldCountOutputTypeCountOptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FieldOptionWhereInput
+  }
+
+
+  /**
+   * Count Type FormSubmissionCountOutputType
+   */
+
+  export type FormSubmissionCountOutputType = {
+    responses: number
+  }
+
+  export type FormSubmissionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responses?: boolean | FormSubmissionCountOutputTypeCountResponsesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FormSubmissionCountOutputType without action
+   */
+  export type FormSubmissionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmissionCountOutputType
+     */
+    select?: FormSubmissionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FormSubmissionCountOutputType without action
+   */
+  export type FormSubmissionCountOutputTypeCountResponsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FieldResponseWhereInput
   }
 
 
@@ -2425,6 +2656,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     fields?: boolean | Form$fieldsArgs<ExtArgs>
+    submissions?: boolean | Form$submissionsArgs<ExtArgs>
     _count?: boolean | FormCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["form"]>
 
@@ -2455,6 +2687,7 @@ export namespace Prisma {
   export type FormOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formName" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["form"]>
   export type FormInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     fields?: boolean | Form$fieldsArgs<ExtArgs>
+    submissions?: boolean | Form$submissionsArgs<ExtArgs>
     _count?: boolean | FormCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FormIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2464,6 +2697,7 @@ export namespace Prisma {
     name: "Form"
     objects: {
       fields: Prisma.$FormFieldPayload<ExtArgs>[]
+      submissions: Prisma.$FormSubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2866,6 +3100,7 @@ export namespace Prisma {
   export interface Prisma__FormClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     fields<T extends Form$fieldsArgs<ExtArgs> = {}>(args?: Subset<T, Form$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    submissions<T extends Form$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Form$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3312,6 +3547,30 @@ export namespace Prisma {
   }
 
   /**
+   * Form.submissions
+   */
+  export type Form$submissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    where?: FormSubmissionWhereInput
+    orderBy?: FormSubmissionOrderByWithRelationInput | FormSubmissionOrderByWithRelationInput[]
+    cursor?: FormSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormSubmissionScalarFieldEnum | FormSubmissionScalarFieldEnum[]
+  }
+
+  /**
    * Form without action
    */
   export type FormDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3577,6 +3836,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     form?: boolean | FormDefaultArgs<ExtArgs>
+    responses?: boolean | FormField$responsesArgs<ExtArgs>
     options?: boolean | FormField$optionsArgs<ExtArgs>
     _count?: boolean | FormFieldCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["formField"]>
@@ -3625,6 +3885,7 @@ export namespace Prisma {
   export type FormFieldOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formId" | "order" | "type" | "label" | "required" | "placeholder" | "multiline" | "createdAt" | "updatedAt", ExtArgs["result"]["formField"]>
   export type FormFieldInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     form?: boolean | FormDefaultArgs<ExtArgs>
+    responses?: boolean | FormField$responsesArgs<ExtArgs>
     options?: boolean | FormField$optionsArgs<ExtArgs>
     _count?: boolean | FormFieldCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3639,6 +3900,7 @@ export namespace Prisma {
     name: "FormField"
     objects: {
       form: Prisma.$FormPayload<ExtArgs>
+      responses: Prisma.$FieldResponsePayload<ExtArgs>[]
       options: Prisma.$FieldOptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4047,6 +4309,7 @@ export namespace Prisma {
   export interface Prisma__FormFieldClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     form<T extends FormDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormDefaultArgs<ExtArgs>>): Prisma__FormClient<$Result.GetResult<Prisma.$FormPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    responses<T extends FormField$responsesArgs<ExtArgs> = {}>(args?: Subset<T, FormField$responsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     options<T extends FormField$optionsArgs<ExtArgs> = {}>(args?: Subset<T, FormField$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4480,6 +4743,30 @@ export namespace Prisma {
      * Limit how many FormFields to delete.
      */
     limit?: number
+  }
+
+  /**
+   * FormField.responses
+   */
+  export type FormField$responsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    where?: FieldResponseWhereInput
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    cursor?: FieldResponseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FieldResponseScalarFieldEnum | FieldResponseScalarFieldEnum[]
   }
 
   /**
@@ -5622,6 +5909,2241 @@ export namespace Prisma {
 
 
   /**
+   * Model FormSubmission
+   */
+
+  export type AggregateFormSubmission = {
+    _count: FormSubmissionCountAggregateOutputType | null
+    _avg: FormSubmissionAvgAggregateOutputType | null
+    _sum: FormSubmissionSumAggregateOutputType | null
+    _min: FormSubmissionMinAggregateOutputType | null
+    _max: FormSubmissionMaxAggregateOutputType | null
+  }
+
+  export type FormSubmissionAvgAggregateOutputType = {
+    id: number | null
+    formId: number | null
+  }
+
+  export type FormSubmissionSumAggregateOutputType = {
+    id: number | null
+    formId: number | null
+  }
+
+  export type FormSubmissionMinAggregateOutputType = {
+    id: number | null
+    formId: number | null
+    createdAt: Date | null
+  }
+
+  export type FormSubmissionMaxAggregateOutputType = {
+    id: number | null
+    formId: number | null
+    createdAt: Date | null
+  }
+
+  export type FormSubmissionCountAggregateOutputType = {
+    id: number
+    formId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FormSubmissionAvgAggregateInputType = {
+    id?: true
+    formId?: true
+  }
+
+  export type FormSubmissionSumAggregateInputType = {
+    id?: true
+    formId?: true
+  }
+
+  export type FormSubmissionMinAggregateInputType = {
+    id?: true
+    formId?: true
+    createdAt?: true
+  }
+
+  export type FormSubmissionMaxAggregateInputType = {
+    id?: true
+    formId?: true
+    createdAt?: true
+  }
+
+  export type FormSubmissionCountAggregateInputType = {
+    id?: true
+    formId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FormSubmissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormSubmission to aggregate.
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSubmissions to fetch.
+     */
+    orderBy?: FormSubmissionOrderByWithRelationInput | FormSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormSubmissions
+    **/
+    _count?: true | FormSubmissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormSubmissionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormSubmissionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormSubmissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormSubmissionMaxAggregateInputType
+  }
+
+  export type GetFormSubmissionAggregateType<T extends FormSubmissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormSubmission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormSubmission[P]>
+      : GetScalarType<T[P], AggregateFormSubmission[P]>
+  }
+
+
+
+
+  export type FormSubmissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormSubmissionWhereInput
+    orderBy?: FormSubmissionOrderByWithAggregationInput | FormSubmissionOrderByWithAggregationInput[]
+    by: FormSubmissionScalarFieldEnum[] | FormSubmissionScalarFieldEnum
+    having?: FormSubmissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormSubmissionCountAggregateInputType | true
+    _avg?: FormSubmissionAvgAggregateInputType
+    _sum?: FormSubmissionSumAggregateInputType
+    _min?: FormSubmissionMinAggregateInputType
+    _max?: FormSubmissionMaxAggregateInputType
+  }
+
+  export type FormSubmissionGroupByOutputType = {
+    id: number
+    formId: number
+    createdAt: Date
+    _count: FormSubmissionCountAggregateOutputType | null
+    _avg: FormSubmissionAvgAggregateOutputType | null
+    _sum: FormSubmissionSumAggregateOutputType | null
+    _min: FormSubmissionMinAggregateOutputType | null
+    _max: FormSubmissionMaxAggregateOutputType | null
+  }
+
+  type GetFormSubmissionGroupByPayload<T extends FormSubmissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormSubmissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormSubmissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormSubmissionGroupByOutputType[P]>
+            : GetScalarType<T[P], FormSubmissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormSubmissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+    responses?: boolean | FormSubmission$responsesArgs<ExtArgs>
+    _count?: boolean | FormSubmissionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSubmission"]>
+
+  export type FormSubmissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSubmission"]>
+
+  export type FormSubmissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSubmission"]>
+
+  export type FormSubmissionSelectScalar = {
+    id?: boolean
+    formId?: boolean
+    createdAt?: boolean
+  }
+
+  export type FormSubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formId" | "createdAt", ExtArgs["result"]["formSubmission"]>
+  export type FormSubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+    responses?: boolean | FormSubmission$responsesArgs<ExtArgs>
+    _count?: boolean | FormSubmissionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FormSubmissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }
+  export type FormSubmissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }
+
+  export type $FormSubmissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormSubmission"
+    objects: {
+      form: Prisma.$FormPayload<ExtArgs>
+      responses: Prisma.$FieldResponsePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      formId: number
+      createdAt: Date
+    }, ExtArgs["result"]["formSubmission"]>
+    composites: {}
+  }
+
+  type FormSubmissionGetPayload<S extends boolean | null | undefined | FormSubmissionDefaultArgs> = $Result.GetResult<Prisma.$FormSubmissionPayload, S>
+
+  type FormSubmissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormSubmissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormSubmissionCountAggregateInputType | true
+    }
+
+  export interface FormSubmissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormSubmission'], meta: { name: 'FormSubmission' } }
+    /**
+     * Find zero or one FormSubmission that matches the filter.
+     * @param {FormSubmissionFindUniqueArgs} args - Arguments to find a FormSubmission
+     * @example
+     * // Get one FormSubmission
+     * const formSubmission = await prisma.formSubmission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormSubmissionFindUniqueArgs>(args: SelectSubset<T, FormSubmissionFindUniqueArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormSubmission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormSubmissionFindUniqueOrThrowArgs} args - Arguments to find a FormSubmission
+     * @example
+     * // Get one FormSubmission
+     * const formSubmission = await prisma.formSubmission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormSubmissionFindUniqueOrThrowArgs>(args: SelectSubset<T, FormSubmissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormSubmission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionFindFirstArgs} args - Arguments to find a FormSubmission
+     * @example
+     * // Get one FormSubmission
+     * const formSubmission = await prisma.formSubmission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormSubmissionFindFirstArgs>(args?: SelectSubset<T, FormSubmissionFindFirstArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormSubmission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionFindFirstOrThrowArgs} args - Arguments to find a FormSubmission
+     * @example
+     * // Get one FormSubmission
+     * const formSubmission = await prisma.formSubmission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormSubmissionFindFirstOrThrowArgs>(args?: SelectSubset<T, FormSubmissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormSubmissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormSubmissions
+     * const formSubmissions = await prisma.formSubmission.findMany()
+     * 
+     * // Get first 10 FormSubmissions
+     * const formSubmissions = await prisma.formSubmission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formSubmissionWithIdOnly = await prisma.formSubmission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormSubmissionFindManyArgs>(args?: SelectSubset<T, FormSubmissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormSubmission.
+     * @param {FormSubmissionCreateArgs} args - Arguments to create a FormSubmission.
+     * @example
+     * // Create one FormSubmission
+     * const FormSubmission = await prisma.formSubmission.create({
+     *   data: {
+     *     // ... data to create a FormSubmission
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormSubmissionCreateArgs>(args: SelectSubset<T, FormSubmissionCreateArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormSubmissions.
+     * @param {FormSubmissionCreateManyArgs} args - Arguments to create many FormSubmissions.
+     * @example
+     * // Create many FormSubmissions
+     * const formSubmission = await prisma.formSubmission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormSubmissionCreateManyArgs>(args?: SelectSubset<T, FormSubmissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormSubmissions and returns the data saved in the database.
+     * @param {FormSubmissionCreateManyAndReturnArgs} args - Arguments to create many FormSubmissions.
+     * @example
+     * // Create many FormSubmissions
+     * const formSubmission = await prisma.formSubmission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormSubmissions and only return the `id`
+     * const formSubmissionWithIdOnly = await prisma.formSubmission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormSubmissionCreateManyAndReturnArgs>(args?: SelectSubset<T, FormSubmissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormSubmission.
+     * @param {FormSubmissionDeleteArgs} args - Arguments to delete one FormSubmission.
+     * @example
+     * // Delete one FormSubmission
+     * const FormSubmission = await prisma.formSubmission.delete({
+     *   where: {
+     *     // ... filter to delete one FormSubmission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormSubmissionDeleteArgs>(args: SelectSubset<T, FormSubmissionDeleteArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormSubmission.
+     * @param {FormSubmissionUpdateArgs} args - Arguments to update one FormSubmission.
+     * @example
+     * // Update one FormSubmission
+     * const formSubmission = await prisma.formSubmission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormSubmissionUpdateArgs>(args: SelectSubset<T, FormSubmissionUpdateArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormSubmissions.
+     * @param {FormSubmissionDeleteManyArgs} args - Arguments to filter FormSubmissions to delete.
+     * @example
+     * // Delete a few FormSubmissions
+     * const { count } = await prisma.formSubmission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormSubmissionDeleteManyArgs>(args?: SelectSubset<T, FormSubmissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormSubmissions
+     * const formSubmission = await prisma.formSubmission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormSubmissionUpdateManyArgs>(args: SelectSubset<T, FormSubmissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormSubmissions and returns the data updated in the database.
+     * @param {FormSubmissionUpdateManyAndReturnArgs} args - Arguments to update many FormSubmissions.
+     * @example
+     * // Update many FormSubmissions
+     * const formSubmission = await prisma.formSubmission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormSubmissions and only return the `id`
+     * const formSubmissionWithIdOnly = await prisma.formSubmission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormSubmissionUpdateManyAndReturnArgs>(args: SelectSubset<T, FormSubmissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormSubmission.
+     * @param {FormSubmissionUpsertArgs} args - Arguments to update or create a FormSubmission.
+     * @example
+     * // Update or create a FormSubmission
+     * const formSubmission = await prisma.formSubmission.upsert({
+     *   create: {
+     *     // ... data to create a FormSubmission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormSubmission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormSubmissionUpsertArgs>(args: SelectSubset<T, FormSubmissionUpsertArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionCountArgs} args - Arguments to filter FormSubmissions to count.
+     * @example
+     * // Count the number of FormSubmissions
+     * const count = await prisma.formSubmission.count({
+     *   where: {
+     *     // ... the filter for the FormSubmissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormSubmissionCountArgs>(
+      args?: Subset<T, FormSubmissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormSubmissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormSubmissionAggregateArgs>(args: Subset<T, FormSubmissionAggregateArgs>): Prisma.PrismaPromise<GetFormSubmissionAggregateType<T>>
+
+    /**
+     * Group by FormSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSubmissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormSubmissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormSubmissionGroupByArgs['orderBy'] }
+        : { orderBy?: FormSubmissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormSubmissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormSubmissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormSubmission model
+   */
+  readonly fields: FormSubmissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormSubmission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormSubmissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    form<T extends FormDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormDefaultArgs<ExtArgs>>): Prisma__FormClient<$Result.GetResult<Prisma.$FormPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    responses<T extends FormSubmission$responsesArgs<ExtArgs> = {}>(args?: Subset<T, FormSubmission$responsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormSubmission model
+   */
+  interface FormSubmissionFieldRefs {
+    readonly id: FieldRef<"FormSubmission", 'Int'>
+    readonly formId: FieldRef<"FormSubmission", 'Int'>
+    readonly createdAt: FieldRef<"FormSubmission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormSubmission findUnique
+   */
+  export type FormSubmissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSubmission to fetch.
+     */
+    where: FormSubmissionWhereUniqueInput
+  }
+
+  /**
+   * FormSubmission findUniqueOrThrow
+   */
+  export type FormSubmissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSubmission to fetch.
+     */
+    where: FormSubmissionWhereUniqueInput
+  }
+
+  /**
+   * FormSubmission findFirst
+   */
+  export type FormSubmissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSubmission to fetch.
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSubmissions to fetch.
+     */
+    orderBy?: FormSubmissionOrderByWithRelationInput | FormSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormSubmissions.
+     */
+    cursor?: FormSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormSubmissions.
+     */
+    distinct?: FormSubmissionScalarFieldEnum | FormSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSubmission findFirstOrThrow
+   */
+  export type FormSubmissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSubmission to fetch.
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSubmissions to fetch.
+     */
+    orderBy?: FormSubmissionOrderByWithRelationInput | FormSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormSubmissions.
+     */
+    cursor?: FormSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormSubmissions.
+     */
+    distinct?: FormSubmissionScalarFieldEnum | FormSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSubmission findMany
+   */
+  export type FormSubmissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSubmissions to fetch.
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSubmissions to fetch.
+     */
+    orderBy?: FormSubmissionOrderByWithRelationInput | FormSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormSubmissions.
+     */
+    cursor?: FormSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSubmissions.
+     */
+    skip?: number
+    distinct?: FormSubmissionScalarFieldEnum | FormSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSubmission create
+   */
+  export type FormSubmissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FormSubmission.
+     */
+    data: XOR<FormSubmissionCreateInput, FormSubmissionUncheckedCreateInput>
+  }
+
+  /**
+   * FormSubmission createMany
+   */
+  export type FormSubmissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormSubmissions.
+     */
+    data: FormSubmissionCreateManyInput | FormSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormSubmission createManyAndReturn
+   */
+  export type FormSubmissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormSubmissions.
+     */
+    data: FormSubmissionCreateManyInput | FormSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FormSubmission update
+   */
+  export type FormSubmissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FormSubmission.
+     */
+    data: XOR<FormSubmissionUpdateInput, FormSubmissionUncheckedUpdateInput>
+    /**
+     * Choose, which FormSubmission to update.
+     */
+    where: FormSubmissionWhereUniqueInput
+  }
+
+  /**
+   * FormSubmission updateMany
+   */
+  export type FormSubmissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormSubmissions.
+     */
+    data: XOR<FormSubmissionUpdateManyMutationInput, FormSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormSubmissions to update
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * Limit how many FormSubmissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormSubmission updateManyAndReturn
+   */
+  export type FormSubmissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to update FormSubmissions.
+     */
+    data: XOR<FormSubmissionUpdateManyMutationInput, FormSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormSubmissions to update
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * Limit how many FormSubmissions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FormSubmission upsert
+   */
+  export type FormSubmissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FormSubmission to update in case it exists.
+     */
+    where: FormSubmissionWhereUniqueInput
+    /**
+     * In case the FormSubmission found by the `where` argument doesn't exist, create a new FormSubmission with this data.
+     */
+    create: XOR<FormSubmissionCreateInput, FormSubmissionUncheckedCreateInput>
+    /**
+     * In case the FormSubmission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormSubmissionUpdateInput, FormSubmissionUncheckedUpdateInput>
+  }
+
+  /**
+   * FormSubmission delete
+   */
+  export type FormSubmissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter which FormSubmission to delete.
+     */
+    where: FormSubmissionWhereUniqueInput
+  }
+
+  /**
+   * FormSubmission deleteMany
+   */
+  export type FormSubmissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormSubmissions to delete
+     */
+    where?: FormSubmissionWhereInput
+    /**
+     * Limit how many FormSubmissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormSubmission.responses
+   */
+  export type FormSubmission$responsesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    where?: FieldResponseWhereInput
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    cursor?: FieldResponseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FieldResponseScalarFieldEnum | FieldResponseScalarFieldEnum[]
+  }
+
+  /**
+   * FormSubmission without action
+   */
+  export type FormSubmissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSubmission
+     */
+    select?: FormSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSubmission
+     */
+    omit?: FormSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSubmissionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FieldResponse
+   */
+
+  export type AggregateFieldResponse = {
+    _count: FieldResponseCountAggregateOutputType | null
+    _avg: FieldResponseAvgAggregateOutputType | null
+    _sum: FieldResponseSumAggregateOutputType | null
+    _min: FieldResponseMinAggregateOutputType | null
+    _max: FieldResponseMaxAggregateOutputType | null
+  }
+
+  export type FieldResponseAvgAggregateOutputType = {
+    submissionId: number | null
+    fieldId: number | null
+  }
+
+  export type FieldResponseSumAggregateOutputType = {
+    submissionId: number | null
+    fieldId: number | null
+  }
+
+  export type FieldResponseMinAggregateOutputType = {
+    id: string | null
+    submissionId: number | null
+    fieldId: number | null
+    textValue: string | null
+    selectedOption: string | null
+    createdAt: Date | null
+  }
+
+  export type FieldResponseMaxAggregateOutputType = {
+    id: string | null
+    submissionId: number | null
+    fieldId: number | null
+    textValue: string | null
+    selectedOption: string | null
+    createdAt: Date | null
+  }
+
+  export type FieldResponseCountAggregateOutputType = {
+    id: number
+    submissionId: number
+    fieldId: number
+    textValue: number
+    selectedOption: number
+    selectedOptions: number
+    tableValue: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FieldResponseAvgAggregateInputType = {
+    submissionId?: true
+    fieldId?: true
+  }
+
+  export type FieldResponseSumAggregateInputType = {
+    submissionId?: true
+    fieldId?: true
+  }
+
+  export type FieldResponseMinAggregateInputType = {
+    id?: true
+    submissionId?: true
+    fieldId?: true
+    textValue?: true
+    selectedOption?: true
+    createdAt?: true
+  }
+
+  export type FieldResponseMaxAggregateInputType = {
+    id?: true
+    submissionId?: true
+    fieldId?: true
+    textValue?: true
+    selectedOption?: true
+    createdAt?: true
+  }
+
+  export type FieldResponseCountAggregateInputType = {
+    id?: true
+    submissionId?: true
+    fieldId?: true
+    textValue?: true
+    selectedOption?: true
+    selectedOptions?: true
+    tableValue?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FieldResponseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FieldResponse to aggregate.
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FieldResponses to fetch.
+     */
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FieldResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FieldResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FieldResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FieldResponses
+    **/
+    _count?: true | FieldResponseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FieldResponseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FieldResponseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FieldResponseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FieldResponseMaxAggregateInputType
+  }
+
+  export type GetFieldResponseAggregateType<T extends FieldResponseAggregateArgs> = {
+        [P in keyof T & keyof AggregateFieldResponse]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFieldResponse[P]>
+      : GetScalarType<T[P], AggregateFieldResponse[P]>
+  }
+
+
+
+
+  export type FieldResponseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FieldResponseWhereInput
+    orderBy?: FieldResponseOrderByWithAggregationInput | FieldResponseOrderByWithAggregationInput[]
+    by: FieldResponseScalarFieldEnum[] | FieldResponseScalarFieldEnum
+    having?: FieldResponseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FieldResponseCountAggregateInputType | true
+    _avg?: FieldResponseAvgAggregateInputType
+    _sum?: FieldResponseSumAggregateInputType
+    _min?: FieldResponseMinAggregateInputType
+    _max?: FieldResponseMaxAggregateInputType
+  }
+
+  export type FieldResponseGroupByOutputType = {
+    id: string
+    submissionId: number
+    fieldId: number
+    textValue: string | null
+    selectedOption: string | null
+    selectedOptions: string[]
+    tableValue: JsonValue | null
+    createdAt: Date
+    _count: FieldResponseCountAggregateOutputType | null
+    _avg: FieldResponseAvgAggregateOutputType | null
+    _sum: FieldResponseSumAggregateOutputType | null
+    _min: FieldResponseMinAggregateOutputType | null
+    _max: FieldResponseMaxAggregateOutputType | null
+  }
+
+  type GetFieldResponseGroupByPayload<T extends FieldResponseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FieldResponseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FieldResponseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FieldResponseGroupByOutputType[P]>
+            : GetScalarType<T[P], FieldResponseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FieldResponseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    submissionId?: boolean
+    fieldId?: boolean
+    textValue?: boolean
+    selectedOption?: boolean
+    selectedOptions?: boolean
+    tableValue?: boolean
+    createdAt?: boolean
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fieldResponse"]>
+
+  export type FieldResponseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    submissionId?: boolean
+    fieldId?: boolean
+    textValue?: boolean
+    selectedOption?: boolean
+    selectedOptions?: boolean
+    tableValue?: boolean
+    createdAt?: boolean
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fieldResponse"]>
+
+  export type FieldResponseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    submissionId?: boolean
+    fieldId?: boolean
+    textValue?: boolean
+    selectedOption?: boolean
+    selectedOptions?: boolean
+    tableValue?: boolean
+    createdAt?: boolean
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fieldResponse"]>
+
+  export type FieldResponseSelectScalar = {
+    id?: boolean
+    submissionId?: boolean
+    fieldId?: boolean
+    textValue?: boolean
+    selectedOption?: boolean
+    selectedOptions?: boolean
+    tableValue?: boolean
+    createdAt?: boolean
+  }
+
+  export type FieldResponseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "submissionId" | "fieldId" | "textValue" | "selectedOption" | "selectedOptions" | "tableValue" | "createdAt", ExtArgs["result"]["fieldResponse"]>
+  export type FieldResponseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }
+  export type FieldResponseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }
+  export type FieldResponseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    submission?: boolean | FormSubmissionDefaultArgs<ExtArgs>
+    field?: boolean | FormFieldDefaultArgs<ExtArgs>
+  }
+
+  export type $FieldResponsePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FieldResponse"
+    objects: {
+      submission: Prisma.$FormSubmissionPayload<ExtArgs>
+      field: Prisma.$FormFieldPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      submissionId: number
+      fieldId: number
+      textValue: string | null
+      selectedOption: string | null
+      selectedOptions: string[]
+      tableValue: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["fieldResponse"]>
+    composites: {}
+  }
+
+  type FieldResponseGetPayload<S extends boolean | null | undefined | FieldResponseDefaultArgs> = $Result.GetResult<Prisma.$FieldResponsePayload, S>
+
+  type FieldResponseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FieldResponseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FieldResponseCountAggregateInputType | true
+    }
+
+  export interface FieldResponseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FieldResponse'], meta: { name: 'FieldResponse' } }
+    /**
+     * Find zero or one FieldResponse that matches the filter.
+     * @param {FieldResponseFindUniqueArgs} args - Arguments to find a FieldResponse
+     * @example
+     * // Get one FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FieldResponseFindUniqueArgs>(args: SelectSubset<T, FieldResponseFindUniqueArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FieldResponse that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FieldResponseFindUniqueOrThrowArgs} args - Arguments to find a FieldResponse
+     * @example
+     * // Get one FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FieldResponseFindUniqueOrThrowArgs>(args: SelectSubset<T, FieldResponseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FieldResponse that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseFindFirstArgs} args - Arguments to find a FieldResponse
+     * @example
+     * // Get one FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FieldResponseFindFirstArgs>(args?: SelectSubset<T, FieldResponseFindFirstArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FieldResponse that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseFindFirstOrThrowArgs} args - Arguments to find a FieldResponse
+     * @example
+     * // Get one FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FieldResponseFindFirstOrThrowArgs>(args?: SelectSubset<T, FieldResponseFindFirstOrThrowArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FieldResponses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FieldResponses
+     * const fieldResponses = await prisma.fieldResponse.findMany()
+     * 
+     * // Get first 10 FieldResponses
+     * const fieldResponses = await prisma.fieldResponse.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const fieldResponseWithIdOnly = await prisma.fieldResponse.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FieldResponseFindManyArgs>(args?: SelectSubset<T, FieldResponseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FieldResponse.
+     * @param {FieldResponseCreateArgs} args - Arguments to create a FieldResponse.
+     * @example
+     * // Create one FieldResponse
+     * const FieldResponse = await prisma.fieldResponse.create({
+     *   data: {
+     *     // ... data to create a FieldResponse
+     *   }
+     * })
+     * 
+     */
+    create<T extends FieldResponseCreateArgs>(args: SelectSubset<T, FieldResponseCreateArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FieldResponses.
+     * @param {FieldResponseCreateManyArgs} args - Arguments to create many FieldResponses.
+     * @example
+     * // Create many FieldResponses
+     * const fieldResponse = await prisma.fieldResponse.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FieldResponseCreateManyArgs>(args?: SelectSubset<T, FieldResponseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FieldResponses and returns the data saved in the database.
+     * @param {FieldResponseCreateManyAndReturnArgs} args - Arguments to create many FieldResponses.
+     * @example
+     * // Create many FieldResponses
+     * const fieldResponse = await prisma.fieldResponse.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FieldResponses and only return the `id`
+     * const fieldResponseWithIdOnly = await prisma.fieldResponse.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FieldResponseCreateManyAndReturnArgs>(args?: SelectSubset<T, FieldResponseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FieldResponse.
+     * @param {FieldResponseDeleteArgs} args - Arguments to delete one FieldResponse.
+     * @example
+     * // Delete one FieldResponse
+     * const FieldResponse = await prisma.fieldResponse.delete({
+     *   where: {
+     *     // ... filter to delete one FieldResponse
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FieldResponseDeleteArgs>(args: SelectSubset<T, FieldResponseDeleteArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FieldResponse.
+     * @param {FieldResponseUpdateArgs} args - Arguments to update one FieldResponse.
+     * @example
+     * // Update one FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FieldResponseUpdateArgs>(args: SelectSubset<T, FieldResponseUpdateArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FieldResponses.
+     * @param {FieldResponseDeleteManyArgs} args - Arguments to filter FieldResponses to delete.
+     * @example
+     * // Delete a few FieldResponses
+     * const { count } = await prisma.fieldResponse.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FieldResponseDeleteManyArgs>(args?: SelectSubset<T, FieldResponseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FieldResponses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FieldResponses
+     * const fieldResponse = await prisma.fieldResponse.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FieldResponseUpdateManyArgs>(args: SelectSubset<T, FieldResponseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FieldResponses and returns the data updated in the database.
+     * @param {FieldResponseUpdateManyAndReturnArgs} args - Arguments to update many FieldResponses.
+     * @example
+     * // Update many FieldResponses
+     * const fieldResponse = await prisma.fieldResponse.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FieldResponses and only return the `id`
+     * const fieldResponseWithIdOnly = await prisma.fieldResponse.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FieldResponseUpdateManyAndReturnArgs>(args: SelectSubset<T, FieldResponseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FieldResponse.
+     * @param {FieldResponseUpsertArgs} args - Arguments to update or create a FieldResponse.
+     * @example
+     * // Update or create a FieldResponse
+     * const fieldResponse = await prisma.fieldResponse.upsert({
+     *   create: {
+     *     // ... data to create a FieldResponse
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FieldResponse we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FieldResponseUpsertArgs>(args: SelectSubset<T, FieldResponseUpsertArgs<ExtArgs>>): Prisma__FieldResponseClient<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FieldResponses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseCountArgs} args - Arguments to filter FieldResponses to count.
+     * @example
+     * // Count the number of FieldResponses
+     * const count = await prisma.fieldResponse.count({
+     *   where: {
+     *     // ... the filter for the FieldResponses we want to count
+     *   }
+     * })
+    **/
+    count<T extends FieldResponseCountArgs>(
+      args?: Subset<T, FieldResponseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FieldResponseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FieldResponse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FieldResponseAggregateArgs>(args: Subset<T, FieldResponseAggregateArgs>): Prisma.PrismaPromise<GetFieldResponseAggregateType<T>>
+
+    /**
+     * Group by FieldResponse.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FieldResponseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FieldResponseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FieldResponseGroupByArgs['orderBy'] }
+        : { orderBy?: FieldResponseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FieldResponseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFieldResponseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FieldResponse model
+   */
+  readonly fields: FieldResponseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FieldResponse.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FieldResponseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    submission<T extends FormSubmissionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormSubmissionDefaultArgs<ExtArgs>>): Prisma__FormSubmissionClient<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    field<T extends FormFieldDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormFieldDefaultArgs<ExtArgs>>): Prisma__FormFieldClient<$Result.GetResult<Prisma.$FormFieldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FieldResponse model
+   */
+  interface FieldResponseFieldRefs {
+    readonly id: FieldRef<"FieldResponse", 'String'>
+    readonly submissionId: FieldRef<"FieldResponse", 'Int'>
+    readonly fieldId: FieldRef<"FieldResponse", 'Int'>
+    readonly textValue: FieldRef<"FieldResponse", 'String'>
+    readonly selectedOption: FieldRef<"FieldResponse", 'String'>
+    readonly selectedOptions: FieldRef<"FieldResponse", 'String[]'>
+    readonly tableValue: FieldRef<"FieldResponse", 'Json'>
+    readonly createdAt: FieldRef<"FieldResponse", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FieldResponse findUnique
+   */
+  export type FieldResponseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which FieldResponse to fetch.
+     */
+    where: FieldResponseWhereUniqueInput
+  }
+
+  /**
+   * FieldResponse findUniqueOrThrow
+   */
+  export type FieldResponseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which FieldResponse to fetch.
+     */
+    where: FieldResponseWhereUniqueInput
+  }
+
+  /**
+   * FieldResponse findFirst
+   */
+  export type FieldResponseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which FieldResponse to fetch.
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FieldResponses to fetch.
+     */
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FieldResponses.
+     */
+    cursor?: FieldResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FieldResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FieldResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FieldResponses.
+     */
+    distinct?: FieldResponseScalarFieldEnum | FieldResponseScalarFieldEnum[]
+  }
+
+  /**
+   * FieldResponse findFirstOrThrow
+   */
+  export type FieldResponseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which FieldResponse to fetch.
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FieldResponses to fetch.
+     */
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FieldResponses.
+     */
+    cursor?: FieldResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FieldResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FieldResponses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FieldResponses.
+     */
+    distinct?: FieldResponseScalarFieldEnum | FieldResponseScalarFieldEnum[]
+  }
+
+  /**
+   * FieldResponse findMany
+   */
+  export type FieldResponseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter, which FieldResponses to fetch.
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FieldResponses to fetch.
+     */
+    orderBy?: FieldResponseOrderByWithRelationInput | FieldResponseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FieldResponses.
+     */
+    cursor?: FieldResponseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FieldResponses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FieldResponses.
+     */
+    skip?: number
+    distinct?: FieldResponseScalarFieldEnum | FieldResponseScalarFieldEnum[]
+  }
+
+  /**
+   * FieldResponse create
+   */
+  export type FieldResponseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FieldResponse.
+     */
+    data: XOR<FieldResponseCreateInput, FieldResponseUncheckedCreateInput>
+  }
+
+  /**
+   * FieldResponse createMany
+   */
+  export type FieldResponseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FieldResponses.
+     */
+    data: FieldResponseCreateManyInput | FieldResponseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FieldResponse createManyAndReturn
+   */
+  export type FieldResponseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * The data used to create many FieldResponses.
+     */
+    data: FieldResponseCreateManyInput | FieldResponseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FieldResponse update
+   */
+  export type FieldResponseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FieldResponse.
+     */
+    data: XOR<FieldResponseUpdateInput, FieldResponseUncheckedUpdateInput>
+    /**
+     * Choose, which FieldResponse to update.
+     */
+    where: FieldResponseWhereUniqueInput
+  }
+
+  /**
+   * FieldResponse updateMany
+   */
+  export type FieldResponseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FieldResponses.
+     */
+    data: XOR<FieldResponseUpdateManyMutationInput, FieldResponseUncheckedUpdateManyInput>
+    /**
+     * Filter which FieldResponses to update
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * Limit how many FieldResponses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FieldResponse updateManyAndReturn
+   */
+  export type FieldResponseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * The data used to update FieldResponses.
+     */
+    data: XOR<FieldResponseUpdateManyMutationInput, FieldResponseUncheckedUpdateManyInput>
+    /**
+     * Filter which FieldResponses to update
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * Limit how many FieldResponses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FieldResponse upsert
+   */
+  export type FieldResponseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FieldResponse to update in case it exists.
+     */
+    where: FieldResponseWhereUniqueInput
+    /**
+     * In case the FieldResponse found by the `where` argument doesn't exist, create a new FieldResponse with this data.
+     */
+    create: XOR<FieldResponseCreateInput, FieldResponseUncheckedCreateInput>
+    /**
+     * In case the FieldResponse was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FieldResponseUpdateInput, FieldResponseUncheckedUpdateInput>
+  }
+
+  /**
+   * FieldResponse delete
+   */
+  export type FieldResponseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+    /**
+     * Filter which FieldResponse to delete.
+     */
+    where: FieldResponseWhereUniqueInput
+  }
+
+  /**
+   * FieldResponse deleteMany
+   */
+  export type FieldResponseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FieldResponses to delete
+     */
+    where?: FieldResponseWhereInput
+    /**
+     * Limit how many FieldResponses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FieldResponse without action
+   */
+  export type FieldResponseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FieldResponse
+     */
+    select?: FieldResponseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FieldResponse
+     */
+    omit?: FieldResponseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FieldResponseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5682,12 +8204,43 @@ export namespace Prisma {
   export type FieldOptionScalarFieldEnum = (typeof FieldOptionScalarFieldEnum)[keyof typeof FieldOptionScalarFieldEnum]
 
 
+  export const FormSubmissionScalarFieldEnum: {
+    id: 'id',
+    formId: 'formId',
+    createdAt: 'createdAt'
+  };
+
+  export type FormSubmissionScalarFieldEnum = (typeof FormSubmissionScalarFieldEnum)[keyof typeof FormSubmissionScalarFieldEnum]
+
+
+  export const FieldResponseScalarFieldEnum: {
+    id: 'id',
+    submissionId: 'submissionId',
+    fieldId: 'fieldId',
+    textValue: 'textValue',
+    selectedOption: 'selectedOption',
+    selectedOptions: 'selectedOptions',
+    tableValue: 'tableValue',
+    createdAt: 'createdAt'
+  };
+
+  export type FieldResponseScalarFieldEnum = (typeof FieldResponseScalarFieldEnum)[keyof typeof FieldResponseScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -5704,6 +8257,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -5771,6 +8333,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -5845,6 +8421,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Form"> | Date | string
     updatedAt?: DateTimeFilter<"Form"> | Date | string
     fields?: FormFieldListRelationFilter
+    submissions?: FormSubmissionListRelationFilter
   }
 
   export type FormOrderByWithRelationInput = {
@@ -5854,6 +8431,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     fields?: FormFieldOrderByRelationAggregateInput
+    submissions?: FormSubmissionOrderByRelationAggregateInput
   }
 
   export type FormWhereUniqueInput = Prisma.AtLeast<{
@@ -5866,6 +8444,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Form"> | Date | string
     updatedAt?: DateTimeFilter<"Form"> | Date | string
     fields?: FormFieldListRelationFilter
+    submissions?: FormSubmissionListRelationFilter
   }, "id">
 
   export type FormOrderByWithAggregationInput = {
@@ -5907,6 +8486,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FormField"> | Date | string
     updatedAt?: DateTimeFilter<"FormField"> | Date | string
     form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    responses?: FieldResponseListRelationFilter
     options?: FieldOptionListRelationFilter
   }
 
@@ -5922,6 +8502,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     form?: FormOrderByWithRelationInput
+    responses?: FieldResponseOrderByRelationAggregateInput
     options?: FieldOptionOrderByRelationAggregateInput
   }
 
@@ -5940,6 +8521,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FormField"> | Date | string
     updatedAt?: DateTimeFilter<"FormField"> | Date | string
     form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    responses?: FieldResponseListRelationFilter
     options?: FieldOptionListRelationFilter
   }, "id">
 
@@ -6034,6 +8616,131 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"FieldOption"> | Date | string
   }
 
+  export type FormSubmissionWhereInput = {
+    AND?: FormSubmissionWhereInput | FormSubmissionWhereInput[]
+    OR?: FormSubmissionWhereInput[]
+    NOT?: FormSubmissionWhereInput | FormSubmissionWhereInput[]
+    id?: IntFilter<"FormSubmission"> | number
+    formId?: IntFilter<"FormSubmission"> | number
+    createdAt?: DateTimeFilter<"FormSubmission"> | Date | string
+    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    responses?: FieldResponseListRelationFilter
+  }
+
+  export type FormSubmissionOrderByWithRelationInput = {
+    id?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    form?: FormOrderByWithRelationInput
+    responses?: FieldResponseOrderByRelationAggregateInput
+  }
+
+  export type FormSubmissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: FormSubmissionWhereInput | FormSubmissionWhereInput[]
+    OR?: FormSubmissionWhereInput[]
+    NOT?: FormSubmissionWhereInput | FormSubmissionWhereInput[]
+    formId?: IntFilter<"FormSubmission"> | number
+    createdAt?: DateTimeFilter<"FormSubmission"> | Date | string
+    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    responses?: FieldResponseListRelationFilter
+  }, "id">
+
+  export type FormSubmissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    _count?: FormSubmissionCountOrderByAggregateInput
+    _avg?: FormSubmissionAvgOrderByAggregateInput
+    _max?: FormSubmissionMaxOrderByAggregateInput
+    _min?: FormSubmissionMinOrderByAggregateInput
+    _sum?: FormSubmissionSumOrderByAggregateInput
+  }
+
+  export type FormSubmissionScalarWhereWithAggregatesInput = {
+    AND?: FormSubmissionScalarWhereWithAggregatesInput | FormSubmissionScalarWhereWithAggregatesInput[]
+    OR?: FormSubmissionScalarWhereWithAggregatesInput[]
+    NOT?: FormSubmissionScalarWhereWithAggregatesInput | FormSubmissionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FormSubmission"> | number
+    formId?: IntWithAggregatesFilter<"FormSubmission"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"FormSubmission"> | Date | string
+  }
+
+  export type FieldResponseWhereInput = {
+    AND?: FieldResponseWhereInput | FieldResponseWhereInput[]
+    OR?: FieldResponseWhereInput[]
+    NOT?: FieldResponseWhereInput | FieldResponseWhereInput[]
+    id?: StringFilter<"FieldResponse"> | string
+    submissionId?: IntFilter<"FieldResponse"> | number
+    fieldId?: IntFilter<"FieldResponse"> | number
+    textValue?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOption?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOptions?: StringNullableListFilter<"FieldResponse">
+    tableValue?: JsonNullableFilter<"FieldResponse">
+    createdAt?: DateTimeFilter<"FieldResponse"> | Date | string
+    submission?: XOR<FormSubmissionScalarRelationFilter, FormSubmissionWhereInput>
+    field?: XOR<FormFieldScalarRelationFilter, FormFieldWhereInput>
+  }
+
+  export type FieldResponseOrderByWithRelationInput = {
+    id?: SortOrder
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+    textValue?: SortOrderInput | SortOrder
+    selectedOption?: SortOrderInput | SortOrder
+    selectedOptions?: SortOrder
+    tableValue?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    submission?: FormSubmissionOrderByWithRelationInput
+    field?: FormFieldOrderByWithRelationInput
+  }
+
+  export type FieldResponseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FieldResponseWhereInput | FieldResponseWhereInput[]
+    OR?: FieldResponseWhereInput[]
+    NOT?: FieldResponseWhereInput | FieldResponseWhereInput[]
+    submissionId?: IntFilter<"FieldResponse"> | number
+    fieldId?: IntFilter<"FieldResponse"> | number
+    textValue?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOption?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOptions?: StringNullableListFilter<"FieldResponse">
+    tableValue?: JsonNullableFilter<"FieldResponse">
+    createdAt?: DateTimeFilter<"FieldResponse"> | Date | string
+    submission?: XOR<FormSubmissionScalarRelationFilter, FormSubmissionWhereInput>
+    field?: XOR<FormFieldScalarRelationFilter, FormFieldWhereInput>
+  }, "id">
+
+  export type FieldResponseOrderByWithAggregationInput = {
+    id?: SortOrder
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+    textValue?: SortOrderInput | SortOrder
+    selectedOption?: SortOrderInput | SortOrder
+    selectedOptions?: SortOrder
+    tableValue?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: FieldResponseCountOrderByAggregateInput
+    _avg?: FieldResponseAvgOrderByAggregateInput
+    _max?: FieldResponseMaxOrderByAggregateInput
+    _min?: FieldResponseMinOrderByAggregateInput
+    _sum?: FieldResponseSumOrderByAggregateInput
+  }
+
+  export type FieldResponseScalarWhereWithAggregatesInput = {
+    AND?: FieldResponseScalarWhereWithAggregatesInput | FieldResponseScalarWhereWithAggregatesInput[]
+    OR?: FieldResponseScalarWhereWithAggregatesInput[]
+    NOT?: FieldResponseScalarWhereWithAggregatesInput | FieldResponseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FieldResponse"> | string
+    submissionId?: IntWithAggregatesFilter<"FieldResponse"> | number
+    fieldId?: IntWithAggregatesFilter<"FieldResponse"> | number
+    textValue?: StringNullableWithAggregatesFilter<"FieldResponse"> | string | null
+    selectedOption?: StringNullableWithAggregatesFilter<"FieldResponse"> | string | null
+    selectedOptions?: StringNullableListFilter<"FieldResponse">
+    tableValue?: JsonNullableWithAggregatesFilter<"FieldResponse">
+    createdAt?: DateTimeWithAggregatesFilter<"FieldResponse"> | Date | string
+  }
+
   export type UserCreateInput = {
     email: string
     password: string
@@ -6079,6 +8786,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fields?: FormFieldCreateNestedManyWithoutFormInput
+    submissions?: FormSubmissionCreateNestedManyWithoutFormInput
   }
 
   export type FormUncheckedCreateInput = {
@@ -6088,6 +8796,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fields?: FormFieldUncheckedCreateNestedManyWithoutFormInput
+    submissions?: FormSubmissionUncheckedCreateNestedManyWithoutFormInput
   }
 
   export type FormUpdateInput = {
@@ -6096,6 +8805,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fields?: FormFieldUpdateManyWithoutFormNestedInput
+    submissions?: FormSubmissionUpdateManyWithoutFormNestedInput
   }
 
   export type FormUncheckedUpdateInput = {
@@ -6105,6 +8815,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fields?: FormFieldUncheckedUpdateManyWithoutFormNestedInput
+    submissions?: FormSubmissionUncheckedUpdateManyWithoutFormNestedInput
   }
 
   export type FormCreateManyInput = {
@@ -6140,6 +8851,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     form: FormCreateNestedOneWithoutFieldsInput
+    responses?: FieldResponseCreateNestedManyWithoutFieldInput
     options?: FieldOptionCreateNestedManyWithoutFieldInput
   }
 
@@ -6154,6 +8866,7 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutFieldInput
     options?: FieldOptionUncheckedCreateNestedManyWithoutFieldInput
   }
 
@@ -6167,6 +8880,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    responses?: FieldResponseUpdateManyWithoutFieldNestedInput
     options?: FieldOptionUpdateManyWithoutFieldNestedInput
   }
 
@@ -6181,6 +8895,7 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutFieldNestedInput
     options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
   }
 
@@ -6271,6 +8986,123 @@ export namespace Prisma {
     fieldId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormSubmissionCreateInput = {
+    createdAt?: Date | string
+    form: FormCreateNestedOneWithoutSubmissionsInput
+    responses?: FieldResponseCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type FormSubmissionUncheckedCreateInput = {
+    id?: number
+    formId: number
+    createdAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type FormSubmissionUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    form?: FormUpdateOneRequiredWithoutSubmissionsNestedInput
+    responses?: FieldResponseUpdateManyWithoutSubmissionNestedInput
+  }
+
+  export type FormSubmissionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutSubmissionNestedInput
+  }
+
+  export type FormSubmissionCreateManyInput = {
+    id?: number
+    formId: number
+    createdAt?: Date | string
+  }
+
+  export type FormSubmissionUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormSubmissionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseCreateInput = {
+    id?: string
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    submission: FormSubmissionCreateNestedOneWithoutResponsesInput
+    field: FormFieldCreateNestedOneWithoutResponsesInput
+  }
+
+  export type FieldResponseUncheckedCreateInput = {
+    id?: string
+    submissionId: number
+    fieldId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FieldResponseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: FormSubmissionUpdateOneRequiredWithoutResponsesNestedInput
+    field?: FormFieldUpdateOneRequiredWithoutResponsesNestedInput
+  }
+
+  export type FieldResponseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submissionId?: IntFieldUpdateOperationsInput | number
+    fieldId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseCreateManyInput = {
+    id?: string
+    submissionId: number
+    fieldId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FieldResponseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submissionId?: IntFieldUpdateOperationsInput | number
+    fieldId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6376,7 +9208,17 @@ export namespace Prisma {
     none?: FormFieldWhereInput
   }
 
+  export type FormSubmissionListRelationFilter = {
+    every?: FormSubmissionWhereInput
+    some?: FormSubmissionWhereInput
+    none?: FormSubmissionWhereInput
+  }
+
   export type FormFieldOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FormSubmissionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6463,6 +9305,12 @@ export namespace Prisma {
     isNot?: FormWhereInput
   }
 
+  export type FieldResponseListRelationFilter = {
+    every?: FieldResponseWhereInput
+    some?: FieldResponseWhereInput
+    none?: FieldResponseWhereInput
+  }
+
   export type FieldOptionListRelationFilter = {
     every?: FieldOptionWhereInput
     some?: FieldOptionWhereInput
@@ -6472,6 +9320,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type FieldResponseOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type FieldOptionOrderByRelationAggregateInput = {
@@ -6612,6 +9464,135 @@ export namespace Prisma {
     fieldId?: SortOrder
   }
 
+  export type FormSubmissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FormSubmissionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+  }
+
+  export type FormSubmissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FormSubmissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FormSubmissionSumOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FormSubmissionScalarRelationFilter = {
+    is?: FormSubmissionWhereInput
+    isNot?: FormSubmissionWhereInput
+  }
+
+  export type FieldResponseCountOrderByAggregateInput = {
+    id?: SortOrder
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+    textValue?: SortOrder
+    selectedOption?: SortOrder
+    selectedOptions?: SortOrder
+    tableValue?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FieldResponseAvgOrderByAggregateInput = {
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+  }
+
+  export type FieldResponseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+    textValue?: SortOrder
+    selectedOption?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FieldResponseMinOrderByAggregateInput = {
+    id?: SortOrder
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+    textValue?: SortOrder
+    selectedOption?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FieldResponseSumOrderByAggregateInput = {
+    submissionId?: SortOrder
+    fieldId?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -6631,11 +9612,25 @@ export namespace Prisma {
     connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
   }
 
+  export type FormSubmissionCreateNestedManyWithoutFormInput = {
+    create?: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput> | FormSubmissionCreateWithoutFormInput[] | FormSubmissionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutFormInput | FormSubmissionCreateOrConnectWithoutFormInput[]
+    createMany?: FormSubmissionCreateManyFormInputEnvelope
+    connect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+  }
+
   export type FormFieldUncheckedCreateNestedManyWithoutFormInput = {
     create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
     connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
     createMany?: FormFieldCreateManyFormInputEnvelope
     connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+  }
+
+  export type FormSubmissionUncheckedCreateNestedManyWithoutFormInput = {
+    create?: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput> | FormSubmissionCreateWithoutFormInput[] | FormSubmissionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutFormInput | FormSubmissionCreateOrConnectWithoutFormInput[]
+    createMany?: FormSubmissionCreateManyFormInputEnvelope
+    connect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -6656,6 +9651,20 @@ export namespace Prisma {
     deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
   }
 
+  export type FormSubmissionUpdateManyWithoutFormNestedInput = {
+    create?: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput> | FormSubmissionCreateWithoutFormInput[] | FormSubmissionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutFormInput | FormSubmissionCreateOrConnectWithoutFormInput[]
+    upsert?: FormSubmissionUpsertWithWhereUniqueWithoutFormInput | FormSubmissionUpsertWithWhereUniqueWithoutFormInput[]
+    createMany?: FormSubmissionCreateManyFormInputEnvelope
+    set?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    disconnect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    delete?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    connect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    update?: FormSubmissionUpdateWithWhereUniqueWithoutFormInput | FormSubmissionUpdateWithWhereUniqueWithoutFormInput[]
+    updateMany?: FormSubmissionUpdateManyWithWhereWithoutFormInput | FormSubmissionUpdateManyWithWhereWithoutFormInput[]
+    deleteMany?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
+  }
+
   export type FormFieldUncheckedUpdateManyWithoutFormNestedInput = {
     create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
     connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
@@ -6670,10 +9679,31 @@ export namespace Prisma {
     deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
   }
 
+  export type FormSubmissionUncheckedUpdateManyWithoutFormNestedInput = {
+    create?: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput> | FormSubmissionCreateWithoutFormInput[] | FormSubmissionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutFormInput | FormSubmissionCreateOrConnectWithoutFormInput[]
+    upsert?: FormSubmissionUpsertWithWhereUniqueWithoutFormInput | FormSubmissionUpsertWithWhereUniqueWithoutFormInput[]
+    createMany?: FormSubmissionCreateManyFormInputEnvelope
+    set?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    disconnect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    delete?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    connect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
+    update?: FormSubmissionUpdateWithWhereUniqueWithoutFormInput | FormSubmissionUpdateWithWhereUniqueWithoutFormInput[]
+    updateMany?: FormSubmissionUpdateManyWithWhereWithoutFormInput | FormSubmissionUpdateManyWithWhereWithoutFormInput[]
+    deleteMany?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
+  }
+
   export type FormCreateNestedOneWithoutFieldsInput = {
     create?: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
     connectOrCreate?: FormCreateOrConnectWithoutFieldsInput
     connect?: FormWhereUniqueInput
+  }
+
+  export type FieldResponseCreateNestedManyWithoutFieldInput = {
+    create?: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput> | FieldResponseCreateWithoutFieldInput[] | FieldResponseUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutFieldInput | FieldResponseCreateOrConnectWithoutFieldInput[]
+    createMany?: FieldResponseCreateManyFieldInputEnvelope
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
   }
 
   export type FieldOptionCreateNestedManyWithoutFieldInput = {
@@ -6681,6 +9711,13 @@ export namespace Prisma {
     connectOrCreate?: FieldOptionCreateOrConnectWithoutFieldInput | FieldOptionCreateOrConnectWithoutFieldInput[]
     createMany?: FieldOptionCreateManyFieldInputEnvelope
     connect?: FieldOptionWhereUniqueInput | FieldOptionWhereUniqueInput[]
+  }
+
+  export type FieldResponseUncheckedCreateNestedManyWithoutFieldInput = {
+    create?: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput> | FieldResponseCreateWithoutFieldInput[] | FieldResponseUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutFieldInput | FieldResponseCreateOrConnectWithoutFieldInput[]
+    createMany?: FieldResponseCreateManyFieldInputEnvelope
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
   }
 
   export type FieldOptionUncheckedCreateNestedManyWithoutFieldInput = {
@@ -6714,6 +9751,20 @@ export namespace Prisma {
     update?: XOR<XOR<FormUpdateToOneWithWhereWithoutFieldsInput, FormUpdateWithoutFieldsInput>, FormUncheckedUpdateWithoutFieldsInput>
   }
 
+  export type FieldResponseUpdateManyWithoutFieldNestedInput = {
+    create?: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput> | FieldResponseCreateWithoutFieldInput[] | FieldResponseUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutFieldInput | FieldResponseCreateOrConnectWithoutFieldInput[]
+    upsert?: FieldResponseUpsertWithWhereUniqueWithoutFieldInput | FieldResponseUpsertWithWhereUniqueWithoutFieldInput[]
+    createMany?: FieldResponseCreateManyFieldInputEnvelope
+    set?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    disconnect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    delete?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    update?: FieldResponseUpdateWithWhereUniqueWithoutFieldInput | FieldResponseUpdateWithWhereUniqueWithoutFieldInput[]
+    updateMany?: FieldResponseUpdateManyWithWhereWithoutFieldInput | FieldResponseUpdateManyWithWhereWithoutFieldInput[]
+    deleteMany?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
+  }
+
   export type FieldOptionUpdateManyWithoutFieldNestedInput = {
     create?: XOR<FieldOptionCreateWithoutFieldInput, FieldOptionUncheckedCreateWithoutFieldInput> | FieldOptionCreateWithoutFieldInput[] | FieldOptionUncheckedCreateWithoutFieldInput[]
     connectOrCreate?: FieldOptionCreateOrConnectWithoutFieldInput | FieldOptionCreateOrConnectWithoutFieldInput[]
@@ -6726,6 +9777,20 @@ export namespace Prisma {
     update?: FieldOptionUpdateWithWhereUniqueWithoutFieldInput | FieldOptionUpdateWithWhereUniqueWithoutFieldInput[]
     updateMany?: FieldOptionUpdateManyWithWhereWithoutFieldInput | FieldOptionUpdateManyWithWhereWithoutFieldInput[]
     deleteMany?: FieldOptionScalarWhereInput | FieldOptionScalarWhereInput[]
+  }
+
+  export type FieldResponseUncheckedUpdateManyWithoutFieldNestedInput = {
+    create?: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput> | FieldResponseCreateWithoutFieldInput[] | FieldResponseUncheckedCreateWithoutFieldInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutFieldInput | FieldResponseCreateOrConnectWithoutFieldInput[]
+    upsert?: FieldResponseUpsertWithWhereUniqueWithoutFieldInput | FieldResponseUpsertWithWhereUniqueWithoutFieldInput[]
+    createMany?: FieldResponseCreateManyFieldInputEnvelope
+    set?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    disconnect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    delete?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    update?: FieldResponseUpdateWithWhereUniqueWithoutFieldInput | FieldResponseUpdateWithWhereUniqueWithoutFieldInput[]
+    updateMany?: FieldResponseUpdateManyWithWhereWithoutFieldInput | FieldResponseUpdateManyWithWhereWithoutFieldInput[]
+    deleteMany?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
   }
 
   export type FieldOptionUncheckedUpdateManyWithoutFieldNestedInput = {
@@ -6754,6 +9819,99 @@ export namespace Prisma {
     upsert?: FormFieldUpsertWithoutOptionsInput
     connect?: FormFieldWhereUniqueInput
     update?: XOR<XOR<FormFieldUpdateToOneWithWhereWithoutOptionsInput, FormFieldUpdateWithoutOptionsInput>, FormFieldUncheckedUpdateWithoutOptionsInput>
+  }
+
+  export type FormCreateNestedOneWithoutSubmissionsInput = {
+    create?: XOR<FormCreateWithoutSubmissionsInput, FormUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: FormCreateOrConnectWithoutSubmissionsInput
+    connect?: FormWhereUniqueInput
+  }
+
+  export type FieldResponseCreateNestedManyWithoutSubmissionInput = {
+    create?: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput> | FieldResponseCreateWithoutSubmissionInput[] | FieldResponseUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutSubmissionInput | FieldResponseCreateOrConnectWithoutSubmissionInput[]
+    createMany?: FieldResponseCreateManySubmissionInputEnvelope
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+  }
+
+  export type FieldResponseUncheckedCreateNestedManyWithoutSubmissionInput = {
+    create?: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput> | FieldResponseCreateWithoutSubmissionInput[] | FieldResponseUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutSubmissionInput | FieldResponseCreateOrConnectWithoutSubmissionInput[]
+    createMany?: FieldResponseCreateManySubmissionInputEnvelope
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+  }
+
+  export type FormUpdateOneRequiredWithoutSubmissionsNestedInput = {
+    create?: XOR<FormCreateWithoutSubmissionsInput, FormUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: FormCreateOrConnectWithoutSubmissionsInput
+    upsert?: FormUpsertWithoutSubmissionsInput
+    connect?: FormWhereUniqueInput
+    update?: XOR<XOR<FormUpdateToOneWithWhereWithoutSubmissionsInput, FormUpdateWithoutSubmissionsInput>, FormUncheckedUpdateWithoutSubmissionsInput>
+  }
+
+  export type FieldResponseUpdateManyWithoutSubmissionNestedInput = {
+    create?: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput> | FieldResponseCreateWithoutSubmissionInput[] | FieldResponseUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutSubmissionInput | FieldResponseCreateOrConnectWithoutSubmissionInput[]
+    upsert?: FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput | FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput[]
+    createMany?: FieldResponseCreateManySubmissionInputEnvelope
+    set?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    disconnect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    delete?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    update?: FieldResponseUpdateWithWhereUniqueWithoutSubmissionInput | FieldResponseUpdateWithWhereUniqueWithoutSubmissionInput[]
+    updateMany?: FieldResponseUpdateManyWithWhereWithoutSubmissionInput | FieldResponseUpdateManyWithWhereWithoutSubmissionInput[]
+    deleteMany?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
+  }
+
+  export type FieldResponseUncheckedUpdateManyWithoutSubmissionNestedInput = {
+    create?: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput> | FieldResponseCreateWithoutSubmissionInput[] | FieldResponseUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: FieldResponseCreateOrConnectWithoutSubmissionInput | FieldResponseCreateOrConnectWithoutSubmissionInput[]
+    upsert?: FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput | FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput[]
+    createMany?: FieldResponseCreateManySubmissionInputEnvelope
+    set?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    disconnect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    delete?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    connect?: FieldResponseWhereUniqueInput | FieldResponseWhereUniqueInput[]
+    update?: FieldResponseUpdateWithWhereUniqueWithoutSubmissionInput | FieldResponseUpdateWithWhereUniqueWithoutSubmissionInput[]
+    updateMany?: FieldResponseUpdateManyWithWhereWithoutSubmissionInput | FieldResponseUpdateManyWithWhereWithoutSubmissionInput[]
+    deleteMany?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
+  }
+
+  export type FieldResponseCreateselectedOptionsInput = {
+    set: string[]
+  }
+
+  export type FormSubmissionCreateNestedOneWithoutResponsesInput = {
+    create?: XOR<FormSubmissionCreateWithoutResponsesInput, FormSubmissionUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutResponsesInput
+    connect?: FormSubmissionWhereUniqueInput
+  }
+
+  export type FormFieldCreateNestedOneWithoutResponsesInput = {
+    create?: XOR<FormFieldCreateWithoutResponsesInput, FormFieldUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: FormFieldCreateOrConnectWithoutResponsesInput
+    connect?: FormFieldWhereUniqueInput
+  }
+
+  export type FieldResponseUpdateselectedOptionsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FormSubmissionUpdateOneRequiredWithoutResponsesNestedInput = {
+    create?: XOR<FormSubmissionCreateWithoutResponsesInput, FormSubmissionUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: FormSubmissionCreateOrConnectWithoutResponsesInput
+    upsert?: FormSubmissionUpsertWithoutResponsesInput
+    connect?: FormSubmissionWhereUniqueInput
+    update?: XOR<XOR<FormSubmissionUpdateToOneWithWhereWithoutResponsesInput, FormSubmissionUpdateWithoutResponsesInput>, FormSubmissionUncheckedUpdateWithoutResponsesInput>
+  }
+
+  export type FormFieldUpdateOneRequiredWithoutResponsesNestedInput = {
+    create?: XOR<FormFieldCreateWithoutResponsesInput, FormFieldUncheckedCreateWithoutResponsesInput>
+    connectOrCreate?: FormFieldCreateOrConnectWithoutResponsesInput
+    upsert?: FormFieldUpsertWithoutResponsesInput
+    connect?: FormFieldWhereUniqueInput
+    update?: XOR<XOR<FormFieldUpdateToOneWithWhereWithoutResponsesInput, FormFieldUpdateWithoutResponsesInput>, FormFieldUncheckedUpdateWithoutResponsesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6934,6 +10092,29 @@ export namespace Prisma {
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type FormFieldCreateWithoutFormInput = {
     order: number
@@ -6944,6 +10125,7 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    responses?: FieldResponseCreateNestedManyWithoutFieldInput
     options?: FieldOptionCreateNestedManyWithoutFieldInput
   }
 
@@ -6957,6 +10139,7 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutFieldInput
     options?: FieldOptionUncheckedCreateNestedManyWithoutFieldInput
   }
 
@@ -6967,6 +10150,27 @@ export namespace Prisma {
 
   export type FormFieldCreateManyFormInputEnvelope = {
     data: FormFieldCreateManyFormInput | FormFieldCreateManyFormInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormSubmissionCreateWithoutFormInput = {
+    createdAt?: Date | string
+    responses?: FieldResponseCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type FormSubmissionUncheckedCreateWithoutFormInput = {
+    id?: number
+    createdAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type FormSubmissionCreateOrConnectWithoutFormInput = {
+    where: FormSubmissionWhereUniqueInput
+    create: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput>
+  }
+
+  export type FormSubmissionCreateManyFormInputEnvelope = {
+    data: FormSubmissionCreateManyFormInput | FormSubmissionCreateManyFormInput[]
     skipDuplicates?: boolean
   }
 
@@ -7002,11 +10206,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"FormField"> | Date | string
   }
 
+  export type FormSubmissionUpsertWithWhereUniqueWithoutFormInput = {
+    where: FormSubmissionWhereUniqueInput
+    update: XOR<FormSubmissionUpdateWithoutFormInput, FormSubmissionUncheckedUpdateWithoutFormInput>
+    create: XOR<FormSubmissionCreateWithoutFormInput, FormSubmissionUncheckedCreateWithoutFormInput>
+  }
+
+  export type FormSubmissionUpdateWithWhereUniqueWithoutFormInput = {
+    where: FormSubmissionWhereUniqueInput
+    data: XOR<FormSubmissionUpdateWithoutFormInput, FormSubmissionUncheckedUpdateWithoutFormInput>
+  }
+
+  export type FormSubmissionUpdateManyWithWhereWithoutFormInput = {
+    where: FormSubmissionScalarWhereInput
+    data: XOR<FormSubmissionUpdateManyMutationInput, FormSubmissionUncheckedUpdateManyWithoutFormInput>
+  }
+
+  export type FormSubmissionScalarWhereInput = {
+    AND?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
+    OR?: FormSubmissionScalarWhereInput[]
+    NOT?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
+    id?: IntFilter<"FormSubmission"> | number
+    formId?: IntFilter<"FormSubmission"> | number
+    createdAt?: DateTimeFilter<"FormSubmission"> | Date | string
+  }
+
   export type FormCreateWithoutFieldsInput = {
     formName: string
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    submissions?: FormSubmissionCreateNestedManyWithoutFormInput
   }
 
   export type FormUncheckedCreateWithoutFieldsInput = {
@@ -7015,11 +10245,42 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    submissions?: FormSubmissionUncheckedCreateNestedManyWithoutFormInput
   }
 
   export type FormCreateOrConnectWithoutFieldsInput = {
     where: FormWhereUniqueInput
     create: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
+  }
+
+  export type FieldResponseCreateWithoutFieldInput = {
+    id?: string
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    submission: FormSubmissionCreateNestedOneWithoutResponsesInput
+  }
+
+  export type FieldResponseUncheckedCreateWithoutFieldInput = {
+    id?: string
+    submissionId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FieldResponseCreateOrConnectWithoutFieldInput = {
+    where: FieldResponseWhereUniqueInput
+    create: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput>
+  }
+
+  export type FieldResponseCreateManyFieldInputEnvelope = {
+    data: FieldResponseCreateManyFieldInput | FieldResponseCreateManyFieldInput[]
+    skipDuplicates?: boolean
   }
 
   export type FieldOptionCreateWithoutFieldInput = {
@@ -7061,6 +10322,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissions?: FormSubmissionUpdateManyWithoutFormNestedInput
   }
 
   export type FormUncheckedUpdateWithoutFieldsInput = {
@@ -7069,6 +10331,37 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissions?: FormSubmissionUncheckedUpdateManyWithoutFormNestedInput
+  }
+
+  export type FieldResponseUpsertWithWhereUniqueWithoutFieldInput = {
+    where: FieldResponseWhereUniqueInput
+    update: XOR<FieldResponseUpdateWithoutFieldInput, FieldResponseUncheckedUpdateWithoutFieldInput>
+    create: XOR<FieldResponseCreateWithoutFieldInput, FieldResponseUncheckedCreateWithoutFieldInput>
+  }
+
+  export type FieldResponseUpdateWithWhereUniqueWithoutFieldInput = {
+    where: FieldResponseWhereUniqueInput
+    data: XOR<FieldResponseUpdateWithoutFieldInput, FieldResponseUncheckedUpdateWithoutFieldInput>
+  }
+
+  export type FieldResponseUpdateManyWithWhereWithoutFieldInput = {
+    where: FieldResponseScalarWhereInput
+    data: XOR<FieldResponseUpdateManyMutationInput, FieldResponseUncheckedUpdateManyWithoutFieldInput>
+  }
+
+  export type FieldResponseScalarWhereInput = {
+    AND?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
+    OR?: FieldResponseScalarWhereInput[]
+    NOT?: FieldResponseScalarWhereInput | FieldResponseScalarWhereInput[]
+    id?: StringFilter<"FieldResponse"> | string
+    submissionId?: IntFilter<"FieldResponse"> | number
+    fieldId?: IntFilter<"FieldResponse"> | number
+    textValue?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOption?: StringNullableFilter<"FieldResponse"> | string | null
+    selectedOptions?: StringNullableListFilter<"FieldResponse">
+    tableValue?: JsonNullableFilter<"FieldResponse">
+    createdAt?: DateTimeFilter<"FieldResponse"> | Date | string
   }
 
   export type FieldOptionUpsertWithWhereUniqueWithoutFieldInput = {
@@ -7108,6 +10401,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     form: FormCreateNestedOneWithoutFieldsInput
+    responses?: FieldResponseCreateNestedManyWithoutFieldInput
   }
 
   export type FormFieldUncheckedCreateWithoutOptionsInput = {
@@ -7121,6 +10415,7 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutFieldInput
   }
 
   export type FormFieldCreateOrConnectWithoutOptionsInput = {
@@ -7149,6 +10444,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    responses?: FieldResponseUpdateManyWithoutFieldNestedInput
   }
 
   export type FormFieldUncheckedUpdateWithoutOptionsInput = {
@@ -7162,6 +10458,211 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutFieldNestedInput
+  }
+
+  export type FormCreateWithoutSubmissionsInput = {
+    formName: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fields?: FormFieldCreateNestedManyWithoutFormInput
+  }
+
+  export type FormUncheckedCreateWithoutSubmissionsInput = {
+    id?: number
+    formName: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fields?: FormFieldUncheckedCreateNestedManyWithoutFormInput
+  }
+
+  export type FormCreateOrConnectWithoutSubmissionsInput = {
+    where: FormWhereUniqueInput
+    create: XOR<FormCreateWithoutSubmissionsInput, FormUncheckedCreateWithoutSubmissionsInput>
+  }
+
+  export type FieldResponseCreateWithoutSubmissionInput = {
+    id?: string
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    field: FormFieldCreateNestedOneWithoutResponsesInput
+  }
+
+  export type FieldResponseUncheckedCreateWithoutSubmissionInput = {
+    id?: string
+    fieldId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FieldResponseCreateOrConnectWithoutSubmissionInput = {
+    where: FieldResponseWhereUniqueInput
+    create: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput>
+  }
+
+  export type FieldResponseCreateManySubmissionInputEnvelope = {
+    data: FieldResponseCreateManySubmissionInput | FieldResponseCreateManySubmissionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormUpsertWithoutSubmissionsInput = {
+    update: XOR<FormUpdateWithoutSubmissionsInput, FormUncheckedUpdateWithoutSubmissionsInput>
+    create: XOR<FormCreateWithoutSubmissionsInput, FormUncheckedCreateWithoutSubmissionsInput>
+    where?: FormWhereInput
+  }
+
+  export type FormUpdateToOneWithWhereWithoutSubmissionsInput = {
+    where?: FormWhereInput
+    data: XOR<FormUpdateWithoutSubmissionsInput, FormUncheckedUpdateWithoutSubmissionsInput>
+  }
+
+  export type FormUpdateWithoutSubmissionsInput = {
+    formName?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fields?: FormFieldUpdateManyWithoutFormNestedInput
+  }
+
+  export type FormUncheckedUpdateWithoutSubmissionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formName?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fields?: FormFieldUncheckedUpdateManyWithoutFormNestedInput
+  }
+
+  export type FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput = {
+    where: FieldResponseWhereUniqueInput
+    update: XOR<FieldResponseUpdateWithoutSubmissionInput, FieldResponseUncheckedUpdateWithoutSubmissionInput>
+    create: XOR<FieldResponseCreateWithoutSubmissionInput, FieldResponseUncheckedCreateWithoutSubmissionInput>
+  }
+
+  export type FieldResponseUpdateWithWhereUniqueWithoutSubmissionInput = {
+    where: FieldResponseWhereUniqueInput
+    data: XOR<FieldResponseUpdateWithoutSubmissionInput, FieldResponseUncheckedUpdateWithoutSubmissionInput>
+  }
+
+  export type FieldResponseUpdateManyWithWhereWithoutSubmissionInput = {
+    where: FieldResponseScalarWhereInput
+    data: XOR<FieldResponseUpdateManyMutationInput, FieldResponseUncheckedUpdateManyWithoutSubmissionInput>
+  }
+
+  export type FormSubmissionCreateWithoutResponsesInput = {
+    createdAt?: Date | string
+    form: FormCreateNestedOneWithoutSubmissionsInput
+  }
+
+  export type FormSubmissionUncheckedCreateWithoutResponsesInput = {
+    id?: number
+    formId: number
+    createdAt?: Date | string
+  }
+
+  export type FormSubmissionCreateOrConnectWithoutResponsesInput = {
+    where: FormSubmissionWhereUniqueInput
+    create: XOR<FormSubmissionCreateWithoutResponsesInput, FormSubmissionUncheckedCreateWithoutResponsesInput>
+  }
+
+  export type FormFieldCreateWithoutResponsesInput = {
+    order: number
+    type: $Enums.FieldType
+    label: string
+    required?: boolean
+    placeholder?: string | null
+    multiline?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    form: FormCreateNestedOneWithoutFieldsInput
+    options?: FieldOptionCreateNestedManyWithoutFieldInput
+  }
+
+  export type FormFieldUncheckedCreateWithoutResponsesInput = {
+    id?: number
+    formId: number
+    order: number
+    type: $Enums.FieldType
+    label: string
+    required?: boolean
+    placeholder?: string | null
+    multiline?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    options?: FieldOptionUncheckedCreateNestedManyWithoutFieldInput
+  }
+
+  export type FormFieldCreateOrConnectWithoutResponsesInput = {
+    where: FormFieldWhereUniqueInput
+    create: XOR<FormFieldCreateWithoutResponsesInput, FormFieldUncheckedCreateWithoutResponsesInput>
+  }
+
+  export type FormSubmissionUpsertWithoutResponsesInput = {
+    update: XOR<FormSubmissionUpdateWithoutResponsesInput, FormSubmissionUncheckedUpdateWithoutResponsesInput>
+    create: XOR<FormSubmissionCreateWithoutResponsesInput, FormSubmissionUncheckedCreateWithoutResponsesInput>
+    where?: FormSubmissionWhereInput
+  }
+
+  export type FormSubmissionUpdateToOneWithWhereWithoutResponsesInput = {
+    where?: FormSubmissionWhereInput
+    data: XOR<FormSubmissionUpdateWithoutResponsesInput, FormSubmissionUncheckedUpdateWithoutResponsesInput>
+  }
+
+  export type FormSubmissionUpdateWithoutResponsesInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    form?: FormUpdateOneRequiredWithoutSubmissionsNestedInput
+  }
+
+  export type FormSubmissionUncheckedUpdateWithoutResponsesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormFieldUpsertWithoutResponsesInput = {
+    update: XOR<FormFieldUpdateWithoutResponsesInput, FormFieldUncheckedUpdateWithoutResponsesInput>
+    create: XOR<FormFieldCreateWithoutResponsesInput, FormFieldUncheckedCreateWithoutResponsesInput>
+    where?: FormFieldWhereInput
+  }
+
+  export type FormFieldUpdateToOneWithWhereWithoutResponsesInput = {
+    where?: FormFieldWhereInput
+    data: XOR<FormFieldUpdateWithoutResponsesInput, FormFieldUncheckedUpdateWithoutResponsesInput>
+  }
+
+  export type FormFieldUpdateWithoutResponsesInput = {
+    order?: IntFieldUpdateOperationsInput | number
+    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
+    label?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
+    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    options?: FieldOptionUpdateManyWithoutFieldNestedInput
+  }
+
+  export type FormFieldUncheckedUpdateWithoutResponsesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formId?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
+    label?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
+    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
   }
 
   export type FormFieldCreateManyFormInput = {
@@ -7176,6 +10677,11 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type FormSubmissionCreateManyFormInput = {
+    id?: number
+    createdAt?: Date | string
+  }
+
   export type FormFieldUpdateWithoutFormInput = {
     order?: IntFieldUpdateOperationsInput | number
     type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
@@ -7185,6 +10691,7 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUpdateManyWithoutFieldNestedInput
     options?: FieldOptionUpdateManyWithoutFieldNestedInput
   }
 
@@ -7198,6 +10705,7 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutFieldNestedInput
     options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
   }
 
@@ -7213,11 +10721,67 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FormSubmissionUpdateWithoutFormInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUpdateManyWithoutSubmissionNestedInput
+  }
+
+  export type FormSubmissionUncheckedUpdateWithoutFormInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutSubmissionNestedInput
+  }
+
+  export type FormSubmissionUncheckedUpdateManyWithoutFormInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseCreateManyFieldInput = {
+    id?: string
+    submissionId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
   export type FieldOptionCreateManyFieldInput = {
     id?: number
     label: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type FieldResponseUpdateWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: FormSubmissionUpdateOneRequiredWithoutResponsesNestedInput
+  }
+
+  export type FieldResponseUncheckedUpdateWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submissionId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseUncheckedUpdateManyWithoutFieldInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submissionId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FieldOptionUpdateWithoutFieldInput = {
@@ -7238,6 +10802,46 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseCreateManySubmissionInput = {
+    id?: string
+    fieldId: number
+    textValue?: string | null
+    selectedOption?: string | null
+    selectedOptions?: FieldResponseCreateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type FieldResponseUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    field?: FormFieldUpdateOneRequiredWithoutResponsesNestedInput
+  }
+
+  export type FieldResponseUncheckedUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FieldResponseUncheckedUpdateManyWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fieldId?: IntFieldUpdateOperationsInput | number
+    textValue?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOption?: NullableStringFieldUpdateOperationsInput | string | null
+    selectedOptions?: FieldResponseUpdateselectedOptionsInput | string[]
+    tableValue?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

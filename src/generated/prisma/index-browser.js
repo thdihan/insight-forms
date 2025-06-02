@@ -155,9 +155,31 @@ exports.Prisma.FieldOptionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FormSubmissionScalarFieldEnum = {
+  id: 'id',
+  formId: 'formId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FieldResponseScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  fieldId: 'fieldId',
+  textValue: 'textValue',
+  selectedOption: 'selectedOption',
+  selectedOptions: 'selectedOptions',
+  tableValue: 'tableValue',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -168,6 +190,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.FieldType = exports.$Enums.FieldType = {
   text: 'text',
@@ -181,7 +209,9 @@ exports.Prisma.ModelName = {
   User: 'User',
   Form: 'Form',
   FormField: 'FormField',
-  FieldOption: 'FieldOption'
+  FieldOption: 'FieldOption',
+  FormSubmission: 'FormSubmission',
+  FieldResponse: 'FieldResponse'
 };
 
 /**

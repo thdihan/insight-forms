@@ -46,7 +46,7 @@ const NewFieldButtons = ({ addField }: Props) => {
     ];
 
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
             {fieldTypes.map((fieldType) => {
                 const Icon = fieldType.icon;
                 return (
@@ -54,7 +54,7 @@ const NewFieldButtons = ({ addField }: Props) => {
                         key={fieldType.type}
                         onClick={(e) => addField(e, fieldType.type)}
                         variant="outline"
-                        className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer"
+                        className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer flex-1"
                         // onClick={() => onAddField(fieldType.type)}
                     >
                         <div className="flex items-center gap-3 mb-2">

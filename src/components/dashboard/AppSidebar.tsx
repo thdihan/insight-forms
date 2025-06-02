@@ -21,7 +21,7 @@ const items = [
     },
     {
         title: "Forms",
-        url: "forms",
+        url: "/forms",
         icon: Inbox,
     },
     {

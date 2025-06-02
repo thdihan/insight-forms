@@ -28,6 +28,7 @@ model Form {
   formName    String
   description String
   fields      FormField[] @relation("FormToFields")
+  submissions FormSubmission[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -36,13 +37,16 @@ model Form {
 
 model FormField {
   id          Int            @id @default(autoincrement())
-  form        Form           @relation("FormToFields", fields: [formId], references: [id])
+  form        Form           @relation("FormToFields", fields: [formId], references: [id], onDelete: Cascade)
   formId      Int
   order       Int
   type        FieldType
   label       String
   required    Boolean        @default(false)
   placeholder String?
+
+  // Relation to FieldResponse
+  responses   FieldResponse[]
 
   // For text fields
   multiline   Boolean?
@@ -74,5 +78,30 @@ enum FieldType {
   radio
   table
   select
+}
+
+
+
+model FormSubmission {
+  id        Int         @id @default(autoincrement())
+  form       Form           @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId     Int
+  responses  FieldResponse[]
+  createdAt  DateTime       @default(now())
+}
+
+model FieldResponse {
+  id             String      @id @default(uuid())
+  submission     FormSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  submissionId   Int
+  field          FormField   @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  fieldId        Int
+  // One of the following depending on field type
+  textValue      String?
+  selectedOption String?      // for radio/select
+  selectedOptions String[]    // for checkbox
+  tableValue     Json?        // for table
+
+  createdAt      DateTime     @default(now())
 }
 
