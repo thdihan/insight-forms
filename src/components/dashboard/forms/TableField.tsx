@@ -18,28 +18,29 @@ type Props = {
 const TableField = ({ field, onChange }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
-    const addTableOption = () => {
-        if (field.type === "table" && Array.isArray(field.columns)) {
+    const addTableOption = (e: any) => {
+        e.preventDefault();
+        if (field.type === "table" && Array.isArray(field.options)) {
             const tempField = { ...field };
-            tempField.columns = [
-                ...field.columns,
+            tempField.options = [
+                ...field.options,
                 {
-                    id: (field.columns.length + 1).toString(),
+                    id: (field.options.length + 1).toString(),
                     label: "",
                 },
             ];
-            onChange(field.id, "columns", tempField.columns);
+            onChange(field.id, "options", tempField.options);
         }
     };
 
     const updateTableOption = (id: string, value: string) => {
-        if (field.type === "table" && Array.isArray(field.columns)) {
+        if (field.type === "table" && Array.isArray(field.options)) {
             const tempField = { ...field };
-            tempField.columns = tempField.columns.filter(
+            tempField.options = tempField.options.filter(
                 (option) => option.id !== id
             );
-            tempField.columns.push({ id, label: value });
-            onChange(field.id, "columns", tempField.columns);
+            tempField.options.push({ id, label: value });
+            onChange(field.id, "options", tempField.options);
         }
     };
     return (
@@ -55,8 +56,8 @@ const TableField = ({ field, onChange }: Props) => {
                 className="flex flex-col gap-y-4 ms-4 border-s-2 border-gray-300 border-dashed ps-4"
             >
                 {field.type === "table" &&
-                    field.columns.length > 0 &&
-                    field.columns
+                    field.options.length > 0 &&
+                    field.options
                         .sort((a, b) => parseInt(a.id) - parseInt(b.id))
                         .map((option, index) => (
                             <div

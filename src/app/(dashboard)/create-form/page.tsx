@@ -7,31 +7,35 @@ import TextField from "@/components/dashboard/forms/TextField";
 import CheckboxField from "@/components/dashboard/forms/CheckboxField";
 import RadiobuttonsField from "@/components/dashboard/forms/RadiobuttonsField";
 import TableField from "@/components/dashboard/forms/TableField";
-import { ICheckboxOption, TypeFormField } from "@/types/form";
+import { ICheckboxOption, INewForm, TypeFormField } from "@/types/form";
 import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
     SortableContext,
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import SelectField from "@/components/dashboard/forms/SelectField";
+import { createForm } from "@/app/actions.ts/createForm";
 
 type Props = {};
 
 const page = (props: Props) => {
-    const [formValues, setFormValues] = useState<{
-        formName: string;
-        description: string;
-        fields: TypeFormField[];
-    }>({
+    const [formValues, setFormValues] = useState<INewForm>({
         formName: "",
         description: "",
         fields: [],
     });
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const handleSubmit = async (e: any): Promise<void> => {
         e.preventDefault();
         console.log("FORM VALUES: ", formValues);
-    }
+        try {
+            const result = await createForm(formValues);
+
+            console.log("RESULT: ", result);
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    };
 
     const handleFieldChange = (
         id: string,
@@ -51,10 +55,11 @@ const page = (props: Props) => {
         tempFormValues.fields = fields;
 
         setFormValues(tempFormValues);
-        console.log("Updated Form Values: ", tempFormValues);
+        // console.log("Updated Form Values: ", tempFormValues);
     };
 
-    const addField = (type: string) => {
+    const addField = (e: any, type: string) => {
+        e.preventDefault();
         const tempFormValues = { ...formValues };
 
         switch (type) {
@@ -94,7 +99,7 @@ const page = (props: Props) => {
                     id: (tempFormValues.fields.length + 1).toString(),
                     order: tempFormValues.fields.length + 1,
                     type: "table",
-                    columns: [], // Initialize with an empty array for checkbox options
+                    options: [], // Initialize with an empty array for checkbox options
                     label: "",
                     required: false,
                 });
@@ -142,7 +147,7 @@ const page = (props: Props) => {
     return (
         <div className="p-2 flex justify-center w-full">
             <div className="w-full md:max-w-[95%] py-8 px-8 my-8 border-2 rounded-md shadow-xl bg-white">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form className="space-y-4">
                     {/* Form Name  */}
                     <TextInput
                         placeholder="Enter form name..."
@@ -165,7 +170,7 @@ const page = (props: Props) => {
                         multiline={true}
                         inputChange={(e) => {
                             const tempFormValues = { ...formValues };
-                            tempFormValues.formName = e.target.value;
+                            tempFormValues.description = e.target.value;
                             setFormValues(tempFormValues);
                         }}
                     />
@@ -236,7 +241,10 @@ const page = (props: Props) => {
 
                     <NewFieldButtons addField={addField} />
                     <div className="flex gap-x-2">
-                        <Button type="submit" className="cursor-pointer">
+                        <Button
+                            onClick={handleSubmit}
+                            className="cursor-pointer"
+                        >
                             Submit
                         </Button>
                         <Button variant="outline" className="cursor-pointer">

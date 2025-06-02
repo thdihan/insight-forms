@@ -28,12 +28,18 @@ export interface RadioField extends BaseField {
 
 export interface TableField extends BaseField {
     type: "table";
-    columns: ICheckboxOption[];
+    options: ICheckboxOption[];
 }
 
 export interface SelectField extends BaseField {
     type: "select";
     options: ICheckboxOption[];
+}
+
+export interface INewForm {
+    formName: string;
+    description: string;
+    fields: TypeFormField[];
 }
 
 export type TypeFormField =

@@ -1,0 +1,51 @@
+"use server";
+
+import { FieldType, PrismaClient } from "@/generated/prisma";
+import { INewForm, TypeFormField } from "@/types/form";
+
+const prisma = new PrismaClient();
+
+export const createForm = async (form: INewForm) => {
+    const { formName, description, fields } = form;
+
+    const createdForm = await prisma.form.create({
+        data: {
+            formName,
+            description,
+            fields: {
+                create: fields.map((field: TypeFormField) => {
+                    const baseField = {
+                        order: field.order,
+                        label: field.label,
+                        required: field.required ?? false,
+                        placeholder: field.placeholder,
+                        type: field.type as FieldType,
+                        multiline:
+                            field.type === "text"
+                                ? (field as any).multiline ?? false
+                                : undefined,
+                        options:
+                            "options" in field && field.options?.length
+                                ? {
+                                      create: field.options.map((option) => ({
+                                          label: option.label,
+                                      })),
+                                  }
+                                : undefined,
+                    };
+
+                    return baseField;
+                }),
+            },
+        },
+        include: {
+            fields: {
+                include: {
+                    options: true,
+                },
+            },
+        },
+    });
+
+    return createdForm;
+};

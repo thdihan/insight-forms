@@ -16,7 +16,8 @@ type Props = {
 };
 
 const SelectField = ({ field, onChange }: Props) => {
-    const addSelectOption = () => {
+    const addSelectOption = (e: any) => {
+        e.preventDefault();
         if (field.type === "select" && Array.isArray(field.options)) {
             const tempField = { ...field };
             tempField.options = [

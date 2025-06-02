@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Props = { addField: (type: string) => void };
+type Props = { addField: (e: any, type: string) => void };
 
 const NewFieldButtons = ({ addField }: Props) => {
     const fieldTypes = [
@@ -52,7 +52,7 @@ const NewFieldButtons = ({ addField }: Props) => {
                 return (
                     <Button
                         key={fieldType.type}
-                        onClick={() => addField(fieldType.type)}
+                        onClick={(e) => addField(e, fieldType.type)}
                         variant="outline"
                         className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer"
                         // onClick={() => onAddField(fieldType.type)}

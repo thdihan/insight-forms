@@ -18,7 +18,8 @@ type Props = {
 const RadiobuttonsField = ({ field, onChange }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
-    const addRadioOption = () => {
+    const addRadioOption = (e: any) => {
+        e.preventDefault();
         if (field.type === "radio" && Array.isArray(field.options)) {
             const tempField = { ...field };
             tempField.options = [

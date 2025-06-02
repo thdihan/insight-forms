@@ -126,6 +126,35 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.FormScalarFieldEnum = {
+  id: 'id',
+  formName: 'formName',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FormFieldScalarFieldEnum = {
+  id: 'id',
+  formId: 'formId',
+  order: 'order',
+  type: 'type',
+  label: 'label',
+  required: 'required',
+  placeholder: 'placeholder',
+  multiline: 'multiline',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FieldOptionScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  fieldId: 'fieldId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -136,9 +165,23 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.FieldType = exports.$Enums.FieldType = {
+  text: 'text',
+  checkbox: 'checkbox',
+  radio: 'radio',
+  table: 'table',
+  select: 'select'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Form: 'Form',
+  FormField: 'FormField',
+  FieldOption: 'FieldOption'
 };
 
 /**

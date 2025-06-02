@@ -18,7 +18,8 @@ type Props = {
 const CheckboxField = ({ field, onChange }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
-    const addCheckboxOption = () => {
+    const addCheckboxOption = (e: any) => {
+        e.preventDefault();
         if (field.type === "checkbox" && Array.isArray(field.options)) {
             const tempField = { ...field };
             tempField.options = [
