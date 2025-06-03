@@ -5,7 +5,7 @@ import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FieldType } from "@/generated/prisma";
 import React, { Context, use, useEffect, useState } from "react";
 
-type Props = { params: Context<{ formId: string }> };
+type Props = { params: any };
 type FieldResponse = {
     id: string;
     textValue: string | null;
@@ -24,7 +24,8 @@ type Submission = {
     responses: FieldResponse[];
 };
 const page = ({ params }: Props) => {
-    const { formId } = use<{ formId: string }>(params);
+    // const { formId } = use<{ formId: string }>(params);
+    const { formId } = params;
 
     const [submission, setSubmission] = useState<any>();
 

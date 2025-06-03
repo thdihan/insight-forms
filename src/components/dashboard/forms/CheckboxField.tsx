@@ -26,7 +26,7 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
             tempField.options = [
                 ...field.options,
                 {
-                    id: (field.options.length + 1).toString(),
+                    id: field.options.length + 1,
                     label: "",
                 },
             ];
@@ -34,7 +34,7 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
         }
     };
 
-    const updateCheckboxOption = (id: string, value: string) => {
+    const updateCheckboxOption = (id: number, value: string) => {
         if (field.type === "checkbox" && Array.isArray(field.options)) {
             const tempField = { ...field };
             tempField.options = tempField.options.filter(
@@ -63,7 +63,7 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
                 {field.type === "checkbox" &&
                     field.options.length > 0 &&
                     field.options
-                        .sort((a, b) => parseInt(a.id) - parseInt(b.id))
+                        .sort((a, b) => a.id - b.id)
                         .map((option, index) => (
                             <div
                                 key={index}

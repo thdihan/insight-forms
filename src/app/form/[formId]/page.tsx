@@ -13,13 +13,13 @@ import { Button } from "@/components/ui/button";
 import { submitForm } from "@/app/actions.ts/submission";
 import { Loader2 } from "lucide-react";
 
-type Props = { params: Context<{ formId: string }> };
+type Props = { params: any };
 
 const page = ({ params }: Props) => {
     const [responses, setResponses] = useState<Record<string, any>>({});
     const [loading, setLoading] = useState(false);
 
-    const { formId } = use<{ formId: string }>(params);
+    const { formId } = params;
 
     const router = useRouter();
     const [formValues, setFormValues] = useState<IForms>({

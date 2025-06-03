@@ -21,10 +21,10 @@ import React, { Context, use, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import parse from "html-react-parser";
 
-type Props = { params: Context<{ formId: string }> };
+type Props = { params: any };
 
 const page = ({ params }: Props) => {
-    const { formId } = use<{ formId: string }>(params);
+    const { formId } = params;
 
     const router = useRouter();
     const [formValues, setFormValues] = useState<IForms>({
