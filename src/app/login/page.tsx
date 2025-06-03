@@ -20,6 +20,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { error } from "console";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Props = {};
 const formSchema = z.object({
@@ -136,6 +137,7 @@ function page({}: Props) {
                     <Button
                         type="submit"
                         disabled={form.formState.isSubmitting}
+                        className="cursor-pointer"
                     >
                         {isLoading ? (
                             <Loader2 className="h-4 w-4 animate-spin" />
@@ -150,9 +152,19 @@ function page({}: Props) {
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
                             <span className="bg-background px-2 text-muted-foreground">
-                                Or continue with email
+                                Or continue to register.
                             </span>
                         </div>
+                    </div>
+                    <div className="text-center">
+                        <Button variant="outline">
+                            <Link
+                                className="text-blue-500 text-center font-bold"
+                                href={"/register"}
+                            >
+                                Register
+                            </Link>
+                        </Button>
                     </div>
                 </form>
             </Form>

@@ -26,5 +26,9 @@ export async function middleware(req: NextRequest) {
 export const config = {
     matcher: [
         "/", // home
+        "/forms",
+        "/create-form",
+        "/form-response",
+        "/edit-form",
     ],
 };
