@@ -26,7 +26,10 @@ export const submitForm = async ({
                             textValue: value,
                             selectedOption: value,
                         };
-                    } else if (Array.isArray(value)) {
+                    } else if (
+                        Array.isArray(value) &&
+                        typeof value[0] === "string"
+                    ) {
                         return {
                             ...base,
                             selectedOptions: value,

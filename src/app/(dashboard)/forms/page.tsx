@@ -2,6 +2,15 @@
 import { deleteForm, getForms } from "@/app/actions.ts/forms";
 import { Button } from "@/components/ui/button";
 import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
     Table,
     TableBody,
     TableCaption,
@@ -12,7 +21,15 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { IForms } from "@/types/form";
-import { Edit2, Eye, Trash2 } from "lucide-react";
+import {
+    Copy,
+    CopyCheck,
+    Edit2,
+    Eye,
+    ListCheck,
+    Share,
+    Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -22,6 +39,7 @@ type Props = {};
 const page = (props: Props) => {
     const router = useRouter();
     const [data, setData] = useState<any>();
+    const [copyStatus, setCopyStatus] = useState(false);
 
     useEffect(() => {
         function loadData() {
@@ -49,6 +67,10 @@ const page = (props: Props) => {
         } catch (error) {
             console.log("Error", error);
         }
+    };
+    const handleCopy = async (link: string) => {
+        await navigator.clipboard.writeText(link);
+        setCopyStatus(true);
     };
     return (
         <div className="p-2 flex justify-center w-full">
@@ -79,10 +101,71 @@ const page = (props: Props) => {
                                 <TableCell className="font-medium">
                                     {data.formName}
                                 </TableCell>
-                                <TableCell>{data.description}</TableCell>
+                                <TableCell>
+                                    {data.description.substring(0, 50)}...
+                                </TableCell>
                                 <TableCell>{10}</TableCell>
                                 <TableCell className="text-right">
                                     <div className="flex gap-x-2 justify-end-safe">
+                                        <Button
+                                            variant="outline"
+                                            className="cursor-pointer"
+                                            onClick={() =>
+                                                router.push(
+                                                    `/form-response/${data.id}`
+                                                )
+                                            }
+                                        >
+                                            <ListCheck className="w-6 h-6 text-black" />
+                                        </Button>
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <Button
+                                                    variant="outline"
+                                                    className="cursor-pointer"
+                                                    onClick={() =>
+                                                        setCopyStatus(false)
+                                                    }
+                                                >
+                                                    <Share className="w-6 h-6 text-black" />
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent className="sm:max-w-[425px]">
+                                                <DialogHeader>
+                                                    <DialogTitle>
+                                                        Share
+                                                    </DialogTitle>
+                                                </DialogHeader>
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
+                                                        readOnly
+                                                        value={`http://localhost:3000/form/${data.id}`}
+                                                        className="flex-1"
+                                                    />
+                                                    <Button
+                                                        variant="secondary"
+                                                        onClick={() =>
+                                                            handleCopy(
+                                                                `http://localhost:3000/form/${data.id}`
+                                                            )
+                                                        }
+                                                    >
+                                                        {!copyStatus ? (
+                                                            <>
+                                                                <Copy className="w-4 h-4 mr-1" />
+                                                                Copy
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <CopyCheck className="w-4 h-4 mr-1" />
+                                                                Done!
+                                                            </>
+                                                        )}
+                                                    </Button>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
+
                                         <Button
                                             variant="outline"
                                             className="cursor-pointer"

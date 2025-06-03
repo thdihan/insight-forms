@@ -17,7 +17,7 @@ import SelectField from "@/components/dashboard/forms/SelectField";
 import { createForm } from "@/app/actions.ts/createForm";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getFormById } from "@/app/actions.ts/forms";
+import { getFormById, updateForm } from "@/app/actions.ts/forms";
 
 type Props = {
     params: Context<{ id: string }>;
@@ -69,7 +69,7 @@ const page = ({ params }: Props) => {
         console.log("FORM VALUES: ", formValues);
         setLoading(true);
         try {
-            const result = await createForm(formValues);
+            const result = await updateForm(Number(id), formValues);
 
             console.log("RESULT: ", result);
             setLoading(false);

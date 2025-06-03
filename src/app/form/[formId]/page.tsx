@@ -73,7 +73,6 @@ const page = ({ params }: Props) => {
                 formId: parseInt(formId),
                 responses,
             });
-
             console.log("Submitted: ", response);
             setLoading(false);
             router.push("/form");

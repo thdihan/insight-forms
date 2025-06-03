@@ -1,4 +1,5 @@
-import { TypeFormField } from "@/types/form";
+"use client";
+
 import React from "react";
 import {
     Table,
@@ -9,6 +10,9 @@ import {
     TableRow,
 } from "../ui/table";
 import TextInput from "../dashboard/inputs/TextInput";
+import { Button } from "../ui/button";
+import { Plus } from "lucide-react";
+import { TypeFormField } from "@/types/form";
 
 type Props = {
     field: TypeFormField;
@@ -17,9 +21,33 @@ type Props = {
 };
 
 const TableField = ({ field, handleChange, responses }: Props) => {
+    const currentRows: Record<string, string>[] = responses[field.id] || [];
+
+    const updateCell = (rowIndex: number, key: string, value: string) => {
+        const newRows = [...currentRows];
+        newRows[rowIndex] = { ...newRows[rowIndex], [key]: value };
+        handleChange(field.id, newRows);
+    };
+
+    const addRow = () => {
+        const newRows = [...currentRows, {}];
+        handleChange(field.id, newRows);
+    };
+
     return (
-        <div className="py-2 border-y">
-            <h3 className="text-lg">{field.label}</h3>
+        <div className="py-4 border-y space-y-2">
+            <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium">{field.label}</h3>
+                <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    onClick={addRow}
+                    className="h-8 w-8"
+                >
+                    <Plus className="h-4 w-4" />
+                </Button>
+            </div>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -32,30 +60,28 @@ const TableField = ({ field, handleChange, responses }: Props) => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        {field.type === "table" &&
-                            field.options.map((option, index) => (
-                                <TableCell key={index}>
-                                    <TextInput
-                                        placeholder={"Enter text"}
-                                        label=""
-                                        labelStyle="hidden"
-                                        textValue={
-                                            responses[field.id]?.[option.id] ||
-                                            ""
-                                        }
-                                        inputChange={(e) => {
-                                            const currentRow =
-                                                responses[field.id] || {};
-                                            handleChange(field.id, {
-                                                ...currentRow,
-                                                [option.id]: e.target.value,
-                                            });
-                                        }}
-                                    />
-                                </TableCell>
-                            ))}
-                    </TableRow>
+                    {currentRows.map((row, rowIndex) => (
+                        <TableRow key={rowIndex}>
+                            {field.type === "table" &&
+                                field.options.map((option, colIndex) => (
+                                    <TableCell key={colIndex}>
+                                        <TextInput
+                                            placeholder="Enter text"
+                                            label=""
+                                            labelStyle="hidden"
+                                            textValue={row[option.label] || ""}
+                                            inputChange={(e) =>
+                                                updateCell(
+                                                    rowIndex,
+                                                    option.label,
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </TableCell>
+                                ))}
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </div>
