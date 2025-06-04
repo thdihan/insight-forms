@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Form = $Result.DefaultSelection<Prisma.$FormPayload>
 /**
+ * Model FormSection
+ * 
+ */
+export type FormSection = $Result.DefaultSelection<Prisma.$FormSectionPayload>
+/**
  * Model FormField
  * 
  */
@@ -208,6 +213,16 @@ export class PrismaClient<
     * ```
     */
   get form(): Prisma.FormDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formSection`: Exposes CRUD operations for the **FormSection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormSections
+    * const formSections = await prisma.formSection.findMany()
+    * ```
+    */
+  get formSection(): Prisma.FormSectionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.formField`: Exposes CRUD operations for the **FormField** model.
@@ -690,6 +705,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Form: 'Form',
+    FormSection: 'FormSection',
     FormField: 'FormField',
     FieldOption: 'FieldOption',
     FormSubmission: 'FormSubmission',
@@ -712,7 +728,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "form" | "formField" | "fieldOption" | "formSubmission" | "fieldResponse"
+      modelProps: "user" | "form" | "formSection" | "formField" | "fieldOption" | "formSubmission" | "fieldResponse"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -861,6 +877,80 @@ export namespace Prisma {
           count: {
             args: Prisma.FormCountArgs<ExtArgs>
             result: $Utils.Optional<FormCountAggregateOutputType> | number
+          }
+        }
+      }
+      FormSection: {
+        payload: Prisma.$FormSectionPayload<ExtArgs>
+        fields: Prisma.FormSectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormSectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormSectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          findFirst: {
+            args: Prisma.FormSectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormSectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          findMany: {
+            args: Prisma.FormSectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>[]
+          }
+          create: {
+            args: Prisma.FormSectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          createMany: {
+            args: Prisma.FormSectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormSectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>[]
+          }
+          delete: {
+            args: Prisma.FormSectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          update: {
+            args: Prisma.FormSectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormSectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormSectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormSectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormSectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormSectionPayload>
+          }
+          aggregate: {
+            args: Prisma.FormSectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormSection>
+          }
+          groupBy: {
+            args: Prisma.FormSectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormSectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormSectionCountArgs<ExtArgs>
+            result: $Utils.Optional<FormSectionCountAggregateOutputType> | number
           }
         }
       }
@@ -1246,6 +1336,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     form?: FormOmit
+    formSection?: FormSectionOmit
     formField?: FormFieldOmit
     fieldOption?: FieldOptionOmit
     formSubmission?: FormSubmissionOmit
@@ -1344,12 +1435,12 @@ export namespace Prisma {
    */
 
   export type FormCountOutputType = {
-    fields: number
+    sections: number
     submissions: number
   }
 
   export type FormCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    fields?: boolean | FormCountOutputTypeCountFieldsArgs
+    sections?: boolean | FormCountOutputTypeCountSectionsArgs
     submissions?: boolean | FormCountOutputTypeCountSubmissionsArgs
   }
 
@@ -1367,8 +1458,8 @@ export namespace Prisma {
   /**
    * FormCountOutputType without action
    */
-  export type FormCountOutputTypeCountFieldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FormFieldWhereInput
+  export type FormCountOutputTypeCountSectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormSectionWhereInput
   }
 
   /**
@@ -1376,6 +1467,37 @@ export namespace Prisma {
    */
   export type FormCountOutputTypeCountSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FormSubmissionWhereInput
+  }
+
+
+  /**
+   * Count Type FormSectionCountOutputType
+   */
+
+  export type FormSectionCountOutputType = {
+    fields: number
+  }
+
+  export type FormSectionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    fields?: boolean | FormSectionCountOutputTypeCountFieldsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FormSectionCountOutputType without action
+   */
+  export type FormSectionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSectionCountOutputType
+     */
+    select?: FormSectionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FormSectionCountOutputType without action
+   */
+  export type FormSectionCountOutputTypeCountFieldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormFieldWhereInput
   }
 
 
@@ -2655,7 +2777,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    fields?: boolean | Form$fieldsArgs<ExtArgs>
+    sections?: boolean | Form$sectionsArgs<ExtArgs>
     submissions?: boolean | Form$submissionsArgs<ExtArgs>
     _count?: boolean | FormCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["form"]>
@@ -2686,7 +2808,7 @@ export namespace Prisma {
 
   export type FormOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formName" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["form"]>
   export type FormInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    fields?: boolean | Form$fieldsArgs<ExtArgs>
+    sections?: boolean | Form$sectionsArgs<ExtArgs>
     submissions?: boolean | Form$submissionsArgs<ExtArgs>
     _count?: boolean | FormCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2696,7 +2818,7 @@ export namespace Prisma {
   export type $FormPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Form"
     objects: {
-      fields: Prisma.$FormFieldPayload<ExtArgs>[]
+      sections: Prisma.$FormSectionPayload<ExtArgs>[]
       submissions: Prisma.$FormSubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3099,7 +3221,7 @@ export namespace Prisma {
    */
   export interface Prisma__FormClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    fields<T extends Form$fieldsArgs<ExtArgs> = {}>(args?: Subset<T, Form$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sections<T extends Form$sectionsArgs<ExtArgs> = {}>(args?: Subset<T, Form$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     submissions<T extends Form$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Form$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3523,27 +3645,27 @@ export namespace Prisma {
   }
 
   /**
-   * Form.fields
+   * Form.sections
    */
-  export type Form$fieldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Form$sectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the FormField
+     * Select specific fields to fetch from the FormSection
      */
-    select?: FormFieldSelect<ExtArgs> | null
+    select?: FormSectionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the FormField
+     * Omit specific fields from the FormSection
      */
-    omit?: FormFieldOmit<ExtArgs> | null
+    omit?: FormSectionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: FormFieldInclude<ExtArgs> | null
-    where?: FormFieldWhereInput
-    orderBy?: FormFieldOrderByWithRelationInput | FormFieldOrderByWithRelationInput[]
-    cursor?: FormFieldWhereUniqueInput
+    include?: FormSectionInclude<ExtArgs> | null
+    where?: FormSectionWhereInput
+    orderBy?: FormSectionOrderByWithRelationInput | FormSectionOrderByWithRelationInput[]
+    cursor?: FormSectionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FormFieldScalarFieldEnum | FormFieldScalarFieldEnum[]
+    distinct?: FormSectionScalarFieldEnum | FormSectionScalarFieldEnum[]
   }
 
   /**
@@ -3590,6 +3712,1145 @@ export namespace Prisma {
 
 
   /**
+   * Model FormSection
+   */
+
+  export type AggregateFormSection = {
+    _count: FormSectionCountAggregateOutputType | null
+    _avg: FormSectionAvgAggregateOutputType | null
+    _sum: FormSectionSumAggregateOutputType | null
+    _min: FormSectionMinAggregateOutputType | null
+    _max: FormSectionMaxAggregateOutputType | null
+  }
+
+  export type FormSectionAvgAggregateOutputType = {
+    id: number | null
+    formId: number | null
+  }
+
+  export type FormSectionSumAggregateOutputType = {
+    id: number | null
+    formId: number | null
+  }
+
+  export type FormSectionMinAggregateOutputType = {
+    id: number | null
+    sectionName: string | null
+    sectionDescription: string | null
+    formId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FormSectionMaxAggregateOutputType = {
+    id: number | null
+    sectionName: string | null
+    sectionDescription: string | null
+    formId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FormSectionCountAggregateOutputType = {
+    id: number
+    sectionName: number
+    sectionDescription: number
+    formId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FormSectionAvgAggregateInputType = {
+    id?: true
+    formId?: true
+  }
+
+  export type FormSectionSumAggregateInputType = {
+    id?: true
+    formId?: true
+  }
+
+  export type FormSectionMinAggregateInputType = {
+    id?: true
+    sectionName?: true
+    sectionDescription?: true
+    formId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FormSectionMaxAggregateInputType = {
+    id?: true
+    sectionName?: true
+    sectionDescription?: true
+    formId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FormSectionCountAggregateInputType = {
+    id?: true
+    sectionName?: true
+    sectionDescription?: true
+    formId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FormSectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormSection to aggregate.
+     */
+    where?: FormSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSections to fetch.
+     */
+    orderBy?: FormSectionOrderByWithRelationInput | FormSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormSections
+    **/
+    _count?: true | FormSectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormSectionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormSectionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormSectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormSectionMaxAggregateInputType
+  }
+
+  export type GetFormSectionAggregateType<T extends FormSectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormSection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormSection[P]>
+      : GetScalarType<T[P], AggregateFormSection[P]>
+  }
+
+
+
+
+  export type FormSectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormSectionWhereInput
+    orderBy?: FormSectionOrderByWithAggregationInput | FormSectionOrderByWithAggregationInput[]
+    by: FormSectionScalarFieldEnum[] | FormSectionScalarFieldEnum
+    having?: FormSectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormSectionCountAggregateInputType | true
+    _avg?: FormSectionAvgAggregateInputType
+    _sum?: FormSectionSumAggregateInputType
+    _min?: FormSectionMinAggregateInputType
+    _max?: FormSectionMaxAggregateInputType
+  }
+
+  export type FormSectionGroupByOutputType = {
+    id: number
+    sectionName: string | null
+    sectionDescription: string | null
+    formId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: FormSectionCountAggregateOutputType | null
+    _avg: FormSectionAvgAggregateOutputType | null
+    _sum: FormSectionSumAggregateOutputType | null
+    _min: FormSectionMinAggregateOutputType | null
+    _max: FormSectionMaxAggregateOutputType | null
+  }
+
+  type GetFormSectionGroupByPayload<T extends FormSectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormSectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormSectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormSectionGroupByOutputType[P]>
+            : GetScalarType<T[P], FormSectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormSectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sectionName?: boolean
+    sectionDescription?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+    fields?: boolean | FormSection$fieldsArgs<ExtArgs>
+    _count?: boolean | FormSectionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSection"]>
+
+  export type FormSectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sectionName?: boolean
+    sectionDescription?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSection"]>
+
+  export type FormSectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sectionName?: boolean
+    sectionDescription?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["formSection"]>
+
+  export type FormSectionSelectScalar = {
+    id?: boolean
+    sectionName?: boolean
+    sectionDescription?: boolean
+    formId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FormSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sectionName" | "sectionDescription" | "formId" | "createdAt" | "updatedAt", ExtArgs["result"]["formSection"]>
+  export type FormSectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+    fields?: boolean | FormSection$fieldsArgs<ExtArgs>
+    _count?: boolean | FormSectionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FormSectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }
+  export type FormSectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    form?: boolean | FormDefaultArgs<ExtArgs>
+  }
+
+  export type $FormSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormSection"
+    objects: {
+      form: Prisma.$FormPayload<ExtArgs>
+      fields: Prisma.$FormFieldPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      sectionName: string | null
+      sectionDescription: string | null
+      formId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["formSection"]>
+    composites: {}
+  }
+
+  type FormSectionGetPayload<S extends boolean | null | undefined | FormSectionDefaultArgs> = $Result.GetResult<Prisma.$FormSectionPayload, S>
+
+  type FormSectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormSectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormSectionCountAggregateInputType | true
+    }
+
+  export interface FormSectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormSection'], meta: { name: 'FormSection' } }
+    /**
+     * Find zero or one FormSection that matches the filter.
+     * @param {FormSectionFindUniqueArgs} args - Arguments to find a FormSection
+     * @example
+     * // Get one FormSection
+     * const formSection = await prisma.formSection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormSectionFindUniqueArgs>(args: SelectSubset<T, FormSectionFindUniqueArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormSection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormSectionFindUniqueOrThrowArgs} args - Arguments to find a FormSection
+     * @example
+     * // Get one FormSection
+     * const formSection = await prisma.formSection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormSectionFindUniqueOrThrowArgs>(args: SelectSubset<T, FormSectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormSection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionFindFirstArgs} args - Arguments to find a FormSection
+     * @example
+     * // Get one FormSection
+     * const formSection = await prisma.formSection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormSectionFindFirstArgs>(args?: SelectSubset<T, FormSectionFindFirstArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormSection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionFindFirstOrThrowArgs} args - Arguments to find a FormSection
+     * @example
+     * // Get one FormSection
+     * const formSection = await prisma.formSection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormSectionFindFirstOrThrowArgs>(args?: SelectSubset<T, FormSectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormSections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormSections
+     * const formSections = await prisma.formSection.findMany()
+     * 
+     * // Get first 10 FormSections
+     * const formSections = await prisma.formSection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formSectionWithIdOnly = await prisma.formSection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormSectionFindManyArgs>(args?: SelectSubset<T, FormSectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormSection.
+     * @param {FormSectionCreateArgs} args - Arguments to create a FormSection.
+     * @example
+     * // Create one FormSection
+     * const FormSection = await prisma.formSection.create({
+     *   data: {
+     *     // ... data to create a FormSection
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormSectionCreateArgs>(args: SelectSubset<T, FormSectionCreateArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormSections.
+     * @param {FormSectionCreateManyArgs} args - Arguments to create many FormSections.
+     * @example
+     * // Create many FormSections
+     * const formSection = await prisma.formSection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormSectionCreateManyArgs>(args?: SelectSubset<T, FormSectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormSections and returns the data saved in the database.
+     * @param {FormSectionCreateManyAndReturnArgs} args - Arguments to create many FormSections.
+     * @example
+     * // Create many FormSections
+     * const formSection = await prisma.formSection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormSections and only return the `id`
+     * const formSectionWithIdOnly = await prisma.formSection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormSectionCreateManyAndReturnArgs>(args?: SelectSubset<T, FormSectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormSection.
+     * @param {FormSectionDeleteArgs} args - Arguments to delete one FormSection.
+     * @example
+     * // Delete one FormSection
+     * const FormSection = await prisma.formSection.delete({
+     *   where: {
+     *     // ... filter to delete one FormSection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormSectionDeleteArgs>(args: SelectSubset<T, FormSectionDeleteArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormSection.
+     * @param {FormSectionUpdateArgs} args - Arguments to update one FormSection.
+     * @example
+     * // Update one FormSection
+     * const formSection = await prisma.formSection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormSectionUpdateArgs>(args: SelectSubset<T, FormSectionUpdateArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormSections.
+     * @param {FormSectionDeleteManyArgs} args - Arguments to filter FormSections to delete.
+     * @example
+     * // Delete a few FormSections
+     * const { count } = await prisma.formSection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormSectionDeleteManyArgs>(args?: SelectSubset<T, FormSectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormSections
+     * const formSection = await prisma.formSection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormSectionUpdateManyArgs>(args: SelectSubset<T, FormSectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormSections and returns the data updated in the database.
+     * @param {FormSectionUpdateManyAndReturnArgs} args - Arguments to update many FormSections.
+     * @example
+     * // Update many FormSections
+     * const formSection = await prisma.formSection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormSections and only return the `id`
+     * const formSectionWithIdOnly = await prisma.formSection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormSectionUpdateManyAndReturnArgs>(args: SelectSubset<T, FormSectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormSection.
+     * @param {FormSectionUpsertArgs} args - Arguments to update or create a FormSection.
+     * @example
+     * // Update or create a FormSection
+     * const formSection = await prisma.formSection.upsert({
+     *   create: {
+     *     // ... data to create a FormSection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormSection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormSectionUpsertArgs>(args: SelectSubset<T, FormSectionUpsertArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionCountArgs} args - Arguments to filter FormSections to count.
+     * @example
+     * // Count the number of FormSections
+     * const count = await prisma.formSection.count({
+     *   where: {
+     *     // ... the filter for the FormSections we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormSectionCountArgs>(
+      args?: Subset<T, FormSectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormSectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormSectionAggregateArgs>(args: Subset<T, FormSectionAggregateArgs>): Prisma.PrismaPromise<GetFormSectionAggregateType<T>>
+
+    /**
+     * Group by FormSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormSectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormSectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormSectionGroupByArgs['orderBy'] }
+        : { orderBy?: FormSectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormSectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormSection model
+   */
+  readonly fields: FormSectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormSection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormSectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    form<T extends FormDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormDefaultArgs<ExtArgs>>): Prisma__FormClient<$Result.GetResult<Prisma.$FormPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    fields<T extends FormSection$fieldsArgs<ExtArgs> = {}>(args?: Subset<T, FormSection$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormSection model
+   */
+  interface FormSectionFieldRefs {
+    readonly id: FieldRef<"FormSection", 'Int'>
+    readonly sectionName: FieldRef<"FormSection", 'String'>
+    readonly sectionDescription: FieldRef<"FormSection", 'String'>
+    readonly formId: FieldRef<"FormSection", 'Int'>
+    readonly createdAt: FieldRef<"FormSection", 'DateTime'>
+    readonly updatedAt: FieldRef<"FormSection", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormSection findUnique
+   */
+  export type FormSectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSection to fetch.
+     */
+    where: FormSectionWhereUniqueInput
+  }
+
+  /**
+   * FormSection findUniqueOrThrow
+   */
+  export type FormSectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSection to fetch.
+     */
+    where: FormSectionWhereUniqueInput
+  }
+
+  /**
+   * FormSection findFirst
+   */
+  export type FormSectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSection to fetch.
+     */
+    where?: FormSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSections to fetch.
+     */
+    orderBy?: FormSectionOrderByWithRelationInput | FormSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormSections.
+     */
+    cursor?: FormSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormSections.
+     */
+    distinct?: FormSectionScalarFieldEnum | FormSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSection findFirstOrThrow
+   */
+  export type FormSectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSection to fetch.
+     */
+    where?: FormSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSections to fetch.
+     */
+    orderBy?: FormSectionOrderByWithRelationInput | FormSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormSections.
+     */
+    cursor?: FormSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormSections.
+     */
+    distinct?: FormSectionScalarFieldEnum | FormSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSection findMany
+   */
+  export type FormSectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which FormSections to fetch.
+     */
+    where?: FormSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormSections to fetch.
+     */
+    orderBy?: FormSectionOrderByWithRelationInput | FormSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormSections.
+     */
+    cursor?: FormSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormSections.
+     */
+    skip?: number
+    distinct?: FormSectionScalarFieldEnum | FormSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormSection create
+   */
+  export type FormSectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FormSection.
+     */
+    data: XOR<FormSectionCreateInput, FormSectionUncheckedCreateInput>
+  }
+
+  /**
+   * FormSection createMany
+   */
+  export type FormSectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormSections.
+     */
+    data: FormSectionCreateManyInput | FormSectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormSection createManyAndReturn
+   */
+  export type FormSectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormSections.
+     */
+    data: FormSectionCreateManyInput | FormSectionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FormSection update
+   */
+  export type FormSectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FormSection.
+     */
+    data: XOR<FormSectionUpdateInput, FormSectionUncheckedUpdateInput>
+    /**
+     * Choose, which FormSection to update.
+     */
+    where: FormSectionWhereUniqueInput
+  }
+
+  /**
+   * FormSection updateMany
+   */
+  export type FormSectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormSections.
+     */
+    data: XOR<FormSectionUpdateManyMutationInput, FormSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormSections to update
+     */
+    where?: FormSectionWhereInput
+    /**
+     * Limit how many FormSections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormSection updateManyAndReturn
+   */
+  export type FormSectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * The data used to update FormSections.
+     */
+    data: XOR<FormSectionUpdateManyMutationInput, FormSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormSections to update
+     */
+    where?: FormSectionWhereInput
+    /**
+     * Limit how many FormSections to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FormSection upsert
+   */
+  export type FormSectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FormSection to update in case it exists.
+     */
+    where: FormSectionWhereUniqueInput
+    /**
+     * In case the FormSection found by the `where` argument doesn't exist, create a new FormSection with this data.
+     */
+    create: XOR<FormSectionCreateInput, FormSectionUncheckedCreateInput>
+    /**
+     * In case the FormSection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormSectionUpdateInput, FormSectionUncheckedUpdateInput>
+  }
+
+  /**
+   * FormSection delete
+   */
+  export type FormSectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+    /**
+     * Filter which FormSection to delete.
+     */
+    where: FormSectionWhereUniqueInput
+  }
+
+  /**
+   * FormSection deleteMany
+   */
+  export type FormSectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormSections to delete
+     */
+    where?: FormSectionWhereInput
+    /**
+     * Limit how many FormSections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormSection.fields
+   */
+  export type FormSection$fieldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormField
+     */
+    select?: FormFieldSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormField
+     */
+    omit?: FormFieldOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormFieldInclude<ExtArgs> | null
+    where?: FormFieldWhereInput
+    orderBy?: FormFieldOrderByWithRelationInput | FormFieldOrderByWithRelationInput[]
+    cursor?: FormFieldWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormFieldScalarFieldEnum | FormFieldScalarFieldEnum[]
+  }
+
+  /**
+   * FormSection without action
+   */
+  export type FormSectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormSection
+     */
+    select?: FormSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormSection
+     */
+    omit?: FormSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormSectionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model FormField
    */
 
@@ -3603,19 +4864,19 @@ export namespace Prisma {
 
   export type FormFieldAvgAggregateOutputType = {
     id: number | null
-    formId: number | null
+    sectionId: number | null
     order: number | null
   }
 
   export type FormFieldSumAggregateOutputType = {
     id: number | null
-    formId: number | null
+    sectionId: number | null
     order: number | null
   }
 
   export type FormFieldMinAggregateOutputType = {
     id: number | null
-    formId: number | null
+    sectionId: number | null
     order: number | null
     type: $Enums.FieldType | null
     label: string | null
@@ -3628,7 +4889,7 @@ export namespace Prisma {
 
   export type FormFieldMaxAggregateOutputType = {
     id: number | null
-    formId: number | null
+    sectionId: number | null
     order: number | null
     type: $Enums.FieldType | null
     label: string | null
@@ -3641,7 +4902,7 @@ export namespace Prisma {
 
   export type FormFieldCountAggregateOutputType = {
     id: number
-    formId: number
+    sectionId: number
     order: number
     type: number
     label: number
@@ -3656,19 +4917,19 @@ export namespace Prisma {
 
   export type FormFieldAvgAggregateInputType = {
     id?: true
-    formId?: true
+    sectionId?: true
     order?: true
   }
 
   export type FormFieldSumAggregateInputType = {
     id?: true
-    formId?: true
+    sectionId?: true
     order?: true
   }
 
   export type FormFieldMinAggregateInputType = {
     id?: true
-    formId?: true
+    sectionId?: true
     order?: true
     type?: true
     label?: true
@@ -3681,7 +4942,7 @@ export namespace Prisma {
 
   export type FormFieldMaxAggregateInputType = {
     id?: true
-    formId?: true
+    sectionId?: true
     order?: true
     type?: true
     label?: true
@@ -3694,7 +4955,7 @@ export namespace Prisma {
 
   export type FormFieldCountAggregateInputType = {
     id?: true
-    formId?: true
+    sectionId?: true
     order?: true
     type?: true
     label?: true
@@ -3794,7 +5055,7 @@ export namespace Prisma {
 
   export type FormFieldGroupByOutputType = {
     id: number
-    formId: number
+    sectionId: number
     order: number
     type: $Enums.FieldType
     label: string
@@ -3826,7 +5087,7 @@ export namespace Prisma {
 
   export type FormFieldSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    formId?: boolean
+    sectionId?: boolean
     order?: boolean
     type?: boolean
     label?: boolean
@@ -3835,7 +5096,7 @@ export namespace Prisma {
     multiline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
     responses?: boolean | FormField$responsesArgs<ExtArgs>
     options?: boolean | FormField$optionsArgs<ExtArgs>
     _count?: boolean | FormFieldCountOutputTypeDefaultArgs<ExtArgs>
@@ -3843,7 +5104,7 @@ export namespace Prisma {
 
   export type FormFieldSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    formId?: boolean
+    sectionId?: boolean
     order?: boolean
     type?: boolean
     label?: boolean
@@ -3852,12 +5113,12 @@ export namespace Prisma {
     multiline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["formField"]>
 
   export type FormFieldSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    formId?: boolean
+    sectionId?: boolean
     order?: boolean
     type?: boolean
     label?: boolean
@@ -3866,12 +5127,12 @@ export namespace Prisma {
     multiline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["formField"]>
 
   export type FormFieldSelectScalar = {
     id?: boolean
-    formId?: boolean
+    sectionId?: boolean
     order?: boolean
     type?: boolean
     label?: boolean
@@ -3882,30 +5143,30 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormFieldOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formId" | "order" | "type" | "label" | "required" | "placeholder" | "multiline" | "createdAt" | "updatedAt", ExtArgs["result"]["formField"]>
+  export type FormFieldOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sectionId" | "order" | "type" | "label" | "required" | "placeholder" | "multiline" | "createdAt" | "updatedAt", ExtArgs["result"]["formField"]>
   export type FormFieldInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
     responses?: boolean | FormField$responsesArgs<ExtArgs>
     options?: boolean | FormField$optionsArgs<ExtArgs>
     _count?: boolean | FormFieldCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FormFieldIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
   }
   export type FormFieldIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    form?: boolean | FormDefaultArgs<ExtArgs>
+    formSection?: boolean | FormSectionDefaultArgs<ExtArgs>
   }
 
   export type $FormFieldPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FormField"
     objects: {
-      form: Prisma.$FormPayload<ExtArgs>
+      formSection: Prisma.$FormSectionPayload<ExtArgs>
       responses: Prisma.$FieldResponsePayload<ExtArgs>[]
       options: Prisma.$FieldOptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      formId: number
+      sectionId: number
       order: number
       type: $Enums.FieldType
       label: string
@@ -4308,7 +5569,7 @@ export namespace Prisma {
    */
   export interface Prisma__FormFieldClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    form<T extends FormDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormDefaultArgs<ExtArgs>>): Prisma__FormClient<$Result.GetResult<Prisma.$FormPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    formSection<T extends FormSectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormSectionDefaultArgs<ExtArgs>>): Prisma__FormSectionClient<$Result.GetResult<Prisma.$FormSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     responses<T extends FormField$responsesArgs<ExtArgs> = {}>(args?: Subset<T, FormField$responsesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     options<T extends FormField$optionsArgs<ExtArgs> = {}>(args?: Subset<T, FormField$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FieldOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4341,7 +5602,7 @@ export namespace Prisma {
    */
   interface FormFieldFieldRefs {
     readonly id: FieldRef<"FormField", 'Int'>
-    readonly formId: FieldRef<"FormField", 'Int'>
+    readonly sectionId: FieldRef<"FormField", 'Int'>
     readonly order: FieldRef<"FormField", 'Int'>
     readonly type: FieldRef<"FormField", 'FieldType'>
     readonly label: FieldRef<"FormField", 'String'>
@@ -8177,9 +9438,21 @@ export namespace Prisma {
   export type FormScalarFieldEnum = (typeof FormScalarFieldEnum)[keyof typeof FormScalarFieldEnum]
 
 
+  export const FormSectionScalarFieldEnum: {
+    id: 'id',
+    sectionName: 'sectionName',
+    sectionDescription: 'sectionDescription',
+    formId: 'formId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FormSectionScalarFieldEnum = (typeof FormSectionScalarFieldEnum)[keyof typeof FormSectionScalarFieldEnum]
+
+
   export const FormFieldScalarFieldEnum: {
     id: 'id',
-    formId: 'formId',
+    sectionId: 'sectionId',
     order: 'order',
     type: 'type',
     label: 'label',
@@ -8420,7 +9693,7 @@ export namespace Prisma {
     description?: StringFilter<"Form"> | string
     createdAt?: DateTimeFilter<"Form"> | Date | string
     updatedAt?: DateTimeFilter<"Form"> | Date | string
-    fields?: FormFieldListRelationFilter
+    sections?: FormSectionListRelationFilter
     submissions?: FormSubmissionListRelationFilter
   }
 
@@ -8430,7 +9703,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    fields?: FormFieldOrderByRelationAggregateInput
+    sections?: FormSectionOrderByRelationAggregateInput
     submissions?: FormSubmissionOrderByRelationAggregateInput
   }
 
@@ -8443,7 +9716,7 @@ export namespace Prisma {
     description?: StringFilter<"Form"> | string
     createdAt?: DateTimeFilter<"Form"> | Date | string
     updatedAt?: DateTimeFilter<"Form"> | Date | string
-    fields?: FormFieldListRelationFilter
+    sections?: FormSectionListRelationFilter
     submissions?: FormSubmissionListRelationFilter
   }, "id">
 
@@ -8471,12 +9744,77 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Form"> | Date | string
   }
 
+  export type FormSectionWhereInput = {
+    AND?: FormSectionWhereInput | FormSectionWhereInput[]
+    OR?: FormSectionWhereInput[]
+    NOT?: FormSectionWhereInput | FormSectionWhereInput[]
+    id?: IntFilter<"FormSection"> | number
+    sectionName?: StringNullableFilter<"FormSection"> | string | null
+    sectionDescription?: StringNullableFilter<"FormSection"> | string | null
+    formId?: IntFilter<"FormSection"> | number
+    createdAt?: DateTimeFilter<"FormSection"> | Date | string
+    updatedAt?: DateTimeFilter<"FormSection"> | Date | string
+    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    fields?: FormFieldListRelationFilter
+  }
+
+  export type FormSectionOrderByWithRelationInput = {
+    id?: SortOrder
+    sectionName?: SortOrderInput | SortOrder
+    sectionDescription?: SortOrderInput | SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    form?: FormOrderByWithRelationInput
+    fields?: FormFieldOrderByRelationAggregateInput
+  }
+
+  export type FormSectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: FormSectionWhereInput | FormSectionWhereInput[]
+    OR?: FormSectionWhereInput[]
+    NOT?: FormSectionWhereInput | FormSectionWhereInput[]
+    sectionName?: StringNullableFilter<"FormSection"> | string | null
+    sectionDescription?: StringNullableFilter<"FormSection"> | string | null
+    formId?: IntFilter<"FormSection"> | number
+    createdAt?: DateTimeFilter<"FormSection"> | Date | string
+    updatedAt?: DateTimeFilter<"FormSection"> | Date | string
+    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    fields?: FormFieldListRelationFilter
+  }, "id">
+
+  export type FormSectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    sectionName?: SortOrderInput | SortOrder
+    sectionDescription?: SortOrderInput | SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FormSectionCountOrderByAggregateInput
+    _avg?: FormSectionAvgOrderByAggregateInput
+    _max?: FormSectionMaxOrderByAggregateInput
+    _min?: FormSectionMinOrderByAggregateInput
+    _sum?: FormSectionSumOrderByAggregateInput
+  }
+
+  export type FormSectionScalarWhereWithAggregatesInput = {
+    AND?: FormSectionScalarWhereWithAggregatesInput | FormSectionScalarWhereWithAggregatesInput[]
+    OR?: FormSectionScalarWhereWithAggregatesInput[]
+    NOT?: FormSectionScalarWhereWithAggregatesInput | FormSectionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FormSection"> | number
+    sectionName?: StringNullableWithAggregatesFilter<"FormSection"> | string | null
+    sectionDescription?: StringNullableWithAggregatesFilter<"FormSection"> | string | null
+    formId?: IntWithAggregatesFilter<"FormSection"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"FormSection"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FormSection"> | Date | string
+  }
+
   export type FormFieldWhereInput = {
     AND?: FormFieldWhereInput | FormFieldWhereInput[]
     OR?: FormFieldWhereInput[]
     NOT?: FormFieldWhereInput | FormFieldWhereInput[]
     id?: IntFilter<"FormField"> | number
-    formId?: IntFilter<"FormField"> | number
+    sectionId?: IntFilter<"FormField"> | number
     order?: IntFilter<"FormField"> | number
     type?: EnumFieldTypeFilter<"FormField"> | $Enums.FieldType
     label?: StringFilter<"FormField"> | string
@@ -8485,14 +9823,14 @@ export namespace Prisma {
     multiline?: BoolNullableFilter<"FormField"> | boolean | null
     createdAt?: DateTimeFilter<"FormField"> | Date | string
     updatedAt?: DateTimeFilter<"FormField"> | Date | string
-    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    formSection?: XOR<FormSectionScalarRelationFilter, FormSectionWhereInput>
     responses?: FieldResponseListRelationFilter
     options?: FieldOptionListRelationFilter
   }
 
   export type FormFieldOrderByWithRelationInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
     type?: SortOrder
     label?: SortOrder
@@ -8501,7 +9839,7 @@ export namespace Prisma {
     multiline?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    form?: FormOrderByWithRelationInput
+    formSection?: FormSectionOrderByWithRelationInput
     responses?: FieldResponseOrderByRelationAggregateInput
     options?: FieldOptionOrderByRelationAggregateInput
   }
@@ -8511,7 +9849,7 @@ export namespace Prisma {
     AND?: FormFieldWhereInput | FormFieldWhereInput[]
     OR?: FormFieldWhereInput[]
     NOT?: FormFieldWhereInput | FormFieldWhereInput[]
-    formId?: IntFilter<"FormField"> | number
+    sectionId?: IntFilter<"FormField"> | number
     order?: IntFilter<"FormField"> | number
     type?: EnumFieldTypeFilter<"FormField"> | $Enums.FieldType
     label?: StringFilter<"FormField"> | string
@@ -8520,14 +9858,14 @@ export namespace Prisma {
     multiline?: BoolNullableFilter<"FormField"> | boolean | null
     createdAt?: DateTimeFilter<"FormField"> | Date | string
     updatedAt?: DateTimeFilter<"FormField"> | Date | string
-    form?: XOR<FormScalarRelationFilter, FormWhereInput>
+    formSection?: XOR<FormSectionScalarRelationFilter, FormSectionWhereInput>
     responses?: FieldResponseListRelationFilter
     options?: FieldOptionListRelationFilter
   }, "id">
 
   export type FormFieldOrderByWithAggregationInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
     type?: SortOrder
     label?: SortOrder
@@ -8548,7 +9886,7 @@ export namespace Prisma {
     OR?: FormFieldScalarWhereWithAggregatesInput[]
     NOT?: FormFieldScalarWhereWithAggregatesInput | FormFieldScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"FormField"> | number
-    formId?: IntWithAggregatesFilter<"FormField"> | number
+    sectionId?: IntWithAggregatesFilter<"FormField"> | number
     order?: IntWithAggregatesFilter<"FormField"> | number
     type?: EnumFieldTypeWithAggregatesFilter<"FormField"> | $Enums.FieldType
     label?: StringWithAggregatesFilter<"FormField"> | string
@@ -8785,7 +10123,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    fields?: FormFieldCreateNestedManyWithoutFormInput
+    sections?: FormSectionCreateNestedManyWithoutFormInput
     submissions?: FormSubmissionCreateNestedManyWithoutFormInput
   }
 
@@ -8795,7 +10133,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    fields?: FormFieldUncheckedCreateNestedManyWithoutFormInput
+    sections?: FormSectionUncheckedCreateNestedManyWithoutFormInput
     submissions?: FormSubmissionUncheckedCreateNestedManyWithoutFormInput
   }
 
@@ -8804,7 +10142,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fields?: FormFieldUpdateManyWithoutFormNestedInput
+    sections?: FormSectionUpdateManyWithoutFormNestedInput
     submissions?: FormSubmissionUpdateManyWithoutFormNestedInput
   }
 
@@ -8814,7 +10152,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fields?: FormFieldUncheckedUpdateManyWithoutFormNestedInput
+    sections?: FormSectionUncheckedUpdateManyWithoutFormNestedInput
     submissions?: FormSubmissionUncheckedUpdateManyWithoutFormNestedInput
   }
 
@@ -8841,6 +10179,69 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FormSectionCreateInput = {
+    sectionName?: string | null
+    sectionDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    form: FormCreateNestedOneWithoutSectionsInput
+    fields?: FormFieldCreateNestedManyWithoutFormSectionInput
+  }
+
+  export type FormSectionUncheckedCreateInput = {
+    id?: number
+    sectionName?: string | null
+    sectionDescription?: string | null
+    formId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fields?: FormFieldUncheckedCreateNestedManyWithoutFormSectionInput
+  }
+
+  export type FormSectionUpdateInput = {
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    form?: FormUpdateOneRequiredWithoutSectionsNestedInput
+    fields?: FormFieldUpdateManyWithoutFormSectionNestedInput
+  }
+
+  export type FormSectionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    formId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fields?: FormFieldUncheckedUpdateManyWithoutFormSectionNestedInput
+  }
+
+  export type FormSectionCreateManyInput = {
+    id?: number
+    sectionName?: string | null
+    sectionDescription?: string | null
+    formId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FormSectionUpdateManyMutationInput = {
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormSectionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    formId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FormFieldCreateInput = {
     order: number
     type: $Enums.FieldType
@@ -8850,14 +10251,14 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    form: FormCreateNestedOneWithoutFieldsInput
+    formSection: FormSectionCreateNestedOneWithoutFieldsInput
     responses?: FieldResponseCreateNestedManyWithoutFieldInput
     options?: FieldOptionCreateNestedManyWithoutFieldInput
   }
 
   export type FormFieldUncheckedCreateInput = {
     id?: number
-    formId: number
+    sectionId: number
     order: number
     type: $Enums.FieldType
     label: string
@@ -8879,14 +10280,14 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    formSection?: FormSectionUpdateOneRequiredWithoutFieldsNestedInput
     responses?: FieldResponseUpdateManyWithoutFieldNestedInput
     options?: FieldOptionUpdateManyWithoutFieldNestedInput
   }
 
   export type FormFieldUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    formId?: IntFieldUpdateOperationsInput | number
+    sectionId?: IntFieldUpdateOperationsInput | number
     order?: IntFieldUpdateOperationsInput | number
     type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
     label?: StringFieldUpdateOperationsInput | string
@@ -8901,7 +10302,7 @@ export namespace Prisma {
 
   export type FormFieldCreateManyInput = {
     id?: number
-    formId: number
+    sectionId: number
     order: number
     type: $Enums.FieldType
     label: string
@@ -8925,7 +10326,7 @@ export namespace Prisma {
 
   export type FormFieldUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    formId?: IntFieldUpdateOperationsInput | number
+    sectionId?: IntFieldUpdateOperationsInput | number
     order?: IntFieldUpdateOperationsInput | number
     type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
     label?: StringFieldUpdateOperationsInput | string
@@ -9202,10 +10603,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type FormFieldListRelationFilter = {
-    every?: FormFieldWhereInput
-    some?: FormFieldWhereInput
-    none?: FormFieldWhereInput
+  export type FormSectionListRelationFilter = {
+    every?: FormSectionWhereInput
+    some?: FormSectionWhereInput
+    none?: FormSectionWhereInput
   }
 
   export type FormSubmissionListRelationFilter = {
@@ -9214,7 +10615,7 @@ export namespace Prisma {
     none?: FormSubmissionWhereInput
   }
 
-  export type FormFieldOrderByRelationAggregateInput = {
+  export type FormSectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9268,18 +10669,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type EnumFieldTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumFieldTypeFilter<$PrismaModel> | $Enums.FieldType
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9295,14 +10684,101 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type FormScalarRelationFilter = {
+    is?: FormWhereInput
+    isNot?: FormWhereInput
+  }
+
+  export type FormFieldListRelationFilter = {
+    every?: FormFieldWhereInput
+    some?: FormFieldWhereInput
+    none?: FormFieldWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type FormFieldOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FormSectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    sectionName?: SortOrder
+    sectionDescription?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormSectionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+  }
+
+  export type FormSectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sectionName?: SortOrder
+    sectionDescription?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormSectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    sectionName?: SortOrder
+    sectionDescription?: SortOrder
+    formId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormSectionSumOrderByAggregateInput = {
+    id?: SortOrder
+    formId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumFieldTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumFieldTypeFilter<$PrismaModel> | $Enums.FieldType
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type FormScalarRelationFilter = {
-    is?: FormWhereInput
-    isNot?: FormWhereInput
+  export type FormSectionScalarRelationFilter = {
+    is?: FormSectionWhereInput
+    isNot?: FormSectionWhereInput
   }
 
   export type FieldResponseListRelationFilter = {
@@ -9317,11 +10793,6 @@ export namespace Prisma {
     none?: FieldOptionWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type FieldResponseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -9332,7 +10803,7 @@ export namespace Prisma {
 
   export type FormFieldCountOrderByAggregateInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
     type?: SortOrder
     label?: SortOrder
@@ -9345,13 +10816,13 @@ export namespace Prisma {
 
   export type FormFieldAvgOrderByAggregateInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
   }
 
   export type FormFieldMaxOrderByAggregateInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
     type?: SortOrder
     label?: SortOrder
@@ -9364,7 +10835,7 @@ export namespace Prisma {
 
   export type FormFieldMinOrderByAggregateInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
     type?: SortOrder
     label?: SortOrder
@@ -9377,7 +10848,7 @@ export namespace Prisma {
 
   export type FormFieldSumOrderByAggregateInput = {
     id?: SortOrder
-    formId?: SortOrder
+    sectionId?: SortOrder
     order?: SortOrder
   }
 
@@ -9397,24 +10868,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9605,11 +11058,11 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type FormFieldCreateNestedManyWithoutFormInput = {
-    create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
-    connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
-    createMany?: FormFieldCreateManyFormInputEnvelope
-    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+  export type FormSectionCreateNestedManyWithoutFormInput = {
+    create?: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput> | FormSectionCreateWithoutFormInput[] | FormSectionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFormInput | FormSectionCreateOrConnectWithoutFormInput[]
+    createMany?: FormSectionCreateManyFormInputEnvelope
+    connect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
   }
 
   export type FormSubmissionCreateNestedManyWithoutFormInput = {
@@ -9619,11 +11072,11 @@ export namespace Prisma {
     connect?: FormSubmissionWhereUniqueInput | FormSubmissionWhereUniqueInput[]
   }
 
-  export type FormFieldUncheckedCreateNestedManyWithoutFormInput = {
-    create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
-    connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
-    createMany?: FormFieldCreateManyFormInputEnvelope
-    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+  export type FormSectionUncheckedCreateNestedManyWithoutFormInput = {
+    create?: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput> | FormSectionCreateWithoutFormInput[] | FormSectionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFormInput | FormSectionCreateOrConnectWithoutFormInput[]
+    createMany?: FormSectionCreateManyFormInputEnvelope
+    connect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
   }
 
   export type FormSubmissionUncheckedCreateNestedManyWithoutFormInput = {
@@ -9637,18 +11090,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type FormFieldUpdateManyWithoutFormNestedInput = {
-    create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
-    connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
-    upsert?: FormFieldUpsertWithWhereUniqueWithoutFormInput | FormFieldUpsertWithWhereUniqueWithoutFormInput[]
-    createMany?: FormFieldCreateManyFormInputEnvelope
-    set?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    disconnect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    delete?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    update?: FormFieldUpdateWithWhereUniqueWithoutFormInput | FormFieldUpdateWithWhereUniqueWithoutFormInput[]
-    updateMany?: FormFieldUpdateManyWithWhereWithoutFormInput | FormFieldUpdateManyWithWhereWithoutFormInput[]
-    deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+  export type FormSectionUpdateManyWithoutFormNestedInput = {
+    create?: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput> | FormSectionCreateWithoutFormInput[] | FormSectionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFormInput | FormSectionCreateOrConnectWithoutFormInput[]
+    upsert?: FormSectionUpsertWithWhereUniqueWithoutFormInput | FormSectionUpsertWithWhereUniqueWithoutFormInput[]
+    createMany?: FormSectionCreateManyFormInputEnvelope
+    set?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    disconnect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    delete?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    connect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    update?: FormSectionUpdateWithWhereUniqueWithoutFormInput | FormSectionUpdateWithWhereUniqueWithoutFormInput[]
+    updateMany?: FormSectionUpdateManyWithWhereWithoutFormInput | FormSectionUpdateManyWithWhereWithoutFormInput[]
+    deleteMany?: FormSectionScalarWhereInput | FormSectionScalarWhereInput[]
   }
 
   export type FormSubmissionUpdateManyWithoutFormNestedInput = {
@@ -9665,18 +11118,18 @@ export namespace Prisma {
     deleteMany?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
   }
 
-  export type FormFieldUncheckedUpdateManyWithoutFormNestedInput = {
-    create?: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput> | FormFieldCreateWithoutFormInput[] | FormFieldUncheckedCreateWithoutFormInput[]
-    connectOrCreate?: FormFieldCreateOrConnectWithoutFormInput | FormFieldCreateOrConnectWithoutFormInput[]
-    upsert?: FormFieldUpsertWithWhereUniqueWithoutFormInput | FormFieldUpsertWithWhereUniqueWithoutFormInput[]
-    createMany?: FormFieldCreateManyFormInputEnvelope
-    set?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    disconnect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    delete?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
-    update?: FormFieldUpdateWithWhereUniqueWithoutFormInput | FormFieldUpdateWithWhereUniqueWithoutFormInput[]
-    updateMany?: FormFieldUpdateManyWithWhereWithoutFormInput | FormFieldUpdateManyWithWhereWithoutFormInput[]
-    deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+  export type FormSectionUncheckedUpdateManyWithoutFormNestedInput = {
+    create?: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput> | FormSectionCreateWithoutFormInput[] | FormSectionUncheckedCreateWithoutFormInput[]
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFormInput | FormSectionCreateOrConnectWithoutFormInput[]
+    upsert?: FormSectionUpsertWithWhereUniqueWithoutFormInput | FormSectionUpsertWithWhereUniqueWithoutFormInput[]
+    createMany?: FormSectionCreateManyFormInputEnvelope
+    set?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    disconnect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    delete?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    connect?: FormSectionWhereUniqueInput | FormSectionWhereUniqueInput[]
+    update?: FormSectionUpdateWithWhereUniqueWithoutFormInput | FormSectionUpdateWithWhereUniqueWithoutFormInput[]
+    updateMany?: FormSectionUpdateManyWithWhereWithoutFormInput | FormSectionUpdateManyWithWhereWithoutFormInput[]
+    deleteMany?: FormSectionScalarWhereInput | FormSectionScalarWhereInput[]
   }
 
   export type FormSubmissionUncheckedUpdateManyWithoutFormNestedInput = {
@@ -9693,10 +11146,70 @@ export namespace Prisma {
     deleteMany?: FormSubmissionScalarWhereInput | FormSubmissionScalarWhereInput[]
   }
 
-  export type FormCreateNestedOneWithoutFieldsInput = {
-    create?: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
-    connectOrCreate?: FormCreateOrConnectWithoutFieldsInput
+  export type FormCreateNestedOneWithoutSectionsInput = {
+    create?: XOR<FormCreateWithoutSectionsInput, FormUncheckedCreateWithoutSectionsInput>
+    connectOrCreate?: FormCreateOrConnectWithoutSectionsInput
     connect?: FormWhereUniqueInput
+  }
+
+  export type FormFieldCreateNestedManyWithoutFormSectionInput = {
+    create?: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput> | FormFieldCreateWithoutFormSectionInput[] | FormFieldUncheckedCreateWithoutFormSectionInput[]
+    connectOrCreate?: FormFieldCreateOrConnectWithoutFormSectionInput | FormFieldCreateOrConnectWithoutFormSectionInput[]
+    createMany?: FormFieldCreateManyFormSectionInputEnvelope
+    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+  }
+
+  export type FormFieldUncheckedCreateNestedManyWithoutFormSectionInput = {
+    create?: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput> | FormFieldCreateWithoutFormSectionInput[] | FormFieldUncheckedCreateWithoutFormSectionInput[]
+    connectOrCreate?: FormFieldCreateOrConnectWithoutFormSectionInput | FormFieldCreateOrConnectWithoutFormSectionInput[]
+    createMany?: FormFieldCreateManyFormSectionInputEnvelope
+    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type FormUpdateOneRequiredWithoutSectionsNestedInput = {
+    create?: XOR<FormCreateWithoutSectionsInput, FormUncheckedCreateWithoutSectionsInput>
+    connectOrCreate?: FormCreateOrConnectWithoutSectionsInput
+    upsert?: FormUpsertWithoutSectionsInput
+    connect?: FormWhereUniqueInput
+    update?: XOR<XOR<FormUpdateToOneWithWhereWithoutSectionsInput, FormUpdateWithoutSectionsInput>, FormUncheckedUpdateWithoutSectionsInput>
+  }
+
+  export type FormFieldUpdateManyWithoutFormSectionNestedInput = {
+    create?: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput> | FormFieldCreateWithoutFormSectionInput[] | FormFieldUncheckedCreateWithoutFormSectionInput[]
+    connectOrCreate?: FormFieldCreateOrConnectWithoutFormSectionInput | FormFieldCreateOrConnectWithoutFormSectionInput[]
+    upsert?: FormFieldUpsertWithWhereUniqueWithoutFormSectionInput | FormFieldUpsertWithWhereUniqueWithoutFormSectionInput[]
+    createMany?: FormFieldCreateManyFormSectionInputEnvelope
+    set?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    disconnect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    delete?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    update?: FormFieldUpdateWithWhereUniqueWithoutFormSectionInput | FormFieldUpdateWithWhereUniqueWithoutFormSectionInput[]
+    updateMany?: FormFieldUpdateManyWithWhereWithoutFormSectionInput | FormFieldUpdateManyWithWhereWithoutFormSectionInput[]
+    deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+  }
+
+  export type FormFieldUncheckedUpdateManyWithoutFormSectionNestedInput = {
+    create?: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput> | FormFieldCreateWithoutFormSectionInput[] | FormFieldUncheckedCreateWithoutFormSectionInput[]
+    connectOrCreate?: FormFieldCreateOrConnectWithoutFormSectionInput | FormFieldCreateOrConnectWithoutFormSectionInput[]
+    upsert?: FormFieldUpsertWithWhereUniqueWithoutFormSectionInput | FormFieldUpsertWithWhereUniqueWithoutFormSectionInput[]
+    createMany?: FormFieldCreateManyFormSectionInputEnvelope
+    set?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    disconnect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    delete?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    connect?: FormFieldWhereUniqueInput | FormFieldWhereUniqueInput[]
+    update?: FormFieldUpdateWithWhereUniqueWithoutFormSectionInput | FormFieldUpdateWithWhereUniqueWithoutFormSectionInput[]
+    updateMany?: FormFieldUpdateManyWithWhereWithoutFormSectionInput | FormFieldUpdateManyWithWhereWithoutFormSectionInput[]
+    deleteMany?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+  }
+
+  export type FormSectionCreateNestedOneWithoutFieldsInput = {
+    create?: XOR<FormSectionCreateWithoutFieldsInput, FormSectionUncheckedCreateWithoutFieldsInput>
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFieldsInput
+    connect?: FormSectionWhereUniqueInput
   }
 
   export type FieldResponseCreateNestedManyWithoutFieldInput = {
@@ -9735,20 +11248,16 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
   }
 
-  export type FormUpdateOneRequiredWithoutFieldsNestedInput = {
-    create?: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
-    connectOrCreate?: FormCreateOrConnectWithoutFieldsInput
-    upsert?: FormUpsertWithoutFieldsInput
-    connect?: FormWhereUniqueInput
-    update?: XOR<XOR<FormUpdateToOneWithWhereWithoutFieldsInput, FormUpdateWithoutFieldsInput>, FormUncheckedUpdateWithoutFieldsInput>
+  export type FormSectionUpdateOneRequiredWithoutFieldsNestedInput = {
+    create?: XOR<FormSectionCreateWithoutFieldsInput, FormSectionUncheckedCreateWithoutFieldsInput>
+    connectOrCreate?: FormSectionCreateOrConnectWithoutFieldsInput
+    upsert?: FormSectionUpsertWithoutFieldsInput
+    connect?: FormSectionWhereUniqueInput
+    update?: XOR<XOR<FormSectionUpdateToOneWithWhereWithoutFieldsInput, FormSectionUpdateWithoutFieldsInput>, FormSectionUncheckedUpdateWithoutFieldsInput>
   }
 
   export type FieldResponseUpdateManyWithoutFieldNestedInput = {
@@ -10008,18 +11517,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumFieldTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumFieldTypeFilter<$PrismaModel> | $Enums.FieldType
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10032,29 +11529,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type NestedEnumFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.FieldType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumFieldTypeFilter<$PrismaModel>
-    _max?: NestedEnumFieldTypeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10083,6 +11557,41 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumFieldTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumFieldTypeFilter<$PrismaModel> | $Enums.FieldType
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedEnumFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FieldType | EnumFieldTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FieldType[] | ListEnumFieldTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.FieldType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFieldTypeFilter<$PrismaModel>
+    _max?: NestedEnumFieldTypeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10116,40 +11625,30 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type FormFieldCreateWithoutFormInput = {
-    order: number
-    type: $Enums.FieldType
-    label: string
-    required?: boolean
-    placeholder?: string | null
-    multiline?: boolean | null
+  export type FormSectionCreateWithoutFormInput = {
+    sectionName?: string | null
+    sectionDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    responses?: FieldResponseCreateNestedManyWithoutFieldInput
-    options?: FieldOptionCreateNestedManyWithoutFieldInput
+    fields?: FormFieldCreateNestedManyWithoutFormSectionInput
   }
 
-  export type FormFieldUncheckedCreateWithoutFormInput = {
+  export type FormSectionUncheckedCreateWithoutFormInput = {
     id?: number
-    order: number
-    type: $Enums.FieldType
-    label: string
-    required?: boolean
-    placeholder?: string | null
-    multiline?: boolean | null
+    sectionName?: string | null
+    sectionDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    responses?: FieldResponseUncheckedCreateNestedManyWithoutFieldInput
-    options?: FieldOptionUncheckedCreateNestedManyWithoutFieldInput
+    fields?: FormFieldUncheckedCreateNestedManyWithoutFormSectionInput
   }
 
-  export type FormFieldCreateOrConnectWithoutFormInput = {
-    where: FormFieldWhereUniqueInput
-    create: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput>
+  export type FormSectionCreateOrConnectWithoutFormInput = {
+    where: FormSectionWhereUniqueInput
+    create: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput>
   }
 
-  export type FormFieldCreateManyFormInputEnvelope = {
-    data: FormFieldCreateManyFormInput | FormFieldCreateManyFormInput[]
+  export type FormSectionCreateManyFormInputEnvelope = {
+    data: FormSectionCreateManyFormInput | FormSectionCreateManyFormInput[]
     skipDuplicates?: boolean
   }
 
@@ -10174,36 +11673,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type FormFieldUpsertWithWhereUniqueWithoutFormInput = {
-    where: FormFieldWhereUniqueInput
-    update: XOR<FormFieldUpdateWithoutFormInput, FormFieldUncheckedUpdateWithoutFormInput>
-    create: XOR<FormFieldCreateWithoutFormInput, FormFieldUncheckedCreateWithoutFormInput>
+  export type FormSectionUpsertWithWhereUniqueWithoutFormInput = {
+    where: FormSectionWhereUniqueInput
+    update: XOR<FormSectionUpdateWithoutFormInput, FormSectionUncheckedUpdateWithoutFormInput>
+    create: XOR<FormSectionCreateWithoutFormInput, FormSectionUncheckedCreateWithoutFormInput>
   }
 
-  export type FormFieldUpdateWithWhereUniqueWithoutFormInput = {
-    where: FormFieldWhereUniqueInput
-    data: XOR<FormFieldUpdateWithoutFormInput, FormFieldUncheckedUpdateWithoutFormInput>
+  export type FormSectionUpdateWithWhereUniqueWithoutFormInput = {
+    where: FormSectionWhereUniqueInput
+    data: XOR<FormSectionUpdateWithoutFormInput, FormSectionUncheckedUpdateWithoutFormInput>
   }
 
-  export type FormFieldUpdateManyWithWhereWithoutFormInput = {
-    where: FormFieldScalarWhereInput
-    data: XOR<FormFieldUpdateManyMutationInput, FormFieldUncheckedUpdateManyWithoutFormInput>
+  export type FormSectionUpdateManyWithWhereWithoutFormInput = {
+    where: FormSectionScalarWhereInput
+    data: XOR<FormSectionUpdateManyMutationInput, FormSectionUncheckedUpdateManyWithoutFormInput>
   }
 
-  export type FormFieldScalarWhereInput = {
-    AND?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
-    OR?: FormFieldScalarWhereInput[]
-    NOT?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
-    id?: IntFilter<"FormField"> | number
-    formId?: IntFilter<"FormField"> | number
-    order?: IntFilter<"FormField"> | number
-    type?: EnumFieldTypeFilter<"FormField"> | $Enums.FieldType
-    label?: StringFilter<"FormField"> | string
-    required?: BoolFilter<"FormField"> | boolean
-    placeholder?: StringNullableFilter<"FormField"> | string | null
-    multiline?: BoolNullableFilter<"FormField"> | boolean | null
-    createdAt?: DateTimeFilter<"FormField"> | Date | string
-    updatedAt?: DateTimeFilter<"FormField"> | Date | string
+  export type FormSectionScalarWhereInput = {
+    AND?: FormSectionScalarWhereInput | FormSectionScalarWhereInput[]
+    OR?: FormSectionScalarWhereInput[]
+    NOT?: FormSectionScalarWhereInput | FormSectionScalarWhereInput[]
+    id?: IntFilter<"FormSection"> | number
+    sectionName?: StringNullableFilter<"FormSection"> | string | null
+    sectionDescription?: StringNullableFilter<"FormSection"> | string | null
+    formId?: IntFilter<"FormSection"> | number
+    createdAt?: DateTimeFilter<"FormSection"> | Date | string
+    updatedAt?: DateTimeFilter<"FormSection"> | Date | string
   }
 
   export type FormSubmissionUpsertWithWhereUniqueWithoutFormInput = {
@@ -10231,7 +11726,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"FormSubmission"> | Date | string
   }
 
-  export type FormCreateWithoutFieldsInput = {
+  export type FormCreateWithoutSectionsInput = {
     formName: string
     description: string
     createdAt?: Date | string
@@ -10239,7 +11734,7 @@ export namespace Prisma {
     submissions?: FormSubmissionCreateNestedManyWithoutFormInput
   }
 
-  export type FormUncheckedCreateWithoutFieldsInput = {
+  export type FormUncheckedCreateWithoutSectionsInput = {
     id?: number
     formName: string
     description: string
@@ -10248,9 +11743,128 @@ export namespace Prisma {
     submissions?: FormSubmissionUncheckedCreateNestedManyWithoutFormInput
   }
 
-  export type FormCreateOrConnectWithoutFieldsInput = {
+  export type FormCreateOrConnectWithoutSectionsInput = {
     where: FormWhereUniqueInput
-    create: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
+    create: XOR<FormCreateWithoutSectionsInput, FormUncheckedCreateWithoutSectionsInput>
+  }
+
+  export type FormFieldCreateWithoutFormSectionInput = {
+    order: number
+    type: $Enums.FieldType
+    label: string
+    required?: boolean
+    placeholder?: string | null
+    multiline?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    responses?: FieldResponseCreateNestedManyWithoutFieldInput
+    options?: FieldOptionCreateNestedManyWithoutFieldInput
+  }
+
+  export type FormFieldUncheckedCreateWithoutFormSectionInput = {
+    id?: number
+    order: number
+    type: $Enums.FieldType
+    label: string
+    required?: boolean
+    placeholder?: string | null
+    multiline?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    responses?: FieldResponseUncheckedCreateNestedManyWithoutFieldInput
+    options?: FieldOptionUncheckedCreateNestedManyWithoutFieldInput
+  }
+
+  export type FormFieldCreateOrConnectWithoutFormSectionInput = {
+    where: FormFieldWhereUniqueInput
+    create: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput>
+  }
+
+  export type FormFieldCreateManyFormSectionInputEnvelope = {
+    data: FormFieldCreateManyFormSectionInput | FormFieldCreateManyFormSectionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormUpsertWithoutSectionsInput = {
+    update: XOR<FormUpdateWithoutSectionsInput, FormUncheckedUpdateWithoutSectionsInput>
+    create: XOR<FormCreateWithoutSectionsInput, FormUncheckedCreateWithoutSectionsInput>
+    where?: FormWhereInput
+  }
+
+  export type FormUpdateToOneWithWhereWithoutSectionsInput = {
+    where?: FormWhereInput
+    data: XOR<FormUpdateWithoutSectionsInput, FormUncheckedUpdateWithoutSectionsInput>
+  }
+
+  export type FormUpdateWithoutSectionsInput = {
+    formName?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissions?: FormSubmissionUpdateManyWithoutFormNestedInput
+  }
+
+  export type FormUncheckedUpdateWithoutSectionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formName?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissions?: FormSubmissionUncheckedUpdateManyWithoutFormNestedInput
+  }
+
+  export type FormFieldUpsertWithWhereUniqueWithoutFormSectionInput = {
+    where: FormFieldWhereUniqueInput
+    update: XOR<FormFieldUpdateWithoutFormSectionInput, FormFieldUncheckedUpdateWithoutFormSectionInput>
+    create: XOR<FormFieldCreateWithoutFormSectionInput, FormFieldUncheckedCreateWithoutFormSectionInput>
+  }
+
+  export type FormFieldUpdateWithWhereUniqueWithoutFormSectionInput = {
+    where: FormFieldWhereUniqueInput
+    data: XOR<FormFieldUpdateWithoutFormSectionInput, FormFieldUncheckedUpdateWithoutFormSectionInput>
+  }
+
+  export type FormFieldUpdateManyWithWhereWithoutFormSectionInput = {
+    where: FormFieldScalarWhereInput
+    data: XOR<FormFieldUpdateManyMutationInput, FormFieldUncheckedUpdateManyWithoutFormSectionInput>
+  }
+
+  export type FormFieldScalarWhereInput = {
+    AND?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+    OR?: FormFieldScalarWhereInput[]
+    NOT?: FormFieldScalarWhereInput | FormFieldScalarWhereInput[]
+    id?: IntFilter<"FormField"> | number
+    sectionId?: IntFilter<"FormField"> | number
+    order?: IntFilter<"FormField"> | number
+    type?: EnumFieldTypeFilter<"FormField"> | $Enums.FieldType
+    label?: StringFilter<"FormField"> | string
+    required?: BoolFilter<"FormField"> | boolean
+    placeholder?: StringNullableFilter<"FormField"> | string | null
+    multiline?: BoolNullableFilter<"FormField"> | boolean | null
+    createdAt?: DateTimeFilter<"FormField"> | Date | string
+    updatedAt?: DateTimeFilter<"FormField"> | Date | string
+  }
+
+  export type FormSectionCreateWithoutFieldsInput = {
+    sectionName?: string | null
+    sectionDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    form: FormCreateNestedOneWithoutSectionsInput
+  }
+
+  export type FormSectionUncheckedCreateWithoutFieldsInput = {
+    id?: number
+    sectionName?: string | null
+    sectionDescription?: string | null
+    formId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FormSectionCreateOrConnectWithoutFieldsInput = {
+    where: FormSectionWhereUniqueInput
+    create: XOR<FormSectionCreateWithoutFieldsInput, FormSectionUncheckedCreateWithoutFieldsInput>
   }
 
   export type FieldResponseCreateWithoutFieldInput = {
@@ -10306,32 +11920,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type FormUpsertWithoutFieldsInput = {
-    update: XOR<FormUpdateWithoutFieldsInput, FormUncheckedUpdateWithoutFieldsInput>
-    create: XOR<FormCreateWithoutFieldsInput, FormUncheckedCreateWithoutFieldsInput>
-    where?: FormWhereInput
+  export type FormSectionUpsertWithoutFieldsInput = {
+    update: XOR<FormSectionUpdateWithoutFieldsInput, FormSectionUncheckedUpdateWithoutFieldsInput>
+    create: XOR<FormSectionCreateWithoutFieldsInput, FormSectionUncheckedCreateWithoutFieldsInput>
+    where?: FormSectionWhereInput
   }
 
-  export type FormUpdateToOneWithWhereWithoutFieldsInput = {
-    where?: FormWhereInput
-    data: XOR<FormUpdateWithoutFieldsInput, FormUncheckedUpdateWithoutFieldsInput>
+  export type FormSectionUpdateToOneWithWhereWithoutFieldsInput = {
+    where?: FormSectionWhereInput
+    data: XOR<FormSectionUpdateWithoutFieldsInput, FormSectionUncheckedUpdateWithoutFieldsInput>
   }
 
-  export type FormUpdateWithoutFieldsInput = {
-    formName?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+  export type FormSectionUpdateWithoutFieldsInput = {
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    submissions?: FormSubmissionUpdateManyWithoutFormNestedInput
+    form?: FormUpdateOneRequiredWithoutSectionsNestedInput
   }
 
-  export type FormUncheckedUpdateWithoutFieldsInput = {
+  export type FormSectionUncheckedUpdateWithoutFieldsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    formName?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    formId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    submissions?: FormSubmissionUncheckedUpdateManyWithoutFormNestedInput
   }
 
   export type FieldResponseUpsertWithWhereUniqueWithoutFieldInput = {
@@ -10400,13 +12014,13 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    form: FormCreateNestedOneWithoutFieldsInput
+    formSection: FormSectionCreateNestedOneWithoutFieldsInput
     responses?: FieldResponseCreateNestedManyWithoutFieldInput
   }
 
   export type FormFieldUncheckedCreateWithoutOptionsInput = {
     id?: number
-    formId: number
+    sectionId: number
     order: number
     type: $Enums.FieldType
     label: string
@@ -10443,13 +12057,13 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    formSection?: FormSectionUpdateOneRequiredWithoutFieldsNestedInput
     responses?: FieldResponseUpdateManyWithoutFieldNestedInput
   }
 
   export type FormFieldUncheckedUpdateWithoutOptionsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    formId?: IntFieldUpdateOperationsInput | number
+    sectionId?: IntFieldUpdateOperationsInput | number
     order?: IntFieldUpdateOperationsInput | number
     type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
     label?: StringFieldUpdateOperationsInput | string
@@ -10466,7 +12080,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    fields?: FormFieldCreateNestedManyWithoutFormInput
+    sections?: FormSectionCreateNestedManyWithoutFormInput
   }
 
   export type FormUncheckedCreateWithoutSubmissionsInput = {
@@ -10475,7 +12089,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    fields?: FormFieldUncheckedCreateNestedManyWithoutFormInput
+    sections?: FormSectionUncheckedCreateNestedManyWithoutFormInput
   }
 
   export type FormCreateOrConnectWithoutSubmissionsInput = {
@@ -10529,7 +12143,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fields?: FormFieldUpdateManyWithoutFormNestedInput
+    sections?: FormSectionUpdateManyWithoutFormNestedInput
   }
 
   export type FormUncheckedUpdateWithoutSubmissionsInput = {
@@ -10538,7 +12152,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fields?: FormFieldUncheckedUpdateManyWithoutFormNestedInput
+    sections?: FormSectionUncheckedUpdateManyWithoutFormNestedInput
   }
 
   export type FieldResponseUpsertWithWhereUniqueWithoutSubmissionInput = {
@@ -10582,13 +12196,13 @@ export namespace Prisma {
     multiline?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    form: FormCreateNestedOneWithoutFieldsInput
+    formSection: FormSectionCreateNestedOneWithoutFieldsInput
     options?: FieldOptionCreateNestedManyWithoutFieldInput
   }
 
   export type FormFieldUncheckedCreateWithoutResponsesInput = {
     id?: number
-    formId: number
+    sectionId: number
     order: number
     type: $Enums.FieldType
     label: string
@@ -10647,13 +12261,13 @@ export namespace Prisma {
     multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    form?: FormUpdateOneRequiredWithoutFieldsNestedInput
+    formSection?: FormSectionUpdateOneRequiredWithoutFieldsNestedInput
     options?: FieldOptionUpdateManyWithoutFieldNestedInput
   }
 
   export type FormFieldUncheckedUpdateWithoutResponsesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    formId?: IntFieldUpdateOperationsInput | number
+    sectionId?: IntFieldUpdateOperationsInput | number
     order?: IntFieldUpdateOperationsInput | number
     type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
     label?: StringFieldUpdateOperationsInput | string
@@ -10665,14 +12279,10 @@ export namespace Prisma {
     options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
   }
 
-  export type FormFieldCreateManyFormInput = {
+  export type FormSectionCreateManyFormInput = {
     id?: number
-    order: number
-    type: $Enums.FieldType
-    label: string
-    required?: boolean
-    placeholder?: string | null
-    multiline?: boolean | null
+    sectionName?: string | null
+    sectionDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10682,41 +12292,27 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type FormFieldUpdateWithoutFormInput = {
-    order?: IntFieldUpdateOperationsInput | number
-    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
-    label?: StringFieldUpdateOperationsInput | string
-    required?: BoolFieldUpdateOperationsInput | boolean
-    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
-    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+  export type FormSectionUpdateWithoutFormInput = {
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    responses?: FieldResponseUpdateManyWithoutFieldNestedInput
-    options?: FieldOptionUpdateManyWithoutFieldNestedInput
+    fields?: FormFieldUpdateManyWithoutFormSectionNestedInput
   }
 
-  export type FormFieldUncheckedUpdateWithoutFormInput = {
+  export type FormSectionUncheckedUpdateWithoutFormInput = {
     id?: IntFieldUpdateOperationsInput | number
-    order?: IntFieldUpdateOperationsInput | number
-    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
-    label?: StringFieldUpdateOperationsInput | string
-    required?: BoolFieldUpdateOperationsInput | boolean
-    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
-    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    responses?: FieldResponseUncheckedUpdateManyWithoutFieldNestedInput
-    options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
+    fields?: FormFieldUncheckedUpdateManyWithoutFormSectionNestedInput
   }
 
-  export type FormFieldUncheckedUpdateManyWithoutFormInput = {
+  export type FormSectionUncheckedUpdateManyWithoutFormInput = {
     id?: IntFieldUpdateOperationsInput | number
-    order?: IntFieldUpdateOperationsInput | number
-    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
-    label?: StringFieldUpdateOperationsInput | string
-    required?: BoolFieldUpdateOperationsInput | boolean
-    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
-    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10735,6 +12331,57 @@ export namespace Prisma {
   export type FormSubmissionUncheckedUpdateManyWithoutFormInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormFieldCreateManyFormSectionInput = {
+    id?: number
+    order: number
+    type: $Enums.FieldType
+    label: string
+    required?: boolean
+    placeholder?: string | null
+    multiline?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FormFieldUpdateWithoutFormSectionInput = {
+    order?: IntFieldUpdateOperationsInput | number
+    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
+    label?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
+    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUpdateManyWithoutFieldNestedInput
+    options?: FieldOptionUpdateManyWithoutFieldNestedInput
+  }
+
+  export type FormFieldUncheckedUpdateWithoutFormSectionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
+    label?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
+    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responses?: FieldResponseUncheckedUpdateManyWithoutFieldNestedInput
+    options?: FieldOptionUncheckedUpdateManyWithoutFieldNestedInput
+  }
+
+  export type FormFieldUncheckedUpdateManyWithoutFormSectionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    type?: EnumFieldTypeFieldUpdateOperationsInput | $Enums.FieldType
+    label?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    placeholder?: NullableStringFieldUpdateOperationsInput | string | null
+    multiline?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FieldResponseCreateManyFieldInput = {

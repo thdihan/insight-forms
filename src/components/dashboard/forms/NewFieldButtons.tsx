@@ -9,9 +9,12 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type Props = { addField: (e: any, type: string) => void };
+type Props = {
+    addField: (e: any, type: string, sectionIdx: number) => void;
+    sectionIdx: number;
+};
 
-const NewFieldButtons = ({ addField }: Props) => {
+const NewFieldButtons = ({ addField, sectionIdx }: Props) => {
     const fieldTypes = [
         {
             type: "text" as const,
@@ -52,7 +55,7 @@ const NewFieldButtons = ({ addField }: Props) => {
                 return (
                     <Button
                         key={fieldType.type}
-                        onClick={(e) => addField(e, fieldType.type)}
+                        onClick={(e) => addField(e, fieldType.type, sectionIdx)}
                         variant="outline"
                         className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer flex-1"
                         // onClick={() => onAddField(fieldType.type)}

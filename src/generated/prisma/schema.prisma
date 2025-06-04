@@ -26,7 +26,7 @@ model Form {
   id          Int              @id @default(autoincrement())
   formName    String
   description String
-  fields      FormField[]      @relation("FormToFields")
+  sections    FormSection[]    @relation("FormToSection")
   submissions FormSubmission[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
@@ -34,14 +34,29 @@ model Form {
   @@map("form")
 }
 
+model FormSection {
+  id                 Int     @id @default(autoincrement())
+  sectionName        String?
+  sectionDescription String?
+
+  form   Form @relation("FormToSection", fields: [formId], references: [id], onDelete: Cascade)
+  formId Int
+
+  fields    FormField[] @relation("FormSectionToFields")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@map("formsection")
+}
+
 model FormField {
-  id          Int       @id @default(autoincrement())
-  form        Form      @relation("FormToFields", fields: [formId], references: [id], onDelete: Cascade)
-  formId      Int
+  id          Int         @id @default(autoincrement())
+  formSection FormSection @relation("FormSectionToFields", fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId   Int
   order       Int
   type        FieldType
   label       String
-  required    Boolean   @default(false)
+  required    Boolean     @default(false)
   placeholder String?
 
   // Relation to FieldResponse

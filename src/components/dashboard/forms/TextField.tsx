@@ -8,20 +8,23 @@ import SortableFieldWrapper from "./SortableFieldWrapper";
 
 type Props = {
     field: TTextField;
+    sectionIdx: number;
     onChange: (
         id: number,
+        sectionIdx: number,
         valueName: string,
         value: string | boolean | ICheckboxOption[]
     ) => void;
-    deleteAction: (e: any, id: number) => void;
+    deleteAction: (e: any, id: number, sectionIdx: number) => void;
 };
 
-const TextField = ({ field, onChange, deleteAction }: Props) => {
+const TextField = ({ field, sectionIdx, onChange, deleteAction }: Props) => {
     return (
         <SortableFieldWrapper
             id={field.id}
             type={field.type}
             deleteAction={deleteAction}
+            sectionIdx={sectionIdx}
         >
             <div
                 className="space-y-4 flex-1 transition-all"
@@ -32,7 +35,7 @@ const TextField = ({ field, onChange, deleteAction }: Props) => {
                     label="Field Name"
                     textValue={field.label}
                     inputChange={(e) =>
-                        onChange(field.id, "label", e.target.value)
+                        onChange(field.id, sectionIdx, "label", e.target.value)
                     }
                 />
                 <div onClick={(e) => e.stopPropagation()}></div>
@@ -41,7 +44,12 @@ const TextField = ({ field, onChange, deleteAction }: Props) => {
                     label="Placeholder"
                     textValue={field.placeholder}
                     inputChange={(e) =>
-                        onChange(field.id, "placeholder", e.target.value)
+                        onChange(
+                            field.id,
+                            sectionIdx,
+                            "placeholder",
+                            e.target.value
+                        )
                     }
                 />
                 <div className="flex gap-x-4">
@@ -49,14 +57,14 @@ const TextField = ({ field, onChange, deleteAction }: Props) => {
                         label="Required"
                         checked={field.required}
                         changeChecked={(checked: boolean) =>
-                            onChange(field.id, "required", checked)
+                            onChange(field.id, sectionIdx, "required", checked)
                         }
                     />
                     <SwitchInput
                         label="Multi line input"
                         checked={field.multiline}
                         changeChecked={(checked: boolean) =>
-                            onChange(field.id, "multiline", checked)
+                            onChange(field.id, sectionIdx, "multiline", checked)
                         }
                     />
                 </div>

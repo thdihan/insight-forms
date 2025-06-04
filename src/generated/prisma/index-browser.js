@@ -134,9 +134,18 @@ exports.Prisma.FormScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FormSectionScalarFieldEnum = {
+  id: 'id',
+  sectionName: 'sectionName',
+  sectionDescription: 'sectionDescription',
+  formId: 'formId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.FormFieldScalarFieldEnum = {
   id: 'id',
-  formId: 'formId',
+  sectionId: 'sectionId',
   order: 'order',
   type: 'type',
   label: 'label',
@@ -208,6 +217,7 @@ exports.FieldType = exports.$Enums.FieldType = {
 exports.Prisma.ModelName = {
   User: 'User',
   Form: 'Form',
+  FormSection: 'FormSection',
   FormField: 'FormField',
   FieldOption: 'FieldOption',
   FormSubmission: 'FormSubmission',

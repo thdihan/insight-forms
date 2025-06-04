@@ -5,18 +5,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ICheckboxOption, TypeFormField } from "@/types/form";
 import SortableFieldWrapper from "./SortableFieldWrapper";
+import { TFieldProps } from "./types";
 
-type Props = {
-    field: TypeFormField;
-    onChange: (
-        id: number,
-        valueName: string,
-        value: string | boolean | ICheckboxOption[]
-    ) => void;
-    deleteAction: (e: any, id: number) => void;
-};
-
-const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
+const CheckboxField = ({
+    field,
+    onChange,
+    deleteAction,
+    sectionIdx,
+}: TFieldProps) => {
     const [expanded, setExpanded] = useState(false);
 
     const addCheckboxOption = (e: any) => {
@@ -30,7 +26,7 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
                     label: "",
                 },
             ];
-            onChange(field.id, "options", tempField.options);
+            onChange(field.id, sectionIdx, "options", tempField.options);
         }
     };
 
@@ -41,7 +37,7 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
                 (option) => option.id !== id
             );
             tempField.options.push({ id, label: value });
-            onChange(field.id, "options", tempField.options);
+            onChange(field.id, sectionIdx, "options", tempField.options);
         }
     };
     return (
@@ -49,12 +45,15 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
             id={field.id}
             type={field.type}
             deleteAction={deleteAction}
+            sectionIdx={sectionIdx}
         >
             <TextInput
                 placeholder={"Enter checkbox group name..."}
                 label="Checkbox group name."
                 textValue={field.label}
-                inputChange={(e) => onChange(field.id, "label", e.target.value)}
+                inputChange={(e) =>
+                    onChange(field.id, sectionIdx, "label", e.target.value)
+                }
             />
             <div
                 onClick={(e) => e.stopPropagation()}
@@ -62,28 +61,23 @@ const CheckboxField = ({ field, onChange, deleteAction }: Props) => {
             >
                 {field.type === "checkbox" &&
                     field.options.length > 0 &&
-                    field.options
-                        .sort((a, b) => a.id - b.id)
-                        .map((option, index) => (
-                            <div
-                                key={index}
-                                className="flex items-center gap-x-4"
-                            >
-                                <Label id="terms-2">Option {index + 1}</Label>
-                                <TextInput
-                                    placeholder={"Enter Option..."}
-                                    label=""
-                                    textValue={option.label}
-                                    inputChange={(e) =>
-                                        updateCheckboxOption(
-                                            option.id,
-                                            e.target.value
-                                        )
-                                    }
-                                    labelStyle="hidden"
-                                />
-                            </div>
-                        ))}
+                    field.options.map((option, index) => (
+                        <div key={index} className="flex items-center gap-x-4">
+                            <Label id="terms-2">Option {index + 1}</Label>
+                            <TextInput
+                                placeholder={"Enter Option..."}
+                                label=""
+                                textValue={option.label}
+                                inputChange={(e) =>
+                                    updateCheckboxOption(
+                                        option.id,
+                                        e.target.value
+                                    )
+                                }
+                                labelStyle="hidden"
+                            />
+                        </div>
+                    ))}
 
                 <div>
                     <Button

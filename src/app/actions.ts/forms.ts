@@ -25,9 +25,13 @@ export const getFormById = async (id: string) => {
 export const getForms = async () => {
     const response = await prisma.form.findMany({
         include: {
-            fields: {
+            sections: {
                 include: {
-                    options: true, // Include options if fields have related options
+                    fields: {
+                        include: {
+                            options: true, // Include options if fields have related options
+                        },
+                    },
                 },
             },
         },
@@ -46,47 +50,46 @@ export const deleteForm = async (id: number) => {
     return response;
 };
 
+// const updatedForm = await prisma.form.update({
+//     where: {
+//         id: id,
+//     },
+//     data: {
+//         formName: values.formName,
+//         description: values.description,
+//         fields: {
+//             deleteMany: {}, // Delete all existing fields for the form
+//             create: values.fields.map((field) => ({
+//                 id: field.id,
+//                 order: field.order,
+//                 type: field.type,
+//                 label: field.label,
+//                 required: field.required || false,
+//                 placeholder: field.placeholder || null,
+//                 multiline:
+//                     field.type === "text"
+//                         ? (field as any).multiline ?? false
+//                         : undefined,
+//                 options:
+//                     "options" in field && field.options?.length
+//                         ? {
+//                               create:
+//                                   field.options?.map((option) => ({
+//                                       id: Number(option.id),
+//                                       label: option.label,
+//                                       createdAt:
+//                                           option.createdAt || undefined,
+//                                       updatedAt:
+//                                           option.updatedAt || undefined,
+//                                   })) || [],
+//                           }
+//                         : undefined,
+//             })),
+//         },
+//     },
+// });
 export const updateForm = async (id: number, values: IForms) => {
     try {
-        // const updatedForm = await prisma.form.update({
-        //     where: {
-        //         id: id,
-        //     },
-        //     data: {
-        //         formName: values.formName,
-        //         description: values.description,
-        //         fields: {
-        //             deleteMany: {}, // Delete all existing fields for the form
-        //             create: values.fields.map((field) => ({
-        //                 id: field.id,
-        //                 order: field.order,
-        //                 type: field.type,
-        //                 label: field.label,
-        //                 required: field.required || false,
-        //                 placeholder: field.placeholder || null,
-        //                 multiline:
-        //                     field.type === "text"
-        //                         ? (field as any).multiline ?? false
-        //                         : undefined,
-        //                 options:
-        //                     "options" in field && field.options?.length
-        //                         ? {
-        //                               create:
-        //                                   field.options?.map((option) => ({
-        //                                       id: Number(option.id),
-        //                                       label: option.label,
-        //                                       createdAt:
-        //                                           option.createdAt || undefined,
-        //                                       updatedAt:
-        //                                           option.updatedAt || undefined,
-        //                                   })) || [],
-        //                           }
-        //                         : undefined,
-        //             })),
-        //         },
-        //     },
-        // });
-
         const updatedForm = await prisma.$transaction([
             prisma.formField.deleteMany({
                 where: {
@@ -100,29 +103,47 @@ export const updateForm = async (id: number, values: IForms) => {
                     formName: values.formName,
                     description: values.description,
                     fields: {
-                        create: values.fields.map((field) => ({
-                            id: field.id,
-                            order: field.order,
-                            type: field.type,
-                            label: field.label,
-                            required: field.required || false,
-                            placeholder: field.placeholder || null,
-                            multiline:
-                                field.type === "text"
-                                    ? (field as any).multiline ?? false
-                                    : undefined,
-                            options:
-                                "options" in field && field.options?.length
-                                    ? {
-                                          create: field.options.map(
-                                              (option) => ({
-                                                  id: Number(option.id),
-                                                  label: option.label,
-                                              })
-                                          ),
-                                      }
-                                    : undefined,
-                        })),
+                        create: values.fields.map((field) => {
+                            const isNewField =
+                                field.createdAt === null ||
+                                field.createdAt === undefined;
+                            return {
+                                ...(isNewField ? {} : { id: field.id }),
+                                order: field.order,
+                                type: field.type,
+                                label: field.label,
+                                required: field.required || false,
+                                placeholder: field.placeholder || null,
+                                multiline:
+                                    field.type === "text"
+                                        ? (field as any).multiline ?? false
+                                        : undefined,
+                                options:
+                                    "options" in field && field.options?.length
+                                        ? {
+                                              create: field.options.map(
+                                                  (option) => {
+                                                      const isNewOption =
+                                                          option.createdAt ===
+                                                              null ||
+                                                          option.createdAt ===
+                                                              undefined;
+                                                      return {
+                                                          ...(isNewOption
+                                                              ? {}
+                                                              : {
+                                                                    id: Number(
+                                                                        option.id
+                                                                    ),
+                                                                }),
+                                                          label: option.label,
+                                                      };
+                                                  }
+                                              ),
+                                          }
+                                        : undefined,
+                            };
+                        }),
                     },
                 },
             }),

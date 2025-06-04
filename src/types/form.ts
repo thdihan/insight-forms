@@ -6,10 +6,12 @@ export interface IForms {
     updatedAt?: Date;
     fields: TypeFormField[];
 }
+
+export type TFieldType = "text" | "checkbox" | "radio" | "table" | "select";
 export interface BaseField {
     order: number;
     id: number;
-    type: "text" | "checkbox" | "radio" | "table" | "select";
+    type: TFieldType;
     required?: boolean;
     placeholder?: string;
     label: string;
@@ -51,6 +53,13 @@ export interface SelectField extends BaseField {
 export interface INewForm {
     formName: string;
     description: string;
+    formSections: TFormSection[];
+}
+
+export interface TFormSection {
+    id: number;
+    sectionName?: string;
+    sectionDescription?: string;
     fields: TypeFormField[];
 }
 

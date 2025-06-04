@@ -51,6 +51,8 @@ const EditForm = ({ id }: Props) => {
                             return transformedField;
                         }),
                     };
+
+                    console.log("Transformed Data : ", transformedData);
                     setFormValues(transformedData);
                 } else {
                     console.error("No data found for the given ID");

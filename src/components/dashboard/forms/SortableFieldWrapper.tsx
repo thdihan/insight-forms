@@ -14,10 +14,17 @@ type Props = {
     id: number;
     children: React.ReactNode;
     type: string;
-    deleteAction: (e: any, id: number) => void;
+    sectionIdx: number;
+    deleteAction: (e: any, id: number, sectionIdx: number) => void;
 };
 
-const SortableFieldWrapper = ({ id, children, type, deleteAction }: Props) => {
+const SortableFieldWrapper = ({
+    id,
+    children,
+    type,
+    deleteAction,
+    sectionIdx,
+}: Props) => {
     const [expanded, setExpanded] = useState(false);
     const {
         attributes,
@@ -54,7 +61,7 @@ const SortableFieldWrapper = ({ id, children, type, deleteAction }: Props) => {
                         Type : {_.capitalize(type)}
                     </p>
                     <Trash2
-                        onClick={(e) => deleteAction(e, id)}
+                        onClick={(e) => deleteAction(e, id, sectionIdx)}
                         className="w-5 h-5 text-red-500"
                     />
                 </div>
