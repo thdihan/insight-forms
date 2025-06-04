@@ -11,9 +11,13 @@ export const getFormById = async (id: string) => {
             id: parseInt(id),
         },
         include: {
-            fields: {
+            sections: {
                 include: {
-                    options: true, // Include options if fields have related options
+                    fields: {
+                        include: {
+                            options: true, // Include options if fields have related options
+                        },
+                    },
                 },
             },
         },
@@ -91,9 +95,9 @@ export const deleteForm = async (id: number) => {
 export const updateForm = async (id: number, values: IForms) => {
     try {
         const updatedForm = await prisma.$transaction([
-            prisma.formField.deleteMany({
+            prisma.formSection.deleteMany({
                 where: {
-                    formId: id,
+                    id: id,
                 },
             }),
 

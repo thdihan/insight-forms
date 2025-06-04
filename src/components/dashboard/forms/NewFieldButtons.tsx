@@ -57,10 +57,10 @@ const NewFieldButtons = ({ addField, sectionIdx }: Props) => {
                         key={fieldType.type}
                         onClick={(e) => addField(e, fieldType.type, sectionIdx)}
                         variant="outline"
-                        className=" h-auto p-4 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer flex-1"
+                        className="h-auto p-3 flex flex-col items-start text-left hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer flex-1"
                         // onClick={() => onAddField(fieldType.type)}
                     >
-                        <div className="flex items-center gap-3 mb-2">
+                        <div className="flex items-center gap-1 mb-2">
                             <Icon className="w-6 h-6 text-black" />
                             <span className="font-semibold">
                                 Add {fieldType.label}
