@@ -1,11 +1,11 @@
 "use server";
 
 import { FieldType, PrismaClient } from "@/generated/prisma";
-import { INewForm, TypeFormField } from "@/types/form";
+import { IForms, INewForm, TypeFormField } from "@/types/form";
 
 const prisma = new PrismaClient();
 
-export const createForm = async (form: INewForm) => {
+export const createForm = async (form: IForms) => {
     const { formName, description, formSections } = form;
 
     const createdForm = await prisma.form.create({
@@ -13,7 +13,7 @@ export const createForm = async (form: INewForm) => {
             formName,
             description,
             sections: {
-                create: formSections.map((section) => {
+                create: formSections.map((section: any) => {
                     return {
                         sectionName: section.sectionName,
                         sectionDescription: section.sectionDescription,

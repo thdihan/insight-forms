@@ -1,10 +1,10 @@
 export interface IForms {
-    id: number;
+    id?: number;
     formName: string;
     description: string;
+    formSections: TFormSection[];
     createdAt?: Date;
     updatedAt?: Date;
-    fields: TypeFormField[];
 }
 
 export type TFieldType = "text" | "checkbox" | "radio" | "table" | "select";
@@ -61,6 +61,8 @@ export interface TFormSection {
     sectionName?: string;
     sectionDescription?: string;
     fields: TypeFormField[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export type TypeFormField =

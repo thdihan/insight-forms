@@ -1,9 +1,7 @@
 import CreateForm from "./CreateForm";
 
-type Props = {};
-
-const page = (props: Props) => {
-    return <CreateForm></CreateForm>;
+const page = () => {
+    return <CreateForm />;
 };
 
 export default page;
