@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IForms, INewForm } from "@/types/form";
-import { createForm } from "@/app/actions.ts/createForm";
+import { createForm } from "@/actions/createForm";
 import { useRouter } from "next/navigation";
 import "react-quill-new/dist/quill.snow.css";
 import FormEdit from "@/components/dashboard/formBuilder/FormEdit";

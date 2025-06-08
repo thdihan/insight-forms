@@ -1,5 +1,5 @@
 "use client";
-import { getSubmissions } from "@/app/actions.ts/submission";
+import { getSubmissions } from "@/actions/submission";
 import SubmissionsTable from "@/components/dashboard/SubmissionTable";
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FieldType } from "@/generated/prisma";

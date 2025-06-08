@@ -1,5 +1,5 @@
 "use client";
-import { deleteForm, getForms } from "@/app/actions.ts/forms";
+import { deleteForm, getForms } from "@/actions/forms";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,

@@ -1,5 +1,5 @@
 // import { getUserByEmail } from "@/data/users";
-import { login } from "@/app/actions.ts/login";
+import { login } from "@/actions/login";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 

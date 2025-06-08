@@ -1,5 +1,5 @@
 "use client";
-import { getFormById } from "@/app/actions.ts/forms";
+import { getFormById } from "@/actions/forms";
 import TextInput from "@/components/dashboard/inputs/TextInput";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormField } from "@/components/ui/form";

@@ -1,134 +1,194 @@
 "use client";
 import React, { useState } from "react";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { signup } from "../actions.ts/signup";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { CheckCircle, Mail, Lock, User } from "lucide-react";
+import Link from "next/link";
+// import { toast } from "@/hooks/use-toast";
 
-type Props = {};
-const formSchema = z.object({
-    email: z
-        .string({
-            message: "Email mustn't be empty.",
-        })
-        .email({
-            message: "Please provide a valid email.",
-        }),
-    password: z.string(),
-});
+const Register = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    // const { register } = useAuth();
+    // const navigate = useNavigate();
 
-function page({}: Props) {
-    const router = useRouter();
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-        },
-    });
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    const [formError, setFormError] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+        // if (password !== confirmPassword) {
+        //     toast({
+        //         title: "Error",
+        //         description: "Passwords do not match.",
+        //         variant: "destructive",
+        //     });
+        //     return;
+        // }
 
-    async function handleRegistration(values: z.infer<typeof formSchema>) {
-        setIsLoading(true);
-        try {
-            const response = await signup(values);
-            console.log(response);
-            setIsLoading(false);
-            router.push("/login");
-        } catch (error) {
-            console.log(error);
-            setFormError(String(error).split("Error:")[1].trim());
-            setIsLoading(false);
-        }
-    }
+        // setIsLoading(true);
+
+        // try {
+        //     await register(email, password, name);
+        //     toast({
+        //         title: "Account created!",
+        //         description: "Welcome to InsightForm. Let's get started!",
+        //     });
+        //     navigate("/dashboard");
+        // } catch (error) {
+        //     toast({
+        //         title: "Error",
+        //         description: "Failed to create account. Please try again.",
+        //         variant: "destructive",
+        //     });
+        // } finally {
+        //     setIsLoading(false);
+        // }
+    };
 
     return (
-        <div className="w-full h-screen flex justify-center items-center bg-gray-100">
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(handleRegistration)}
-                    className="flex flex-col gap-y-4 w-full md:max-w-[400px] border p-8 rounded-md shadow-md mx-1 md:mx-0 bg-white"
-                >
-                    <div className="mb-2">
-                        <h2 className="text-2xl font-bold">Registration</h2>
-                        <p className="text-sm text-muted-foreground">
-                            Register with your email & password please.
-                        </p>
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+            <div className="w-full max-w-md">
+                {/* Logo */}
+                <div className="flex items-center justify-center gap-2 mb-8">
+                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <CheckCircle className="w-5 h-5 text-white" />
                     </div>
+                    <span className="font-bold text-xl text-gray-900">
+                        InsightForm
+                    </span>
+                </div>
 
-                    {/* Email Input  */}
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
+                <Card className="border-0 shadow-xl">
+                    <CardHeader className="text-center">
+                        <CardTitle className="text-2xl font-bold">
+                            Create your account
+                        </CardTitle>
+                        <CardDescription>
+                            Start building amazing forms today
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Full Name</Label>
+                                <div className="relative">
+                                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                                     <Input
+                                        id="name"
+                                        type="text"
+                                        placeholder="Enter your full name"
+                                        value={name}
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                        className="pl-10"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <div className="relative">
+                                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                    <Input
+                                        id="email"
                                         type="email"
-                                        placeholder="Email address..."
-                                        {...field}
+                                        placeholder="Enter your email"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        className="pl-10"
+                                        required
                                     />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    {/* Password Input  */}
-                    <FormField
-                        control={form.control}
-                        name="password"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Password</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="password"
-                                        placeholder="Password..."
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                                </div>
+                            </div>
 
-                    {formError != "" && (
-                        <Alert variant="destructive">
-                            <AlertCircle className="h-4 w-4" />
-                            <AlertTitle>Error</AlertTitle>
-                            <AlertDescription>{formError}</AlertDescription>
-                        </Alert>
-                    )}
-                    <Button
-                        type="submit"
-                        disabled={form.formState.isSubmitting}
-                    >
-                        {isLoading ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                            "Register"
-                        )}
-                    </Button>
-                </form>
-            </Form>
+                            <div className="space-y-2">
+                                <Label htmlFor="password">Password</Label>
+                                <div className="relative">
+                                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        placeholder="Create a password"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        className="pl-10"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="confirmPassword">
+                                    Confirm Password
+                                </Label>
+                                <div className="relative">
+                                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                    <Input
+                                        id="confirmPassword"
+                                        type="password"
+                                        placeholder="Confirm your password"
+                                        value={confirmPassword}
+                                        onChange={(e) =>
+                                            setConfirmPassword(e.target.value)
+                                        }
+                                        className="pl-10"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={isLoading}
+                            >
+                                {isLoading
+                                    ? "Creating account..."
+                                    : "Create Account"}
+                            </Button>
+                        </form>
+
+                        <div className="mt-6 text-center">
+                            <p className="text-sm text-gray-600">
+                                Already have an account?{" "}
+                                <Link
+                                    href="/login"
+                                    className="font-medium text-blue-600 hover:text-blue-500"
+                                >
+                                    Sign in
+                                </Link>
+                            </p>
+                        </div>
+
+                        <div className="mt-4 text-center">
+                            <Link
+                                href="/"
+                                className="text-sm text-gray-600 hover:text-gray-900"
+                            >
+                                ← Back to home
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
-}
+};
 
-export default page;
+export default Register;

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { IForms, TypeFormField } from "@/types/form";
 import { useRouter } from "next/navigation";
-import { getFormById, updateForm } from "@/app/actions.ts/forms";
+import { getFormById, updateForm } from "@/actions/forms";
 import FormEdit from "@/components/dashboard/formBuilder/FormEdit";
 
 type Props = {

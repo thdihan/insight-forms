@@ -1,6 +1,6 @@
 // app>api>auth>register>route.ts
 
-import { signup } from "@/app/actions.ts/signup";
+import { signup } from "@/actions/signup";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

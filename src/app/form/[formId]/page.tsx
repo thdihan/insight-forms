@@ -1,5 +1,5 @@
 "use client";
-import { getFormById } from "@/app/actions.ts/forms";
+import { getFormById } from "@/actions/forms";
 import { IForms, TypeFormField } from "@/types/form";
 import { useRouter } from "next/navigation";
 import React, { Context, use, useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import RadioButtonsField from "@/components/form/RadioButtonsField";
 import TableField from "@/components/form/TableField";
 import SelectField from "@/components/form/SelectField";
 import { Button } from "@/components/ui/button";
-import { submitForm } from "@/app/actions.ts/submission";
+import { submitForm } from "@/actions/submission";
 import { Loader2 } from "lucide-react";
 
 type Props = { params: any };

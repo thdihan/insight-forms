@@ -122,8 +122,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  role: 'role'
 };
 
 exports.Prisma.FormScalarFieldEnum = {
@@ -206,6 +208,11 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.UserType = exports.$Enums.UserType = {
+  admin: 'admin',
+  user: 'user'
+};
+
 exports.FieldType = exports.$Enums.FieldType = {
   text: 'text',
   checkbox: 'checkbox',
