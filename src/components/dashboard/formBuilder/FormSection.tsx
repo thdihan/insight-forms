@@ -22,7 +22,7 @@ import NewFieldButtons from "../forms/NewFieldButtons";
 
 type Props = {
     section: TFormSection;
-    formValues: INewForm;
+    formValues: IForms;
     setFormValues:
         | Dispatch<React.SetStateAction<INewForm>>
         | Dispatch<React.SetStateAction<IForms>>;
@@ -85,7 +85,7 @@ const FormSection = ({ section, formValues, setFormValues, idx }: Props) => {
         setFormValues(tempFormValues);
     };
 
-    const updateIdAndOrder = (tempFormValues: INewForm, sectionIdx: number) => {
+    const updateIdAndOrder = (tempFormValues: IForms, sectionIdx: number) => {
         tempFormValues.formSections[sectionIdx].fields
             .sort((a, b) => a.order - b.order)
             .forEach((field, index) => {
@@ -153,8 +153,6 @@ const FormSection = ({ section, formValues, setFormValues, idx }: Props) => {
     };
     return (
         <div>
-            <div className="border-t-4 border-dashed py-1"></div>
-
             <div className="space-y-2">
                 <TextInput
                     placeholder="Enter section name..."
@@ -188,7 +186,10 @@ const FormSection = ({ section, formValues, setFormValues, idx }: Props) => {
                     }}
                 />
             </div>
+
             {/* Form Fields */}
+
+            <div className="mt-2 border-t-4 border-dashed py-1"></div>
             <DndContext
                 collisionDetection={closestCenter}
                 onDragEnd={(e) => handleDragEnd(e, idx)}

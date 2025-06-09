@@ -97,7 +97,7 @@ export const updateForm = async (id: number, values: IForms) => {
         const updatedForm = await prisma.$transaction([
             prisma.formSection.deleteMany({
                 where: {
-                    id: id,
+                    formId: id,
                 },
             }),
 
@@ -106,46 +106,64 @@ export const updateForm = async (id: number, values: IForms) => {
                 data: {
                     formName: values.formName,
                     description: values.description,
-                    fields: {
-                        create: values.fields.map((field) => {
-                            const isNewField =
-                                field.createdAt === null ||
-                                field.createdAt === undefined;
+                    sections: {
+                        create: values.formSections.map((section) => {
+                            const isNewSection =
+                                section.createdAt === null ||
+                                section.createdAt === undefined;
                             return {
-                                ...(isNewField ? {} : { id: field.id }),
-                                order: field.order,
-                                type: field.type,
-                                label: field.label,
-                                required: field.required || false,
-                                placeholder: field.placeholder || null,
-                                multiline:
-                                    field.type === "text"
-                                        ? (field as any).multiline ?? false
-                                        : undefined,
-                                options:
-                                    "options" in field && field.options?.length
-                                        ? {
-                                              create: field.options.map(
-                                                  (option) => {
-                                                      const isNewOption =
-                                                          option.createdAt ===
-                                                              null ||
-                                                          option.createdAt ===
-                                                              undefined;
-                                                      return {
-                                                          ...(isNewOption
-                                                              ? {}
-                                                              : {
-                                                                    id: Number(
-                                                                        option.id
-                                                                    ),
-                                                                }),
-                                                          label: option.label,
-                                                      };
-                                                  }
-                                              ),
-                                          }
-                                        : undefined,
+                                ...(isNewSection ? {} : { id: section.id }),
+                                sectionName: section.sectionName,
+                                sectionDescription: section.sectionDescription,
+                                fields: {
+                                    create: section.fields.map((field) => {
+                                        const isNewField =
+                                            field.createdAt === null ||
+                                            field.createdAt === undefined;
+                                        console.log("Section Created");
+                                        return {
+                                            ...(isNewField
+                                                ? {}
+                                                : { id: field.id }),
+                                            order: field.order,
+                                            type: field.type,
+                                            label: field.label,
+                                            required: field.required || false,
+                                            placeholder:
+                                                field.placeholder || null,
+                                            multiline:
+                                                field.type === "text"
+                                                    ? (field as any)
+                                                          .multiline ?? false
+                                                    : undefined,
+                                            options:
+                                                "options" in field &&
+                                                field.options?.length
+                                                    ? {
+                                                          create: field.options.map(
+                                                              (option) => {
+                                                                  const isNewOption =
+                                                                      option.createdAt ===
+                                                                          null ||
+                                                                      option.createdAt ===
+                                                                          undefined;
+                                                                  return {
+                                                                      ...(isNewOption
+                                                                          ? {}
+                                                                          : {
+                                                                                id: Number(
+                                                                                    option.id
+                                                                                ),
+                                                                            }),
+                                                                      label: option.label,
+                                                                  };
+                                                              }
+                                                          ),
+                                                      }
+                                                    : undefined,
+                                        };
+                                    }),
+                                },
                             };
                         }),
                     },

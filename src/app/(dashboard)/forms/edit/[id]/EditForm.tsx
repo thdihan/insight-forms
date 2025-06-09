@@ -4,6 +4,8 @@ import { IForms, TypeFormField } from "@/types/form";
 import { useRouter } from "next/navigation";
 import { getFormById, updateForm } from "@/app/actions.ts/forms";
 import FormEdit from "@/components/dashboard/formBuilder/FormEdit";
+import { Button } from "@/components/ui/button";
+import { Eye, Save } from "lucide-react";
 
 type Props = {
     id: string;
@@ -61,16 +63,36 @@ const EditForm = ({ id }: Props) => {
             setLoading(false);
         }
     };
-
+    const handleSave = (state: boolean) => {};
     return (
-        <div className="p-2 flex justify-center w-full">
-            <div className="w-full md:max-w-[95%] py-8 px-8 my-8 border-2 rounded-md shadow-xl bg-white">
-                <FormEdit
-                    submission={{ handleSubmit, loading }}
-                    formValues={formValues}
-                    setFormValues={setFormValues}
-                />
+        <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-bold text-gray-900">
+                        Update Form
+                    </h1>
+                    <p className="text-gray-600 mt-1">
+                        Build your form with sections and fields
+                    </p>
+                </div>
+                <div className="flex gap-2">
+                    <Button variant="outline" onClick={() => handleSave(false)}>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Draft
+                    </Button>
+                    <Button onClick={() => handleSave(true)}>
+                        <Eye className="w-4 h-4 mr-2" />
+                        Publish Form
+                    </Button>
+                </div>
             </div>
+
+            <FormEdit
+                submission={{ handleSubmit, loading }}
+                formValues={formValues}
+                setFormValues={setFormValues}
+            />
         </div>
     );
 };

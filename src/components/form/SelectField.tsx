@@ -17,7 +17,7 @@ type Props = {
 const SelectField = ({ field, handleChange, responses }: Props) => {
     return (
         <div>
-            <h3 className="text-lg py-2">{field.label}</h3>
+            <h3 className="text-md font-semibold py-2">{field.label}</h3>
             <Select
                 value={responses[field.id] || ""}
                 onValueChange={(val) => handleChange(field.id, val)}

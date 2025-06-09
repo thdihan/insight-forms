@@ -16,6 +16,8 @@ const TextField = ({ field, handleChange, value }: Props) => {
             textValue={value}
             inputChange={handleChange}
             multiline={field.type == "text" && field.multiline}
+            inputStyle="bg-white"
+            required={field.required}
         />
     );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Table,
     TableBody,
@@ -22,6 +22,11 @@ type Props = {
 
 const TableField = ({ field, handleChange, responses }: Props) => {
     const currentRows: Record<string, string>[] = responses[field.id] || [];
+
+    useEffect(() => {
+        const newRows = [...currentRows, {}];
+        handleChange(field.id, newRows);
+    }, []);
 
     const updateCell = (rowIndex: number, key: string, value: string) => {
         const newRows = [...currentRows];
@@ -53,8 +58,10 @@ const TableField = ({ field, handleChange, responses }: Props) => {
                     <TableRow>
                         {field.type === "table" &&
                             field.options.map((option, index) => (
-                                <TableHead key={index}>
-                                    {option.label}
+                                <TableHead key={index} className="">
+                                    <span className="text-wrap">
+                                        {option.label}
+                                    </span>
                                 </TableHead>
                             ))}
                     </TableRow>

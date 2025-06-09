@@ -12,12 +12,12 @@ type Props = {
 const RadioButtonsField = ({ field, handleChange, responses }: Props) => {
     return (
         <div>
-            <h3 className="text-lg py-2">{field.label}</h3>
+            <h3 className="text-md font-semibold py-2">{field.label}</h3>
 
             <div className="flex flex-wrap gap-x-8">
                 <RadioGroup
                     defaultValue="comfortable"
-                    className="flex flex-wrap gap-x-8"
+                    className="grid grid-cols-3 gap-8"
                     value={responses[field.id] || ""}
                     onValueChange={(val) => handleChange(field.id, val)}
                 >

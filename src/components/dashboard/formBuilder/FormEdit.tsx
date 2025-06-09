@@ -1,27 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { Dispatch, useState } from "react";
+import React, { Dispatch } from "react";
 import TextInput from "@/components/dashboard/inputs/TextInput";
-import NewFieldButtons from "@/components/dashboard/forms/NewFieldButtons";
-import TextField from "@/components/dashboard/forms/TextField";
-import CheckboxField from "@/components/dashboard/forms/CheckboxField";
-import RadiobuttonsField from "@/components/dashboard/forms/RadiobuttonsField";
-import TableField from "@/components/dashboard/forms/TableField";
-import {
-    ICheckboxOption,
-    IForms,
-    INewForm,
-    TFieldType,
-    TypeFormField,
-} from "@/types/form";
-import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
-import {
-    SortableContext,
-    verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import SelectField from "@/components/dashboard/forms/SelectField";
-import { Loader2 } from "lucide-react";
-// import ReactQuill from "react-quill-new";
+import { IForms, INewForm } from "@/types/form";
+import { Loader2, Plus } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
 import { Label } from "@/components/ui/label";
 
@@ -33,7 +15,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), {
 });
 
 type Props = {
-    formValues: INewForm | IForms;
+    formValues: IForms;
     setFormValues:
         | Dispatch<React.SetStateAction<INewForm>>
         | Dispatch<React.SetStateAction<IForms>>;
@@ -46,47 +28,81 @@ type Props = {
 const FormEdit = ({ formValues, setFormValues, submission }: Props) => {
     const { handleSubmit, loading } = submission;
 
+    const addSection = (e: any) => {
+        e.preventDefault();
+        const tempFormValue = { ...formValues };
+        const newSection = {
+            id: tempFormValue.formSections.length + 1,
+            sectionName: "",
+            sectionDescription: "",
+            fields: [],
+        };
+
+        tempFormValue.formSections.push(newSection);
+
+        setFormValues(tempFormValue);
+    };
     return (
         <form className="space-y-4">
-            {/* Form Name  */}
-            <TextInput
-                placeholder="Enter form name..."
-                label="Form Name"
-                labelStyle="text-xl font-semibold"
-                inputStyle=""
-                textValue={formValues.formName}
-                inputChange={(e) => {
-                    const tempFormValues = { ...formValues };
-                    tempFormValues.formName = e.target.value;
-                    setFormValues(tempFormValues as IForms);
-                }}
-            />
-            <div className="space-y-2">
-                <Label htmlFor="form-name" className={`text-lg font-semibold`}>
-                    Description
-                </Label>
-                <ReactQuill
-                    theme="snow"
-                    value={formValues.description}
-                    onChange={(val: string) => {
+            <div className="p-8 bg-white border rounded-md shadow-md space-y-4">
+                {/* Form Name  */}
+                <TextInput
+                    placeholder="Enter form name..."
+                    label="Form Name"
+                    labelStyle="text-xl font-semibold"
+                    inputStyle=""
+                    textValue={formValues.formName}
+                    inputChange={(e) => {
                         const tempFormValues = { ...formValues };
-                        tempFormValues.description = val;
+                        tempFormValues.formName = e.target.value;
                         setFormValues(tempFormValues as IForms);
                     }}
-                    className="rounde-lg"
                 />
+                <div className="space-y-2">
+                    <Label
+                        htmlFor="form-name"
+                        className={`text-lg font-semibold`}
+                    >
+                        Description
+                    </Label>
+                    <ReactQuill
+                        theme="snow"
+                        value={formValues.description}
+                        onChange={(val: string) => {
+                            const tempFormValues = { ...formValues };
+                            tempFormValues.description = val;
+                            setFormValues(tempFormValues as IForms);
+                        }}
+                        className="rounde-lg"
+                    />
+                </div>
             </div>
 
             {formValues.formSections.length > 0 &&
                 formValues.formSections.map((section, idx) => (
-                    <FormSection
+                    <div
                         key={idx}
-                        section={section}
-                        formValues={formValues}
-                        setFormValues={setFormValues}
-                        idx={idx}
-                    />
+                        className="p-8 bg-white border rounded-md shadow-md space-y-4"
+                    >
+                        <FormSection
+                            section={section}
+                            formValues={formValues}
+                            setFormValues={setFormValues}
+                            idx={idx}
+                        />
+                    </div>
                 ))}
+
+            <div>
+                <Button
+                    variant="outline"
+                    className="w-full cursor-pointer"
+                    onClick={addSection}
+                >
+                    <Plus />
+                    Add Section
+                </Button>
+            </div>
 
             <div className="flex gap-x-2 border-t  pt-4">
                 <Button

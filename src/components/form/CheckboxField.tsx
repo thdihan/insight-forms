@@ -12,9 +12,9 @@ type Props = {
 const CheckboxField = ({ field, handleChange, responses }: Props) => {
     return (
         <div>
-            <h3 className="text-lg py-2">{field.label}</h3>
+            <h3 className="text-md font-semibold py-4">{field.label}</h3>
 
-            <div className="flex flex-wrap gap-x-8">
+            <div className="grid grid-cols-3 gap-8">
                 {field.type === "checkbox" &&
                     field.options.map((option, index) => (
                         <div key={index} className="flex items-center gap-x-2">
