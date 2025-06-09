@@ -54,9 +54,12 @@ export const getSubmissions = async (formId: string) => {
         where: { formId: Number(formId) },
         include: {
             form: {
-                select: {
-                    id: true,
-                    formName: true,
+                include: {
+                    sections: {
+                        include: {
+                            fields: true,
+                        },
+                    },
                 },
             },
             responses: {

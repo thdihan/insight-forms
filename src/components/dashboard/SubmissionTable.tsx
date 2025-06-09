@@ -56,64 +56,67 @@ export default function SubmissionsTable({ submissions }: Props) {
         );
         y += 10;
 
-        submission.responses.forEach((resp) => {
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "bold");
-            doc.text(`${resp.field.label}:`, 10, y);
-            doc.setFont("helvetica", "normal");
+        submission.responses
+            .sort((a, b) => Number(a.field.id) - Number(b.field.id))
+            .forEach((resp) => {
+                console.log("WORKING on ", resp);
+                doc.setFontSize(12);
+                doc.setFont("helvetica", "bold");
+                doc.text(`${resp.field.label}:`, 10, y);
+                doc.setFont("helvetica", "normal");
 
-            if (resp.textValue) {
-                console.log("TEXTVALUE");
-                doc.text(`${resp.textValue}`, 60, y);
-                y += 10;
-            } else if (resp.selectedOption) {
-                console.log("SELECTEDOPTIONS * ", resp.selectedOption);
-                doc.text(`${resp.selectedOption}`, 60, y);
-                y += 10;
-            } else if (
-                Array.isArray(resp.selectedOptions) &&
-                resp.selectedOptions.length > 0
-            ) {
-                console.log("SELECTEDOPTIONS * * *", resp.selectedOptions);
-                doc.text(resp.selectedOptions.join(", "), 60, y);
-                y += 10;
-            } else if (
-                Array.isArray(resp.tableValue) &&
-                resp.tableValue.length > 0
-            ) {
-                console.log("TABLE * ", resp.tableValue);
-                resp.tableValue.forEach((rowObj, rowIndex) => {
-                    y += 5;
-                    doc.setFont("helvetica", "bold");
-                    doc.text(`--------- ${rowIndex + 1} ---------`, 15, y);
-                    y += 5;
-                    doc.setFont("helvetica", "normal");
-                    for (const [key, val] of Object.entries(rowObj)) {
-                        doc.text(`${key}: ${String(val)}`, 20, y);
+                if (resp.textValue) {
+                    console.log("TEXTVALUE");
+                    doc.text(`${resp.textValue}`, 60, y);
+                    y += 10;
+                } else if (resp.selectedOption) {
+                    console.log("SELECTEDOPTIONS * ", resp.selectedOption);
+                    doc.text(`${resp.selectedOption}`, 60, y);
+                    y += 10;
+                } else if (
+                    Array.isArray(resp.selectedOptions) &&
+                    resp.selectedOptions.length > 0
+                ) {
+                    console.log("SELECTEDOPTIONS * * *", resp.selectedOptions);
+                    doc.text(resp.selectedOptions.join("\n"), 60, y);
+                    y += 10 * resp.selectedOptions.length;
+                } else if (
+                    Array.isArray(resp.tableValue) &&
+                    resp.tableValue.length > 0
+                ) {
+                    console.log("TABLE * ", resp.tableValue);
+                    resp.tableValue.forEach((rowObj, rowIndex) => {
+                        y += 5;
+                        doc.setFont("helvetica", "bold");
+                        doc.text(`--------- ${rowIndex + 1} ---------`, 15, y);
+                        y += 5;
+                        doc.setFont("helvetica", "normal");
+                        for (const [key, val] of Object.entries(rowObj)) {
+                            doc.text(`${key}: ${String(val)}`, 20, y);
+                            y += 6;
+                        }
+                    });
+                    y += 4;
+                } else if (
+                    typeof resp.tableValue === "object" &&
+                    resp.tableValue !== null
+                ) {
+                    console.log("TABLE * * ");
+                    for (const [key, val] of Object.entries(resp.tableValue)) {
+                        doc.text(`${key}: ${String(val)}`, 60, y);
                         y += 6;
                     }
-                });
-                y += 4;
-            } else if (
-                typeof resp.tableValue === "object" &&
-                resp.tableValue !== null
-            ) {
-                console.log("TABLE * * ");
-                for (const [key, val] of Object.entries(resp.tableValue)) {
-                    doc.text(`${key}: ${String(val)}`, 60, y);
-                    y += 6;
+                } else {
+                    doc.text("-", 60, y);
+                    y += 10;
                 }
-            } else {
-                doc.text("-", 60, y);
-                y += 10;
-            }
 
-            // Prevent overlapping bottom
-            if (y > 270) {
-                doc.addPage();
-                y = 10;
-            }
-        });
+                // Prevent overlapping bottom
+                if (y > 270) {
+                    doc.addPage();
+                    y = 10;
+                }
+            });
 
         doc.save(`submission_${submission.id}.pdf`);
     };
@@ -129,7 +132,7 @@ export default function SubmissionsTable({ submissions }: Props) {
                         <TableHead className="whitespace-nowrap">
                             Submitted At
                         </TableHead>
-                        {Array.isArray(fieldLabels) &&
+                        {/* {Array.isArray(fieldLabels) &&
                             fieldLabels.length > 0 &&
                             fieldLabels.map((label, idx) => (
                                 <TableHead
@@ -138,7 +141,7 @@ export default function SubmissionsTable({ submissions }: Props) {
                                 >
                                     {label}
                                 </TableHead>
-                            ))}
+                            ))} */}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -173,7 +176,7 @@ export default function SubmissionsTable({ submissions }: Props) {
                                         </>
                                     )}
 
-                                    {submission.responses.map((resp, idx) => {
+                                    {/* {submission.responses.map((resp, idx) => {
                                         const isTableArray =
                                             Array.isArray(resp.tableValue) &&
                                             resp.tableValue.length > 0;
@@ -274,7 +277,7 @@ export default function SubmissionsTable({ submissions }: Props) {
                                                 </TableCell>
                                             ) : null;
                                         }
-                                    })}
+                                    })} */}
                                     {rowIndex === 0 && (
                                         <TableCell rowSpan={maxSubRows}>
                                             <Button

@@ -215,7 +215,7 @@ const page = (props: Props) => {
                                             <td className="p-4">
                                                 <div className="flex items-center justify-end gap-1">
                                                     <Link
-                                                        href={`/forms/details/${form.id}`}
+                                                        href={`/forms/${form.id}`}
                                                     >
                                                         <Button
                                                             variant="ghost"
