@@ -1,8 +1,8 @@
 export interface IForms {
-    id?: number;
+    id: number;
     formName: string;
     description: string;
-    formSections: TFormSection[];
+    sections: TFormSection[];
     createdAt?: Date;
     updatedAt?: Date;
 }

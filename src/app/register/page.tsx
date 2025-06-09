@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
     Card,
     CardContent,
@@ -12,47 +10,70 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle, Mail, Lock, User } from "lucide-react";
 import Link from "next/link";
-// import { toast } from "@/hooks/use-toast";
+import TextInput from "@/components/input/TextInput";
+import { toast } from "sonner";
+import { signup } from "@/actions/signup";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
-    const [name, setName] = useState("");
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    // const { register } = useAuth();
-    // const navigate = useNavigate();
+
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // if (password !== confirmPassword) {
-        //     toast({
-        //         title: "Error",
-        //         description: "Passwords do not match.",
-        //         variant: "destructive",
-        //     });
-        //     return;
-        // }
+        const regData = {
+            name: fullName,
+            email,
+            password,
+        };
+        console.log("[Login Form]", regData);
 
-        // setIsLoading(true);
+        if (password !== confirmPassword) {
+            toast("Error : Passwords do not match.", {
+                description: "Passwords do not match.",
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Closing..."),
+                },
+            });
+            // toast({
+            //     title: "Error",
+            //     description: "Passwords do not match.",
+            //     variant: "destructive",
+            // });
+            return;
+        }
 
-        // try {
-        //     await register(email, password, name);
-        //     toast({
-        //         title: "Account created!",
-        //         description: "Welcome to InsightForm. Let's get started!",
-        //     });
-        //     navigate("/dashboard");
-        // } catch (error) {
-        //     toast({
-        //         title: "Error",
-        //         description: "Failed to create account. Please try again.",
-        //         variant: "destructive",
-        //     });
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        setIsLoading(true);
+
+        try {
+            await signup(regData);
+
+            toast("Account created!", {
+                description: "Welcome to InsightForm. Let's get started!",
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Closing..."),
+                },
+            });
+            router.push("/login");
+        } catch (error) {
+            toast("Error: Failed to create account. Please try again.", {
+                description: "Failed to create account. Please try again.",
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Closing..."),
+                },
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -79,79 +100,62 @@ const Register = () => {
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="name">Full Name</Label>
-                                <div className="relative">
+                            <TextInput
+                                label="Full Name"
+                                name="fullName"
+                                className="space-y-2"
+                                placeholder="Enter Full Name"
+                                Icon={
                                     <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="name"
-                                        type="text"
-                                        placeholder="Enter your full name"
-                                        value={name}
-                                        onChange={(e) =>
-                                            setName(e.target.value)
-                                        }
-                                        className="pl-10"
-                                        required
-                                    />
-                                </div>
-                            </div>
+                                }
+                                inputClass="pl-10"
+                                value={fullName}
+                                setValue={(val) => setFullName(val)}
+                                required
+                            />
 
-                            <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
-                                <div className="relative">
+                            <TextInput
+                                label="Email"
+                                name="email"
+                                type="email"
+                                placeholder="Enter Email"
+                                className="space-y-2"
+                                Icon={
                                     <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
-                                        className="pl-10"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="password">Password</Label>
-                                <div className="relative">
+                                }
+                                inputClass="pl-10"
+                                value={email}
+                                setValue={(val) => setEmail(val)}
+                                required
+                            />
+                            <TextInput
+                                label="Password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter password..."
+                                className="space-y-2"
+                                Icon={
                                     <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        placeholder="Create a password"
-                                        value={password}
-                                        onChange={(e) =>
-                                            setPassword(e.target.value)
-                                        }
-                                        className="pl-10"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="confirmPassword">
-                                    Confirm Password
-                                </Label>
-                                <div className="relative">
+                                }
+                                inputClass="pl-10"
+                                value={password}
+                                setValue={(val) => setPassword(val)}
+                                required
+                            />
+                            <TextInput
+                                label="Confirm Password"
+                                name="confirmPassword"
+                                type="password"
+                                placeholder="Confirm password..."
+                                className="space-y-2"
+                                Icon={
                                     <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="confirmPassword"
-                                        type="password"
-                                        placeholder="Confirm your password"
-                                        value={confirmPassword}
-                                        onChange={(e) =>
-                                            setConfirmPassword(e.target.value)
-                                        }
-                                        className="pl-10"
-                                        required
-                                    />
-                                </div>
-                            </div>
+                                }
+                                inputClass="pl-10"
+                                value={confirmPassword}
+                                setValue={(val) => setConfirmPassword(val)}
+                                required
+                            />
 
                             <Button
                                 type="submit"

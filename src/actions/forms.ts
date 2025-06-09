@@ -92,70 +92,70 @@ export const deleteForm = async (id: number) => {
 //         },
 //     },
 // });
-export const updateForm = async (id: number, values: IForms) => {
-    try {
-        const updatedForm = await prisma.$transaction([
-            prisma.formSection.deleteMany({
-                where: {
-                    id: id,
-                },
-            }),
+// export const updateForm = async (id: number, values: IForms) => {
+//     try {
+//         const updatedForm = await prisma.$transaction([
+//             prisma.formSection.deleteMany({
+//                 where: {
+//                     id: id,
+//                 },
+//             }),
 
-            prisma.form.update({
-                where: { id },
-                data: {
-                    formName: values.formName,
-                    description: values.description,
-                    fields: {
-                        create: values.fields.map((field) => {
-                            const isNewField =
-                                field.createdAt === null ||
-                                field.createdAt === undefined;
-                            return {
-                                ...(isNewField ? {} : { id: field.id }),
-                                order: field.order,
-                                type: field.type,
-                                label: field.label,
-                                required: field.required || false,
-                                placeholder: field.placeholder || null,
-                                multiline:
-                                    field.type === "text"
-                                        ? (field as any).multiline ?? false
-                                        : undefined,
-                                options:
-                                    "options" in field && field.options?.length
-                                        ? {
-                                              create: field.options.map(
-                                                  (option) => {
-                                                      const isNewOption =
-                                                          option.createdAt ===
-                                                              null ||
-                                                          option.createdAt ===
-                                                              undefined;
-                                                      return {
-                                                          ...(isNewOption
-                                                              ? {}
-                                                              : {
-                                                                    id: Number(
-                                                                        option.id
-                                                                    ),
-                                                                }),
-                                                          label: option.label,
-                                                      };
-                                                  }
-                                              ),
-                                          }
-                                        : undefined,
-                            };
-                        }),
-                    },
-                },
-            }),
-        ]);
-        console.log("Form updated successfully:", updatedForm);
-        return updatedForm;
-    } catch (error) {
-        console.error("Error updating form:", error);
-        throw error;
-    }
-};
+//             prisma.form.update({
+//                 where: { id },
+//                 data: {
+//                     formName: values.formName,
+//                     description: values.description,
+//                     fields: {
+//                         create: values.fields.map((field) => {
+//                             const isNewField =
+//                                 field.createdAt === null ||
+//                                 field.createdAt === undefined;
+//                             return {
+//                                 ...(isNewField ? {} : { id: field.id }),
+//                                 order: field.order,
+//                                 type: field.type,
+//                                 label: field.label,
+//                                 required: field.required || false,
+//                                 placeholder: field.placeholder || null,
+//                                 multiline:
+//                                     field.type === "text"
+//                                         ? (field as any).multiline ?? false
+//                                         : undefined,
+//                                 options:
+//                                     "options" in field && field.options?.length
+//                                         ? {
+//                                               create: field.options.map(
+//                                                   (option) => {
+//                                                       const isNewOption =
+//                                                           option.createdAt ===
+//                                                               null ||
+//                                                           option.createdAt ===
+//                                                               undefined;
+//                                                       return {
+//                                                           ...(isNewOption
+//                                                               ? {}
+//                                                               : {
+//                                                                     id: Number(
+//                                                                         option.id
+//                                                                     ),
+//                                                                 }),
+//                                                           label: option.label,
+//                                                       };
+//                                                   }
+//                                               ),
+//                                           }
+//                                         : undefined,
+//                             };
+//                         }),
+//                     },
+//                 },
+//             }),
+//         ]);
+//         console.log("Form updated successfully:", updatedForm);
+//         return updatedForm;
+//     } catch (error) {
+//         console.error("Error updating form:", error);
+//         throw error;
+//     }
+// };

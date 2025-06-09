@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
     Card,
     CardContent,
@@ -12,35 +10,50 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle, Mail, Lock } from "lucide-react";
 import Link from "next/link";
+import TextInput from "@/components/input/TextInput";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 // import { toast } from "@/hooks/use-toast";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    // const { login } = useAuth();
-    // const navigate = useNavigate();
+
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // setIsLoading(true);
+        setIsLoading(true);
 
-        // try {
-        //     await login(email, password);
-        //     toast({
-        //         title: "Welcome back!",
-        //         description: "You have successfully signed in.",
-        //     });
-        //     navigate("/dashboard");
-        // } catch (error) {
-        //     toast({
-        //         title: "Error",
-        //         description: "Invalid credentials. Please try again.",
-        //         variant: "destructive",
-        //     });
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        try {
+            signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
+
+            toast("Welcome back! You have successfully signed in.", {
+                description: "You have successfully signed in.",
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Closing..."),
+                },
+            });
+
+            // router.push("/dashboard");
+        } catch (error) {
+            toast("Error: Invalid credentials. Please try again.", {
+                description: "Invalid credentials. Please try again.",
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Closing..."),
+                },
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -67,41 +80,35 @@ const Login = () => {
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
-                                <div className="relative">
-                                    <Mail className="absolute left-3 top-2 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
-                                        className="pl-10"
-                                        required
-                                    />
-                                </div>
-                            </div>
+                            <TextInput
+                                label="Email"
+                                name="email"
+                                type="email"
+                                placeholder="Enter Email"
+                                className="space-y-2"
+                                Icon={
+                                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                }
+                                inputClass="pl-10"
+                                value={email}
+                                setValue={(val) => setEmail(val)}
+                                required
+                            />
 
-                            <div className="space-y-2">
-                                <Label htmlFor="password">Password</Label>
-                                <div className="relative flex items-center ">
-                                    <Lock className="absolute left-3 top-2 h-4 w-4 text-gray-400" />
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        placeholder="Enter your password"
-                                        value={password}
-                                        onChange={(e) =>
-                                            setPassword(e.target.value)
-                                        }
-                                        className="pl-10 focus:border-black "
-                                        required
-                                    />
-                                </div>
-                            </div>
+                            <TextInput
+                                label="Password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter password..."
+                                className="space-y-2"
+                                Icon={
+                                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                }
+                                inputClass="pl-10"
+                                value={password}
+                                setValue={(val) => setPassword(val)}
+                                required
+                            />
 
                             <Button
                                 type="submit"
